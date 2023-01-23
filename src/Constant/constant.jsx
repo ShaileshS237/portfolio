@@ -49,7 +49,7 @@ export const EXPERIANCE = [
 	},
 	{
 		id: 2,
-		comapny_name: "Auum Platform",
+		comapny_name: "Victorrious Digital",
 		location: "Pune, Maharashtra, India",
 		role: "UI Designer & Graphic Designer ",
 		date: "Mar 2019 - Mar 2020 ",
@@ -57,14 +57,14 @@ export const EXPERIANCE = [
 	{
 		id: 3,
 		comapny_name: "DigitizeBrand Hub (India) Pvt Ltd",
-		location: "home",
+		location: "Pune, Maharashtra, India",
 		role: "Graphic & Motion Designer ",
 		date: "Feb 2018 - Feb 2019 ",
 	},
 	{
 		id: 4,
 		comapny_name: "Quick Chicken",
-		location: "Pune",
+		location: "Pune, Maharashtra, India",
 		role: "Mobile Developer (Freelancer)",
 		date: "Jan 2022 - Jul 2022",
 	},

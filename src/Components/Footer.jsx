@@ -2,7 +2,7 @@ import React from "react";
 import { SOCAILS } from "../Constant/constant";
 const Footer = () => {
 	return (
-		<div className="bg-zinc-700">
+		<div className="bg-zinc-800">
 			<div className="  container  mx-auto py-5 ">
 				<h1 className="text-4xl font-bold text-zinc-400">
 					Let's Connect There
@@ -12,7 +12,7 @@ const Footer = () => {
 						{SOCAILS.map((res) => {
 							return (
 								<div className=" ">
-									<div className=" border border-white cursor-pointer grid grid-cols-6 py-5 px-5  hover:bg-zinc-800 text-white hover:text-white items-center">
+									<div className=" border border-white cursor-pointer grid grid-cols-6 py-5 px-5  hover:bg-zinc-900 text-white hover:text-white items-center">
 										<div className="col-span-4 ">
 											<h1 className="text-2xl font-bold ">{res.name}</h1>
 											<h1 className="text-1xl font-light ">{res.type}</h1>

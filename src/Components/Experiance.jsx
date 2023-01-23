@@ -5,7 +5,7 @@ const Experiance = () => {
 	return (
 		<div className=" mt-[40px]">
 			<h1
-				className="text-6xl text-zinc-400
+				className="text-4xl text-zinc-400
 			  font-bold"
 			>
 				Experiance :

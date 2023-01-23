@@ -5,7 +5,9 @@ module.exports = {
 		container: {
 			padding: "6rem",
 		},
-
+		container2: {
+			padding: "20px",
+		},
 		extend: {
 			animation: {
 				marquee: "marquee 70s linear infinite",
