@@ -12,7 +12,7 @@ const Home = () => {
 				style={{ zIndex: "16 !important" }}
 				className="fixed z-99 bottom-6 right-12  bg-zinc-700 w-250 h-50 rounded-full drop-shadow-lg justify-center items-center text-white hover:bg-blue-700 px-[30px] py-[15px] transition-all duration-500 delay-75"
 			>
-				<h3>Let's Talk 👋</h3>
+				<h3>Let's Talk 👋 </h3>
 			</button>
 
 			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">
