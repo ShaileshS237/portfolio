@@ -17,7 +17,7 @@ const Skills = () => {
 			{/* FRONTEND DEVELOPMENT */}
 
 			<div className="grid grid-cols-10 gap-4">
-				<div className="col-span-5 ">
+				<div className="xl:col-span-5 col-span-10">
 					<h3 className="mb-3 text-zinc-500">Frontend Development</h3>
 					<div className=" bg-zinc-800 py-4 rounded-xl ">
 						<Marquee speed={40} delay={1} pauseOnHover={true} gradient={false}>
@@ -36,7 +36,7 @@ const Skills = () => {
 						</Marquee>
 					</div>
 				</div>
-				<div className="col-span-2 ">
+				<div className="xl:col-span-2 col-span-10 ">
 					<h3 className="mb-3 text-zinc-500">Mobile App Development</h3>
 					<div className=" bg-zinc-800 py-4 rounded-xl ">
 						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>
@@ -57,7 +57,7 @@ const Skills = () => {
 					</div>
 				</div>
 
-				<div className="col-span-3 ">
+				<div className="xl:col-span-3 col-span-10 ">
 					<h3 className="mb-3 text-zinc-500">UI Desigining Tools</h3>
 					<div className=" bg-zinc-800 py-4 rounded-xl ">
 						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>
@@ -77,7 +77,7 @@ const Skills = () => {
 						</Marquee>
 					</div>
 				</div>
-				<div className="col-span-2">
+				<div className="xl:col-span-2 col-span-10">
 					<h3 className="mb-3 text-zinc-500">Backend Development</h3>
 					<div className=" bg-zinc-800 py-4 rounded-xl ">
 						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>

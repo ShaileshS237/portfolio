@@ -8,7 +8,7 @@ const Header = () => {
 				<div className="col-span-2">
 					<img src={logo} alt="" />
 				</div>
-				<div className="col-span-10  flex self-center justify-end ">
+				<div className="col-span-10  flex self-center justify-end invisible md:visible">
 					<ul className="flex gap-20 text-white self-center ">
 						<li className="hover:color-sky-700  cursor-pointer">Home</li>
 						<li className="cursor-pointer pa">Work</li>

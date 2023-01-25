@@ -19,18 +19,18 @@ const Experiance = () => {
 				return (
 					<>
 						<div className="grid grid-cols-3">
-							<div className="col-span-3 my-4 text-5xl font-bold text-zinc-700">
+							<div className="col-span-3 my-4 text-3xl md:text-5xl  font-bold text-zinc-700">
 								{val.date}
 							</div>
-							<div className="text-2xl text-zinc-400">
+							<div className="text-2xl md:col-span-1 col-span-3  text-zinc-400">
 								Role: <br />
 								<h1 className="my-1 text-zinc-300">{val.role}</h1>
 							</div>
-							<div className="text-2xl text-zinc-400">
+							<div className="text-2xl md:col-span-1 col-span-3 text-zinc-400">
 								Company: <br />
 								<h1 className="my-1 text-zinc-300">{val.comapny_name}</h1>
 							</div>
-							<div className="text-2xl text-zinc-400">
+							<div className="text-2xl md:col-span-1 col-span-3 text-zinc-400">
 								Location :<br />
 								<h1 className="my-1 text-zinc-300">{val.location}</h1>
 							</div>
