@@ -9,14 +9,28 @@ const Projects = () => {
 		<div className="mt-10">
 			<Title width={"full"} titlename={"Project"} />
 			For all the coding projects, check out my{" "}
-			<span className="text-[cyan]">Github Repos.</span>
+			<a
+				href="https://github.com/ShaileshS237"
+				target="_blank"
+				rel="noreferrer"
+				className="text-[cyan]"
+			>
+				Github Repos.
+			</a>
 			<br />
 			Over the past few years, I have coded things that I am sort-of proud of.
-			These are just a few of them.
+			These are just a few of them. <br />
+			<div className="flex items-center mt-3 gap-3">
+				<span className=" bg-green-500 dot"></span> <h6> - In Progress </h6>
+				<span className="bg-green-500 dot"></span> - Done but required
+				improvisation
+				<span className=" bg-green-500 dot"></span> - Done
+			</div>
 			{/* <h1
 				className="text-4xl text-zinc-400
 			  font-bold"
 			>
+			
 				UI Projects :
 			</h1>
 			<div className="grid grid-cols-4 gap-3 my-5 ">
