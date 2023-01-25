@@ -1,12 +1,19 @@
 import React from "react";
-import image from "../assets/image1.png";
-import logo from "../assets/logo.png";
-import profile from "../assets/profile2.png";
-import bg from "../assets/background.png";
+import Title from "./Title";
+// import image from "../assets/image1.png";
+// import logo from "../assets/logo.png";
+// import profile from "../assets/profile2.png";
+// import bg from "../assets/background.png";
 const Projects = () => {
 	return (
 		<div className="mt-10">
-			<h1
+			<Title width={"full"} titlename={"Project"} />
+			For all the coding projects, check out my{" "}
+			<span className="text-[cyan]">Github Repos.</span>
+			<br />
+			Over the past few years, I have coded things that I am sort-of proud of.
+			These are just a few of them.
+			{/* <h1
 				className="text-4xl text-zinc-400
 			  font-bold"
 			>
@@ -62,7 +69,7 @@ const Projects = () => {
 						alt=""
 					/>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

@@ -3,8 +3,21 @@ import logo from "../assets/logo.png";
 import { BsArrowRight } from "react-icons/bs";
 const Header = () => {
 	return (
-		<div className="ticky top-0 z-50 mt-5">
+		<div className="top-0 z-50 mt-5">
 			<div className="grid grid-cols-12 gap-4 items-center">
+				<div className="md:col-span-2 col-span-12">
+					<img src={logo} alt="" />
+				</div>
+				<div className="col-span-10 hidden md:flex self-center justify-end ">
+					<ul className="flex gap-20 text-white self-center ">
+						<li className="hover:color-sky-700  cursor-pointer">Home</li>
+						<li className="cursor-pointer pa">Work</li>
+						<li className="cursor-pointer">About</li>
+						<li className="cursor-pointer">Article</li>
+					</ul>
+				</div>
+			</div>
+			{/* <div className="grid grid-cols-12 gap-4 items-center">
 				<div className="md:col-span-2 col-span-12">
 					<img src={logo} alt="" />
 				</div>
@@ -21,8 +34,8 @@ const Header = () => {
 						</button>
 					</a>
 				</div>
-			</div>
-			<div className="divide-y divide-blue-200"></div>
+			</div> */}
+			{/* <div className="divide-y divide-blue-200"></div> */}
 		</div>
 	);
 };

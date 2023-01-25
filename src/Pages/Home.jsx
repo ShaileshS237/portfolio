@@ -14,15 +14,17 @@ const Home = () => {
 			>
 				<h3>Let's Talk 👋</h3>
 			</button>
+
 			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">
 				<Header />
-				<div
+				{/* <div
 					className="mt-5"
 					style={{ height: "0.5px", background: "#3f3f46" }}
-				></div>
+				></div> */}
 				<Hero />
 
 				<Skills />
+				<Projects />
 				{/* <h1 className="mt-10 font-bold md:text-[3.00rem] text-[1.4rem]">
 					I have experience with front-end technologies such as HTML, CSS, and
 					JavaScript, and I am able to turn design mockups into functional web
@@ -30,7 +32,6 @@ const Home = () => {
 					seamless and intuitive user experiences.
 				</h1> */}
 				<Experiance />
-				<Projects />
 			</div>
 
 			<Footer />

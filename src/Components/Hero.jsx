@@ -3,6 +3,7 @@ import image from "../assets/image1.png";
 import logo from "../assets/logo.png";
 import profile from "../assets/profile2.png";
 import bg from "../assets/background.png";
+import { BsArrowRight } from "react-icons/bs";
 const Hero = () => {
 	return (
 		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-5 gap-5">
@@ -20,6 +21,11 @@ const Hero = () => {
 				<h1 className="text-2xl mt-3 font-light">
 					I ❤️ to Design & Developed Things.
 				</h1>
+				<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
+					<button className=" border border-white flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
+						Download Resume <BsArrowRight className="ml-5" />
+					</button>
+				</a>
 			</div>
 			<div
 				className="rounded-xl bg-cover bg-center invisible lg:visible col-span-3"

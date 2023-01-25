@@ -1,19 +1,11 @@
 import React from "react";
 import { EXPERIANCE } from "../Constant/constant";
+import Title from "./Title";
 
 const Experiance = () => {
 	return (
 		<div className=" mt-[40px]">
-			<h1
-				className="text-4xl text-zinc-400
-			  font-bold"
-			>
-				Experiance :
-			</h1>
-			<div
-				className="mt-5"
-				style={{ height: "0.5px", background: "#3f3f46" }}
-			></div>
+			<Title width={"full"} titlename={"Experiance"} />
 
 			{EXPERIANCE.map((val) => {
 				return (
