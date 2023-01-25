@@ -5,28 +5,66 @@ import profile from "../assets/profile2.png";
 import bg from "../assets/background.png";
 const Projects = () => {
 	return (
-		<></>
-		// <div className="grid grid-cols-10 mt-10">
-		// 	<div
-		// 		className="bg-zinc-700 p-10 col-span-7 rounded-xl  bg-cover "
-		// 		style={{ backgroundImage: `url(${bg})` }}
-		// 	>
-		// 		{/* style={{ backgroundImage: `url(${bg})` }} */}
-		// 		<h1 className="text-4xl  font-regular">Hi👋, I’m </h1>
-		// 		<h1 className="text-9xl mt-3 font-bold text-gradient-to-r from-cyan-500 to-blue-500 ">
-		// 			Shailesh Sawale
-		// 		</h1>
-		// 		<h1 className="text-2xl mt-3 font-light">
-		// 			I ❤️ to Design & Developed Things.
-		// 		</h1>
-		// 	</div>
-		// 	<div
-		// 		className="rounded-xl bg-cover bg-center ml-5 col-span-3 "
-		// 		style={{ backgroundImage: `url(${profile})` }}
-		// 	>
-		// 		{/* <img className="rounded-xl bg-cover bg-center " src={profile} alt="" /> */}
-		// 	</div>
-		// </div>
+		<div className="mt-10">
+			<h1
+				className="text-4xl text-zinc-400
+			  font-bold"
+			>
+				UI Projects :
+			</h1>
+
+			<div className="grid grid-cols-4 gap-3 my-5 ">
+				{/* <div className="bg-cover col-span-2 rounded-lg  overflow-hidden  ">
+					<img
+						className=" rounded-lg hover:scale-105 hover:rotate-[-2deg] transition-all duration-200 ease-in delay-200 "
+						src={process.env.PUBLIC_URL + "/images/projects/UI/2.png"}
+						alt=""
+					/>
+				</div> */}
+				<div className="bg-cover rounded-md col-span-2">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/3.png"}
+						alt=""
+					/>
+				</div>
+				<div className="bg-cover rounded-md col-span-1">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/4.png"}
+						alt=""
+					/>
+				</div>
+				<div className="bg-cover rounded-md col-span-1">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/5.png"}
+						alt=""
+					/>
+				</div>
+				<div className="bg-cover rounded-md col-span-1">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/6.png"}
+						alt=""
+					/>
+				</div>
+				<div className="bg-cover rounded-md col-span-1">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/7.png"}
+						alt=""
+					/>
+				</div>
+				<div className="bg-cover rounded-md col-span-1">
+					<img
+						className=" rounded-xl"
+						src={process.env.PUBLIC_URL + "/images/projects/UI/8.png"}
+						alt=""
+					/>
+				</div>
+			</div>
+		</div>
 	);
 };
 

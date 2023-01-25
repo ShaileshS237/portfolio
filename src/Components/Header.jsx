@@ -11,13 +11,15 @@ const Header = () => {
 				<div className="col-span-10  flex self-center justify-end ">
 					<ul className="flex gap-20 text-white self-center ">
 						<li className="hover:color-sky-700  cursor-pointer">Home</li>
-						<li className="cursor-pointer">Work</li>
+						<li className="cursor-pointer pa">Work</li>
 						<li className="cursor-pointer">About</li>
 						<li className="cursor-pointer">Article</li>
 					</ul>
-					<button className=" border border-[#2f3034] flex items-center px-6 py-3 b ml-12 hover:bg-[#2f3034] text-white hover:text-white">
-						Download Resume <BsArrowRight className="ml-5" />
-					</button>
+					<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
+						<button className=" border border-[#2f3034] flex items-center px-6 py-3 b ml-12 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
+							Download Resume <BsArrowRight className="ml-5" />
+						</button>
+					</a>
 				</div>
 			</div>
 			<div className="divide-y divide-blue-200"></div>

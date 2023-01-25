@@ -7,7 +7,7 @@ const Hero = () => {
 	return (
 		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-10 gap-5">
 			<div
-				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover"
+				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
 				style={{ backgroundImage: `url(${bg})` }}
 			>
 				{/* style={{ backgroundImage: `url(${bg})` }} */}

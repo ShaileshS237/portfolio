@@ -1,5 +1,6 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
+import { SKILLS } from "../Constant/constant";
 const Skills = () => {
 	return (
 		<div className="mt-10">
@@ -15,132 +16,84 @@ const Skills = () => {
 			></div>
 			{/* FRONTEND DEVELOPMENT */}
 
-			<div className="grid grid-cols-6 gap-4">
-				<div className="col-span-4 ">
+			<div className="grid grid-cols-10 gap-4">
+				<div className="col-span-5 ">
 					<h3 className="mb-3 text-zinc-500">Frontend Development</h3>
-					<div className=" bg-zinc-800 py-8 rounded-xl ">
-						<Marquee speed={40} pauseOnHover={true} gradient={false}>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
+					<div className=" bg-zinc-800 py-4 rounded-xl ">
+						<Marquee speed={40} delay={1} pauseOnHover={true} gradient={false}>
+							{SKILLS.frontend.map((val) => {
+								return (
+									<div>
+										<img
+											src={process.env.PUBLIC_URL + val.icon}
+											alt=""
+											className="ml-3 rounded-lg"
+											style={{ height: "50px" }}
+										/>
+									</div>
+								);
+							})}
 						</Marquee>
 					</div>
 				</div>
 				<div className="col-span-2 ">
-					<h3 className="mb-3 text-zinc-500">UI/UX Tools</h3>
-					<div className=" bg-zinc-800 py-8 rounded-xl ">
-						<Marquee speed={40} pauseOnHover={true} gradient={false}>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
+					<h3 className="mb-3 text-zinc-500">Mobile App Development</h3>
+					<div className=" bg-zinc-800 py-4 rounded-xl ">
+						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>
+							{SKILLS.mobile.map((val) => {
+								return (
+									<>
+										<img
+											key={val.id}
+											src={process.env.PUBLIC_URL + val.icon}
+											alt=""
+											className="ml-3 rounded-lg"
+											style={{ height: "50px" }}
+										/>
+									</>
+								);
+							})}
 						</Marquee>
 					</div>
 				</div>
+
 				<div className="col-span-3 ">
+					<h3 className="mb-3 text-zinc-500">UI Desigining Tools</h3>
+					<div className=" bg-zinc-800 py-4 rounded-xl ">
+						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>
+							{SKILLS.ui.map((val) => {
+								return (
+									<>
+										<img
+											key={val.id}
+											src={process.env.PUBLIC_URL + val.icon}
+											alt=""
+											className="ml-3 rounded-lg"
+											style={{ height: "50px" }}
+										/>
+									</>
+								);
+							})}
+						</Marquee>
+					</div>
+				</div>
+				<div className="col-span-2">
 					<h3 className="mb-3 text-zinc-500">Backend Development</h3>
-					<div className=" bg-zinc-800 py-8 rounded-xl ">
-						<Marquee speed={40} pauseOnHover={true} gradient={false}>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-						</Marquee>
-					</div>
-				</div>
-				<div className="col-span-3 ">
-					<h3 className="mb-3 text-zinc-500">Others</h3>
-					<div className=" bg-zinc-800 py-8 rounded-xl ">
-						<Marquee speed={40} pauseOnHover={true} gradient={false}>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
-							<img
-								src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
-								alt=""
-								style={{ height: "50px" }}
-							/>
+					<div className=" bg-zinc-800 py-4 rounded-xl ">
+						<Marquee speed={40} pauseOnHover={true} delay={1} gradient={false}>
+							{SKILLS.backend.map((val) => {
+								return (
+									<>
+										<img
+											key={val.id}
+											src={process.env.PUBLIC_URL + val.icon}
+											alt=""
+											className="ml-3 rounded-lg"
+											style={{ height: "50px" }}
+										/>
+									</>
+								);
+							})}
 						</Marquee>
 					</div>
 				</div>
