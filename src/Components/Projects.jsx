@@ -12,18 +12,17 @@ const Projects = () => {
 			>
 				UI Projects :
 			</h1>
-
 			<div className="grid grid-cols-4 gap-3 my-5 ">
-				{/* <div className="bg-cover col-span-2 rounded-lg  overflow-hidden  ">
+				<div className="bg-cover col-span-2 rounded-lg  overflow-hidden  ">
 					<img
 						className=" rounded-lg hover:scale-105 hover:rotate-[-2deg] transition-all duration-200 ease-in delay-200 "
 						src={process.env.PUBLIC_URL + "/images/projects/UI/2.png"}
 						alt=""
 					/>
-				</div> */}
+				</div>
 				<div className="bg-cover rounded-md col-span-2">
 					<img
-						className=" rounded-xl"
+						className="rounded-lg"
 						src={process.env.PUBLIC_URL + "/images/projects/UI/3.png"}
 						alt=""
 					/>
@@ -44,14 +43,14 @@ const Projects = () => {
 				</div>
 				<div className="bg-cover rounded-md col-span-1">
 					<img
-						className=" rounded-xl"
+						className="rounded-md"
 						src={process.env.PUBLIC_URL + "/images/projects/UI/6.png"}
 						alt=""
 					/>
 				</div>
 				<div className="bg-cover rounded-md col-span-1">
 					<img
-						className=" rounded-xl"
+						className="rounded-xl"
 						src={process.env.PUBLIC_URL + "/images/projects/UI/7.png"}
 						alt=""
 					/>

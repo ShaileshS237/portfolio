@@ -191,4 +191,18 @@ export const SOCAILS = [
 		icon: "https://cdn-icons-png.flaticon.com/512/4423/4423623.png",
 		type: "Design Sharing ",
 	},
+	{
+		id: 4,
+		name: "Dribble",
+		link: "https://dribbble.com/Shailesh237",
+		icon: "https://cdn-icons-png.flaticon.com/512/4423/4423623.png",
+		type: "Design Sharing ",
+	},
+	{
+		id: 4,
+		name: "Dribble",
+		link: "https://dribbble.com/Shailesh237",
+		icon: "https://cdn-icons-png.flaticon.com/512/4423/4423623.png",
+		type: "Design Sharing ",
+	},
 ];

@@ -5,14 +5,14 @@ import profile from "../assets/profile2.png";
 import bg from "../assets/background.png";
 const Hero = () => {
 	return (
-		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-10 gap-5">
+		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-5 gap-5">
 			<div
 				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
 				style={{ backgroundImage: `url(${bg})` }}
 			>
 				{/* style={{ backgroundImage: `url(${bg})` }} */}
-				<h1 className="text-4xl  font-regular">Hi👋, I’m </h1>
-				<h1 className="text-7xl lg:text-9xl mt-3 font-bold ">
+				<h1 className="text-3xl  font-regular">Hi👋, I’m </h1>
+				<h1 className="text-6xl lg:text-9xl mt-3 font-bold ">
 					Shailesh Sawale
 				</h1>
 				{/* text-transparent bg-clip-text bg-gradient-to-r from-[#fcff9e] to-[#c67700] */}
