@@ -10,8 +10,8 @@ const Title = (props) => {
 				{props.titlename}
 			</h1>
 			<div
-				className={`ml-5 w-${props.width}`}
-				style={{ height: "0.5px", background: "#3f3f46" }}
+				className={`ml-5 w-full`}
+				style={{ height: "1px", background: "#3f3f46" }}
 			></div>
 		</div>
 	);

@@ -21,8 +21,8 @@ const Projects = () => {
 			Over the past few years, I have coded things that I am sort-of proud of.
 			These are just a few of them. <br />
 			<div className="flex items-center mt-3 gap-3">
-				<span className=" bg-green-500 dot"></span> <h6> - In Progress </h6>
-				<span className="bg-green-500 dot"></span> - Done but required
+				<span className=" bg-orange-500 dot"></span> <h6> - In Progress </h6>
+				<span className="bg-yellow-500 dot"></span> - Done but required
 				improvisation
 				<span className=" bg-green-500 dot"></span> - Done
 			</div>
