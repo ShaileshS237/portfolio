@@ -7,10 +7,11 @@ import Title from "./Title";
 // import bg from "../assets/background.png";
 const Projects = () => {
 	const checkStatus = (status) => {
-		console.log(status);
-		if (status == 1) return <span className=" bg-green-500 dot"></span>;
-		else if (status == 2) return <span className=" bg-yellow-500 dot"></span>;
-		else if (status == 3) return <span className=" bg-orange-500 dot"></span>;
+		if (status === "1") return <span className=" bg-green-500 dot"></span>;
+		else if (status === "2")
+			return <span className=" bg-yellow-500 dot"></span>;
+		else if (status === "3")
+			return <span className=" bg-orange-500 dot"></span>;
 	};
 
 	return (
@@ -30,34 +31,48 @@ const Projects = () => {
 			These are just a few of them. <br />
 			<div className="flex flex-col md:flex-row mt-3 gap-3">
 				<div>
-					<span className=" bg-orange-500 dot"></span> : In Progress
+					<span className=" bg-green-500 dot"></span> : Completed
 				</div>
 				<div className="items-center">
 					<span className="bg-yellow-500 dot"></span> : Completed but required
 					improvisation
 				</div>
-
 				<div>
-					<span className=" bg-green-500 dot"></span> : Completed
+					<span className=" bg-orange-500 dot"></span> : In Progress
 				</div>
 			</div>
 			<div className="grid grid-cols-3 mt-5 gap-4">
 				{PROJECTS.map((val) => {
 					return (
-						<div className="col-span-3 md:col-span-1 border border-zinc-600 rounded-md overflow-hidden">
+						<div
+							key={val.id}
+							className="col-span-3 md:col-span-1 border border-zinc-600 rounded-md overflow-hidden"
+						>
 							<div className="p-3 bg-zinc-800 flex justify-end">
 								{checkStatus(val.status)}
 							</div>
 							<div className="p-3">
-								<img
-									className="w-64"
-									src={process.env.PUBLIC_URL + val.icon}
-									alt=""
-								/>
+								{val.icon ? (
+									<img
+										className="w-64"
+										src={process.env.PUBLIC_URL + val.icon}
+										alt=""
+									/>
+								) : (
+									<div>
+										<h1 className="text-3xl px-1 font-bold">
+											{val.project_name}
+										</h1>
+									</div>
+								)}
 							</div>
 							<div className="px-5 py-3">
 								<p className="">{val.description}</p>
-								<p>View More..</p>
+								<a href={val.href} target="_blank" rel="noreferrer">
+									<button className=" text-white px-3 py-2 mt-3 rounded-lg border ">
+										GitHub Link
+									</button>
+								</a>
 							</div>
 						</div>
 					);

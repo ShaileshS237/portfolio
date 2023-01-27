@@ -138,22 +138,27 @@ export const PROJECTS = [
 		description:
 			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
 		status: "2",
+		href: "https://github.com/ShaileshS237/loveAkot",
+		livelink: "",
 	},
 	{
 		id: 2,
 		project_name: "Love Akot",
-		icon: "images/projects/projects_logo/quickchk.png",
-		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+		icon: "images/projects/projects_logo/qc_white.png",
+		description: "Online E-commerce Android application for meat delivery shop",
 		status: "1",
+		href: "",
+		livelink: "https://play.google.com/store/apps/details?id=com.loveakot",
 	},
 	{
 		id: 3,
-		project_name: "Love Akot",
-		icon: "images/projects/projects_logo/la_logowhite.png",
+		project_name: "Matrimoney App",
+		icon: "",
 		description:
 			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
 		status: "1",
+		href: "https://github.com/ShaileshS237/loveAkot",
+		livelink: "",
 	},
 ];
 
