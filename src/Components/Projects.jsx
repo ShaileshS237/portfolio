@@ -1,6 +1,8 @@
 import React from "react";
 import { PROJECTS } from "../Constant/constant";
 import Title from "./Title";
+import "animate.css";
+import { Link } from "react-router-dom";
 // import image from "../assets/image1.png";
 // import logo from "../assets/logo.png";
 // import profile from "../assets/profile2.png";
@@ -17,18 +19,30 @@ const Projects = () => {
 	return (
 		<div className="mt-10">
 			<Title width={"full"} titlename={"Project"} />
-			For all the coding projects, check out my{" "}
-			<a
-				href="https://github.com/ShaileshS237"
-				target="_blank"
-				rel="noreferrer"
-				className="text-[cyan]"
-			>
-				Github Repos.
-			</a>
-			<br />
-			Over the past few years, I have coded things that I am sort-of proud of.
-			These are just a few of them. <br />
+
+			<div className="grid grid-cols-12">
+				<div className="md:col-span-10 col-span-12">
+					For all the coding projects, check out my &nbsp;
+					<a
+						href="https://github.com/ShaileshS237"
+						target="_blank"
+						rel="noreferrer"
+						className="text-[cyan]"
+					>
+						Github Repos.
+					</a>
+					<br />
+					Over the past few years, I have coded things that I am sort-of proud
+					of. These are just a few of them. <br />
+				</div>
+				<div className="col-span-12 mt-4 md:mt-0 md:col-span-2">
+					<Link to="/work">
+						<button className="w-[100%] text-white px-3 py-2 rounded-lg bg-zinc-700 ">
+							View All Projects
+						</button>
+					</Link>
+				</div>
+			</div>
 			<div className="flex flex-col md:flex-row mt-3 gap-3">
 				<div>
 					<span className=" bg-green-500 dot"></span> : Completed
@@ -41,15 +55,15 @@ const Projects = () => {
 					<span className=" bg-orange-500 dot"></span> : In Progress
 				</div>
 			</div>
-			<div className="grid grid-cols-3 mt-5 gap-4">
+			<div className="grid grid-cols-3 mt-5 gap-4 scroll-smooth">
 				{PROJECTS.map((val) => {
 					return (
 						<div
 							key={val.id}
-							className="col-span-3 md:col-span-1 border border-zinc-600 rounded-md overflow-hidden"
+							className="animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-600 rounded-xl overflow-hidden"
 						>
-							<div className="p-3 bg-zinc-800 flex justify-end">
-								{checkStatus(val.status)}
+							<div className="p-3 bg-zinc-800 flex items-center justify-end">
+								<div>{checkStatus(val.status)}</div>
 							</div>
 							<div className="p-3">
 								{val.icon ? (
@@ -67,12 +81,56 @@ const Projects = () => {
 								)}
 							</div>
 							<div className="px-5 py-3">
+								{/* <span className=" bg-white text-black px-4 py-2 rounded">
+									{val.type}
+								</span> */}
+								<div>
+									<span className="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease mr-3">
+										{val.type} - {val.project_type} Project
+									</span>
+								</div>
+							</div>
+							<div className="px-5 py-3 ">
 								<p className="">{val.description}</p>
-								<a href={val.href} target="_blank" rel="noreferrer">
-									<button className=" text-white px-3 py-2 mt-3 rounded-lg border ">
-										GitHub Link
-									</button>
-								</a>
+								{/* <div className="grid grid-cols-4">
+									<img
+										src={process.env.PUBLIC_URL + "images/skills/ionic.png"}
+										alt=""
+										className="rounded-mdl"
+									/>
+								</div> */}
+								<div className="flex gap-3 mt-3">
+									<a href={val.href} target="_blank" rel="noreferrer">
+										<img
+											src="https://cdn-icons-png.flaticon.com/512/3291/3291695.png"
+											alt=""
+											className="h-10 invert"
+										/>
+									</a>
+									<a href={val.livelink} target="_blank" rel="noreferrer">
+										{val.type == "Mobile App" ? (
+											<img
+												src="https://cdn-icons-png.flaticon.com/512/300/300218.png"
+												alt=""
+												className="h-10"
+											/>
+										) : (
+											<img
+												src="https://cdn-icons-png.flaticon.com/512/5909/5909151.png"
+												alt=""
+												className="h-10"
+											/>
+										)}
+									</a>
+									<a href={val.href} target="_blank" rel="noreferrer">
+										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
+											View More
+										</button>
+									</a>
+								</div>
+
+								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>
+								</a> */}
 							</div>
 						</div>
 					);
