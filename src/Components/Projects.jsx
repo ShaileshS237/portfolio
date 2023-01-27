@@ -1,10 +1,18 @@
 import React from "react";
+import { PROJECTS } from "../Constant/constant";
 import Title from "./Title";
 // import image from "../assets/image1.png";
 // import logo from "../assets/logo.png";
 // import profile from "../assets/profile2.png";
 // import bg from "../assets/background.png";
 const Projects = () => {
+	const checkStatus = (status) => {
+		console.log(status);
+		if (status == 1) return <span className=" bg-green-500 dot"></span>;
+		else if (status == 2) return <span className=" bg-yellow-500 dot"></span>;
+		else if (status == 3) return <span className=" bg-orange-500 dot"></span>;
+	};
+
 	return (
 		<div className="mt-10">
 			<Title width={"full"} titlename={"Project"} />
@@ -20,11 +28,40 @@ const Projects = () => {
 			<br />
 			Over the past few years, I have coded things that I am sort-of proud of.
 			These are just a few of them. <br />
-			<div className="flex items-center mt-3 gap-3">
-				<span className=" bg-orange-500 dot"></span> <h6> - In Progress </h6>
-				<span className="bg-yellow-500 dot"></span> - Done but required
-				improvisation
-				<span className=" bg-green-500 dot"></span> - Done
+			<div className="flex flex-col md:flex-row mt-3 gap-3">
+				<div>
+					<span className=" bg-orange-500 dot"></span> : In Progress
+				</div>
+				<div className="items-center">
+					<span className="bg-yellow-500 dot"></span> : Completed but required
+					improvisation
+				</div>
+
+				<div>
+					<span className=" bg-green-500 dot"></span> : Completed
+				</div>
+			</div>
+			<div className="grid grid-cols-3 mt-5 gap-4">
+				{PROJECTS.map((val) => {
+					return (
+						<div className="col-span-3 md:col-span-1 border border-zinc-600 rounded-md overflow-hidden">
+							<div className="p-3 bg-zinc-800 flex justify-end">
+								{checkStatus(val.status)}
+							</div>
+							<div className="p-3">
+								<img
+									className="w-64"
+									src={process.env.PUBLIC_URL + val.icon}
+									alt=""
+								/>
+							</div>
+							<div className="px-5 py-3">
+								<p className="">{val.description}</p>
+								<p>View More..</p>
+							</div>
+						</div>
+					);
+				})}
 			</div>
 			{/* <h1
 				className="text-4xl text-zinc-400

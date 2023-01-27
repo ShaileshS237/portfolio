@@ -7,7 +7,7 @@ const Skills = () => {
 	return (
 		<div className="md:mt-10">
 			<Title width={"full"} titlename={"Skills"} />
-			<div className="grid grid-cols-10 gap-3">
+			<div className="grid grid-cols-12 gap-3">
 				<SkillMarquee
 					marqueeValue={SKILLS.frontend}
 					span={3}
@@ -15,12 +15,12 @@ const Skills = () => {
 				/>
 				<SkillMarquee
 					marqueeValue={SKILLS.mobile}
-					span={2}
+					span={3}
 					section={"Mobile App Development"}
 				/>
 				<SkillMarquee
 					marqueeValue={SKILLS.ui}
-					span={2}
+					span={3}
 					section={"UI Designing"}
 				/>
 				<SkillMarquee
