@@ -6,7 +6,7 @@ import bg from "../assets/background.png";
 import { BsArrowRight } from "react-icons/bs";
 const Hero = () => {
 	return (
-		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-5 gap-5">
+		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-10 gap-5">
 			<div
 				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
 				style={{ backgroundImage: `url(${bg})` }}

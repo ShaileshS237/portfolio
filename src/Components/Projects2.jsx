@@ -8,7 +8,7 @@ import bg from "../assets/background.png";
 // import logo from "../assets/logo.png";
 // import profile from "../assets/profile2.png";
 // import bg from "../assets/background.png";
-const Projects = () => {
+const Projects2 = () => {
 	const checkStatus = (status) => {
 		if (status === "1") return <span className=" bg-green-500 dot"></span>;
 		else if (status === "2")
@@ -18,11 +18,9 @@ const Projects = () => {
 	};
 
 	return (
-		<div className="mt-10">
-			<Title width={"full"} titlename={"Project"} />
-
+		<div className="mt-3">
 			<div className="grid grid-cols-12">
-				<div className="md:col-span-10 col-span-12">
+				<div className="md:col-span-12 col-span-12">
 					For all the coding projects, check out my &nbsp;
 					<a
 						href="https://github.com/ShaileshS237"
@@ -32,16 +30,6 @@ const Projects = () => {
 					>
 						Github Repos.
 					</a>
-					<br />
-					Over the past few years, I have coded things that I am sort-of proud
-					of. These are just a few of them. <br />
-				</div>
-				<div className="col-span-12 mt-4 md:mt-0 md:col-span-2">
-					<Link to="/work">
-						<button className="w-[100%] text-white px-3 py-2 rounded-lg bg-zinc-700 ">
-							View All Projects
-						</button>
-					</Link>
 				</div>
 			</div>
 			<div className="flex flex-col md:flex-row mt-3 gap-3">
@@ -56,8 +44,8 @@ const Projects = () => {
 					<span className=" bg-orange-500 dot"></span> : In Progress
 				</div>
 			</div>
-			<div className="grid grid-cols-3 mt-5 gap-4 scroll-smooth">
-				{PROJECTS.slice(0, 6).map((val) => {
+			<div className="grid grid-cols-3 mt-5 gap-4 scroll-smooth mb-10">
+				{PROJECTS.map((val) => {
 					return (
 						<div
 							key={val.id}
@@ -199,4 +187,4 @@ const Projects = () => {
 	);
 };
 
-export default Projects;
+export default Projects2;

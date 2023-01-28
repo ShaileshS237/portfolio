@@ -11,21 +11,30 @@ const Header = () => {
 						<img src={logo} alt="" />
 					</Link>
 				</div>
-				<div className="col-span-9 hidden md:flex self-center justify-end ">
+				<div className="col-span-9 hidden md:flex self-center justify-end navbar">
 					<ul className="flex gap-20 text-white self-center ">
 						<Link to="/">
-							<li className="hover:color-sky-700  cursor-pointer">Home</li>
+							<li className=" p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+								Home
+							</li>
 						</Link>
 						<Link to="/work">
-							<li className="cursor-pointer pa">Work</li>
+							<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+								Work
+							</li>
 						</Link>
 						<Link to="/about">
-							<li className="cursor-pointer">About</li>
+							<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+								About
+							</li>
 						</Link>
-						<li className="cursor-pointer">Article</li>
+						<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+							Article
+						</li>
 					</ul>
 				</div>
 			</div>
+
 			{/* <div
 				className="mt-5"
 				style={{ height: "0.5px", background: "#3f3f46" }}

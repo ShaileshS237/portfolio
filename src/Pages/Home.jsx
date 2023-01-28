@@ -14,13 +14,17 @@ const Home = () => {
 				<Hero />
 
 				<Skills />
-				<Projects />
-				{/* <h1 className="mt-10 font-bold md:text-[3.00rem] text-[1.4rem]">
-					I have experience with front-end technologies such as HTML, CSS, and
-					JavaScript, and I am able to turn design mockups into functional web
-					pages. I have a keen eye for detail and a passion for creating
-					seamless and intuitive user experiences.
+				{/* <h1 className="mt-10 font-bold md:text-[2.5rem] text-[1.4rem] ">
+					I have experience with front-end technologies such as{" "}
+					<span className="text-orange-600">HTML</span>,{" "}
+					<span className="text-blue-700">CSS</span>, and
+					<span className="text-yellow-300"> JavaScript</span> and I am able to
+					turn design mockups into functional web pages. I have a keen eye for
+					detail and a passion for creating seamless and intuitive user
+					experiences.
 				</h1> */}
+				<Projects />
+
 				<Experiance />
 			</div>
 
