@@ -19,7 +19,7 @@ const Hero = () => {
 				{/* text-transparent bg-clip-text bg-gradient-to-r from-[#fcff9e] to-[#c67700] */}
 				{/* background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%); */}
 				<h1 className="text-2xl mt-3 font-light">
-					I ❤️ to Design & Developed Things (& Loved Rounded Design Too)
+					I ❤️ to Design & Developed Things
 				</h1>
 				<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
 					<button className=" border border-white flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">

@@ -2,7 +2,8 @@ import React from "react";
 import { PROJECTS } from "../Constant/constant";
 import Title from "./Title";
 import "animate.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import bg from "../assets/background.png";
 // import image from "../assets/image1.png";
 // import logo from "../assets/logo.png";
 // import profile from "../assets/profile2.png";
@@ -90,7 +91,7 @@ const Projects = () => {
 									</span>
 								</div>
 							</div>
-							<div className="px-5 py-3 ">
+							<div className="px-5 py-3  ">
 								<p className="">{val.description}</p>
 								{/* <div className="grid grid-cols-4">
 									<img
@@ -99,7 +100,7 @@ const Projects = () => {
 										className="rounded-mdl"
 									/>
 								</div> */}
-								<div className="flex gap-3 mt-3">
+								<div className="flex gap-3 mt-3 mb-2">
 									<a href={val.href} target="_blank" rel="noreferrer">
 										<img
 											src="https://cdn-icons-png.flaticon.com/512/3291/3291695.png"
@@ -122,11 +123,11 @@ const Projects = () => {
 											/>
 										)}
 									</a>
-									<a href={val.href} target="_blank" rel="noreferrer">
+									<Link to={`/aboutproject/${val.id}`}>
 										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
-											View More
+											Know More
 										</button>
-									</a>
+									</Link>
 								</div>
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>

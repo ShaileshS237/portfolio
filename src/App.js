@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Work from "./Pages/Work";
+import AboutProject from "./Components/AboutProject";
+import ScrollToTop from "./Components/ScrollToTop";
 function App() {
 	return (
 		<BrowserRouter>
@@ -12,9 +14,11 @@ function App() {
 			>
 				<h3>Let's Talk 👋 </h3>
 			</button>
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/work" element={<Work />} />
+				<Route path="/aboutproject/:id" element={<AboutProject />} />
 				<Route path="/about" element={<About />} />
 			</Routes>
 		</BrowserRouter>
