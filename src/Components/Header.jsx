@@ -14,21 +14,21 @@ const Header = () => {
 				<div className="col-span-9 hidden md:flex self-center justify-end navbar">
 					<ul className="flex gap-20 text-white self-center ">
 						<Link to="/">
-							<li className=" p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+							<li className=" p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 								Home
 							</li>
 						</Link>
 						<Link to="/work">
-							<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+							<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 								Work
 							</li>
 						</Link>
 						<Link to="/about">
-							<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+							<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 								About
 							</li>
 						</Link>
-						<li className="p-4 border-b-2 border-green-500 border-opacity-0 hover:border-opacity-100 hover:text-green-500 duration-200 cursor-pointer active">
+						<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 							Article
 						</li>
 					</ul>

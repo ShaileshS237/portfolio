@@ -13,6 +13,7 @@ const Work = () => {
 					</h1>
 				</div> */}
 				<TitleHero title={"Projects"} color={"pink"} />
+
 				<Projects2 />
 			</div>
 		</div>

@@ -56,12 +56,12 @@ const Projects = () => {
 					<span className=" bg-orange-500 dot"></span> : In Progress
 				</div>
 			</div>
-			<div className="grid grid-cols-3 mt-5 gap-4 scroll-smooth">
+			<div className="grid grid-cols-3 mt-7 gap-10 scroll-smooth">
 				{PROJECTS.slice(0, 6).map((val) => {
 					return (
 						<div
 							key={val.id}
-							className="animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-600 rounded-xl overflow-hidden"
+							className="  md:transform-none hover:-translate-y-6 transition-all duration-300  animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-700 rounded-xl overflow-hidden"
 						>
 							<div className="p-3 bg-zinc-800 flex items-center justify-end">
 								<div>{checkStatus(val.status)}</div>
@@ -123,11 +123,11 @@ const Projects = () => {
 											/>
 										)}
 									</a>
-									<Link to={`/aboutproject/${val.id}`}>
+									{/* <Link to={`/aboutproject/${val.id}`}>
 										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 											Know More
 										</button>
-									</Link>
+									</Link> */}
 								</div>
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>
@@ -137,64 +137,6 @@ const Projects = () => {
 					);
 				})}
 			</div>
-			{/* <h1
-				className="text-4xl text-zinc-400
-			  font-bold"
-			>
-			
-				UI Projects :
-			</h1>
-			<div className="grid grid-cols-4 gap-3 my-5 ">
-				<div className="bg-cover col-span-2 rounded-lg  overflow-hidden  ">
-					<img
-						className=" rounded-lg hover:scale-105 hover:rotate-[-2deg] transition-all duration-200 ease-in delay-200 "
-						src={process.env.PUBLIC_URL + "/images/projects/UI/2.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-2">
-					<img
-						className="rounded-lg"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/3.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-1">
-					<img
-						className=" rounded-xl"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/4.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-1">
-					<img
-						className=" rounded-xl"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/5.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-1">
-					<img
-						className="rounded-md"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/6.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-1">
-					<img
-						className="rounded-xl"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/7.png"}
-						alt=""
-					/>
-				</div>
-				<div className="bg-cover rounded-md col-span-1">
-					<img
-						className=" rounded-xl"
-						src={process.env.PUBLIC_URL + "/images/projects/UI/8.png"}
-						alt=""
-					/>
-				</div>
-			</div> */}
 		</div>
 	);
 };
