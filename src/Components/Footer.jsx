@@ -2,8 +2,8 @@ import React from "react";
 import { SOCAILS } from "../Constant/constant";
 const Footer = () => {
 	return (
-		<div className="bg-zinc-800 p-5">
-			<div className=" md:container mx-auto">
+		<div className="bg-zinc-800 p-5 rounded-t-lg mt-10">
+			<div className=" container mx-auto">
 				<h1 className="text-2xl md:text-4xl font-bold text-zinc-400 mb-5">
 					Let's Connect There
 				</h1>

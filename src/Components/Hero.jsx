@@ -12,7 +12,9 @@ const Hero = () => {
 				style={{ backgroundImage: `url(${bg})` }}
 			>
 				{/* style={{ backgroundImage: `url(${bg})` }} */}
-				<h1 className="text-3xl  font-regular">Hi👋, I’m </h1>
+				<h1 className="text-4xl  font-regular">
+					Hi <span className="wave">👋</span>, I’m{" "}
+				</h1>
 				<h1 className="text-6xl lg:text-9xl mt-3 font-bold ">
 					Shailesh Sawale
 				</h1>

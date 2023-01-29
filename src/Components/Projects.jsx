@@ -61,7 +61,7 @@ const Projects = () => {
 					return (
 						<div
 							key={val.id}
-							className="  md:transform-none hover:-translate-y-6 transition-all duration-300  animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-700 rounded-xl overflow-hidden"
+							className="  md:transform-none hover:-translate-y-3 transition-all duration-300  animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-700 rounded-2xl overflow-hidden"
 						>
 							<div className="p-3 bg-zinc-800 flex items-center justify-end">
 								<div>{checkStatus(val.status)}</div>
@@ -86,7 +86,7 @@ const Projects = () => {
 									{val.type}
 								</span> */}
 								<div>
-									<span className="px-4 py-2 rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease mr-3">
+									<span className="px-4 py-2 rounded-full text-black bg-gray-200 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-gray-300 transition duration-300 ease mr-3">
 										{val.type} - {val.project_type} Project
 									</span>
 								</div>
@@ -123,11 +123,11 @@ const Projects = () => {
 											/>
 										)}
 									</a>
-									{/* <Link to={`/aboutproject/${val.id}`}>
+									<Link to={`/aboutproject/${val.id}`}>
 										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 											Know More
 										</button>
-									</Link> */}
+									</Link>
 								</div>
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>

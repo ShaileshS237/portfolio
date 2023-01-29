@@ -10,8 +10,8 @@ const About = () => {
 
 				<TitleHero title={"About Me"} color={"sky"} />
 				<h1 className=" animate__animated animate__fadeIn mt-10 font-bold md:text-[3.00rem] text-[1.4rem]">
-					Hello 👋, at this point you already knew me, Still (I'm Shailesh
-					Sawale ).
+					Hello <span className="rotate-45">👋</span>, at this point you already
+					knew me, Still (I'm Shailesh Sawale ).
 					<br /> <br /> I have experience with front-end technologies such as
 					HTML, CSS, and JavaScript, and I am able to turn design mockups into
 					functional web pages. I have a keen eye for detail and a passion for
