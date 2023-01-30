@@ -142,7 +142,7 @@ export const PROJECTS = [
 		project_type: "Personal",
 		route: "/work",
 		href: "https://github.com/ShaileshS237/loveAkot",
-		livelink: "https://play.google.com/store/a pps/details?id=com.loveakot",
+		livelink: "https://play.google.com/store/apps/details?id=com.loveakot",
 		headerImage: "../public/images/projects/projects_logo/bktcard_logo.png",
 	},
 	{
@@ -225,6 +225,13 @@ export const EXPERIANCE = [
 		date: "Jun 2021 - Present ",
 	},
 	{
+		id: 4,
+		comapny_name: "Quick Chicken.",
+		location: "Pune, Maharashtra, India",
+		role: "Mobile Developer (Freelancer)",
+		date: "Jan 2022 - Jul 2022",
+	},
+	{
 		id: 2,
 		comapny_name: "Victorrious Digital.",
 		location: "Pune, Maharashtra, India",
@@ -238,42 +245,57 @@ export const EXPERIANCE = [
 		role: "Graphic & Motion Designer ",
 		date: "Feb 2018 - Feb 2019 ",
 	},
-	{
-		id: 4,
-		comapny_name: "Quick Chicken.",
-		location: "Pune, Maharashtra, India",
-		role: "Mobile Developer (Freelancer)",
-		date: "Jan 2022 - Jul 2022",
-	},
 ];
 
 export const SOCAILS = [
 	{
+		id: 3,
+		name: "Linked In",
+		link: "https://www.linkedin.com/in/shaileshsawale/",
+		icon: "icons/006-linkedin.png",
+		type: "Professional Network ",
+	},
+	{
+		id: 4,
+		name: "githubb",
+		link: "https://dribbble.com/Shailesh237",
+		icon: "icons/007-github.png",
+		type: "Design Sharing ",
+	},
+	{
+		id: 4,
+		name: "Dribble",
+		link: "https://dribbble.com/Shailesh237",
+		icon: "icons/004-twitter.png",
+		type: "Design Sharing ",
+	},
+	{
 		id: 1,
 		name: "Facebook",
 		link: "https://www.facebook.com/TheRealShailesh/",
-		icon: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png",
+		icon: "icons/003-facebook.png",
 		type: "Social Media ",
 	},
 	{
 		id: 2,
 		name: "Instagram",
 		link: "https://www.instagram.com/shaaaailesh/",
-		icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png",
+		icon: "icons/001-instagram.png",
 		type: "Social Media ",
 	},
+
 	{
-		id: 3,
-		name: "Linked In",
-		link: "https://www.linkedin.com/in/shaileshsawale/",
-		icon: "https://cdn-icons-png.flaticon.com/512/174/174857.png",
-		type: "Professional Network ",
+		id: 4,
+		name: "Dribble",
+		link: "https://dribbble.com/Shailesh237",
+		icon: "icons/002-dribble.png",
+		type: "Design Sharing ",
 	},
 	{
 		id: 4,
 		name: "Dribble",
 		link: "https://dribbble.com/Shailesh237",
-		icon: "https://cdn-icons-png.flaticon.com/512/4423/4423623.png",
+		icon: "icons/005-medium.png",
 		type: "Design Sharing ",
 	},
 ];

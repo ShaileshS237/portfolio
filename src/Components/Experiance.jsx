@@ -19,21 +19,21 @@ const Experiance = () => {
 									className="  animate__animated animate__fadeIn col-span-2 md:col-span-1 border border-zinc-700 rounded-2xl overflow-hidden"
 								>
 									<div className="px-5 py-4 bg-zinc-800">
-										<div className="col-span-4 text-3xl md:text-3xl  font-bold text-zinc-500">
+										<div className="col-span-4 text-2xl md:text-3xl  font-bold text-zinc-500">
 											{val.date}
 										</div>
 									</div>
 									<div className="px-5 py-1 ">
-										<div className="col-span-4 my-4 text-3xl md:text-4xl  font-bold text-zinc-700">
+										<div className="col-span-4 my-4 text-4xl md:text-4xl  font-bold text-zinc-600">
 											{val.comapny_name}
 										</div>
-										<div className="md:text-lg md:col-span-2 col-span-1  text-zinc-400">
+										<div className="md:text-lg md:col-span-4 col-span-4  text-zinc-400">
 											<h1 className="my-1 text-zinc-300">
 												Role: <br />
 												{val.role}
 											</h1>
 										</div>
-										<div className="md:text-lg md:col-span-1 col-span-1 text-zinc-400">
+										<div className="md:text-lg md:col-span-4 col-span-4 text-zinc-400">
 											<h1 className="my-1 text-zinc-300 mb-5">
 												Location: <br /> {val.location}
 											</h1>

@@ -123,11 +123,11 @@ const Projects = () => {
 											/>
 										)}
 									</a>
-									<Link to={`/aboutproject/${val.id}`}>
+									{/* <Link to={`/aboutproject/${val.id}`}>
 										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 											Know More
 										</button>
-									</Link>
+									</Link> */}
 								</div>
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>
