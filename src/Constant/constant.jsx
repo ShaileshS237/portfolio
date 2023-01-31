@@ -175,7 +175,7 @@ export const PROJECTS = [
 		project_name: "bktcard",
 		icon: "images/projects/projects_logo/bktcard_logo.png",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"BKTcard is a note-taking app that streamlines organization through categorization. With customizable buckets, you have the flexibility to categorize your notes in a way that suits your needs.",
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		type: "Website",
@@ -187,7 +187,7 @@ export const PROJECTS = [
 		project_name: "Matrimoney App",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Matrimony App project connects individuals seeking partners for marriage. Features profile creation, matching, communication tools, search by criteria, privacy controls, and user verification for a safe and trustworthy platform to simplify finding life partners.",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
@@ -200,7 +200,7 @@ export const PROJECTS = [
 		project_name: "Placement Android App",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Placement Android App connects students with potential employers for internships and job placements. Features resume building, job search, interview scheduling, real-time updates, and secure communication for an efficient and effective placement process.",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -214,7 +214,7 @@ export const PROJECTS = [
 		project_name: "Placement Android App - Dashboard",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Placement Android App connects students with potential employers for internships and job placements. Features resume building, job search, interview scheduling, real-time updates, and secure communication for an efficient and effective placement process.",
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -228,7 +228,7 @@ export const PROJECTS = [
 		project_name: "NIT Kurukshtra College Website",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"NIT Kurukshetra College Website showcases academic programs, research, campus life, facilities, and achievements, with information on admission, fees, scholarships, and events. Improves communication and promotes institute's image.",
 		status: "3",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -242,7 +242,7 @@ export const PROJECTS = [
 		project_name: "Netflix- Clone",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Netflix Clone is a streaming platform that offers a vast library of movies, TV shows, documentaries, and original content. Users can browse, search, and stream content on various devices with personalized recommendations and a user-friendly interface. The platform offers a subscription-based model with options for offline viewing. The goal is to provide a similar viewing experience to that of Netflix.",
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -255,7 +255,7 @@ export const PROJECTS = [
 		project_name: "Password Generator",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Password Generator is a tool that creates secure, random passwords for individuals and businesses. It allows users to specify password length and complexity criteria, such as including uppercase and lowercase letters, numbers, and special characters. The tool helps improve password security by generating strong, unique passwords",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -270,7 +270,7 @@ export const PROJECTS = [
 		project_name: "Contact Parser using CSV file",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Contact Parser using CSV file is a tool that parses and extracts information from CSV files containing contact information. It organizes the data into structured format, and allows users to export the information into various file formats, such as vCard, Excel, and more.",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -284,7 +284,7 @@ export const PROJECTS = [
 		project_name: "Neumorphic Clock",
 		icon: "",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"Neumorphic Style Clock is a clock design featuring soft, curvy shapes with a gradient background, creating a unique and modern look.",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",

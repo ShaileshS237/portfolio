@@ -102,28 +102,36 @@ const Projects = () => {
 									/>
 								</div> */}
 								<div className="flex gap-3 mt-3 mb-2">
-									<a href={val.href} target="_blank" rel="noreferrer">
-										<img
-											src="https://cdn-icons-png.flaticon.com/512/3291/3291695.png"
-											alt=""
-											className="h-10 invert"
-										/>
-									</a>
-									<a href={val.livelink} target="_blank" rel="noreferrer">
-										{val.type == "Mobile App" ? (
+									{val.href ? (
+										<a href={val.href} target="_blank" rel="noreferrer">
 											<img
-												src="https://cdn-icons-png.flaticon.com/512/300/300218.png"
+												src="https://cdn-icons-png.flaticon.com/512/3291/3291695.png"
 												alt=""
-												className="h-10"
+												className="h-10 invert"
 											/>
-										) : (
-											<img
-												src="https://cdn-icons-png.flaticon.com/512/5909/5909151.png"
-												alt=""
-												className="h-10"
-											/>
-										)}
-									</a>
+										</a>
+									) : (
+										""
+									)}
+									{val.livelink ? (
+										<a href={val.livelink} target="_blank" rel="noreferrer">
+											{val.type == "Mobile App" ? (
+												<img
+													src="https://cdn-icons-png.flaticon.com/512/300/300218.png"
+													alt=""
+													className="h-10"
+												/>
+											) : (
+												<img
+													src="https://cdn-icons-png.flaticon.com/512/5909/5909151.png"
+													alt=""
+													className="h-10"
+												/>
+											)}
+										</a>
+									) : (
+										""
+									)}
 									{/* <Link to={`/aboutproject/${val.id}`}>
 										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 											Know More
