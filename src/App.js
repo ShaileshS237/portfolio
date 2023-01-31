@@ -16,7 +16,7 @@ function App() {
 					<h3>Let's Talk 👋 </h3>
 				</button>
 			</a>
-			<ScrollToTop />
+
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/work" element={<Work />} />

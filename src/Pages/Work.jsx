@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Header from "../Components/Header";
 import TitleHero from "../Components/TitleHero";
 import Projects2 from "../Components/Projects2";
+import Footer from "../Components/Footer";
+import { useLocation } from "react-router";
+
 const Work = () => {
 	return (
 		<div className="">
@@ -13,9 +16,9 @@ const Work = () => {
 					</h1>
 				</div> */}
 				<TitleHero title={"Projects"} color={"pink"} />
-
 				<Projects2 />
 			</div>
+			<Footer />
 		</div>
 	);
 };

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Experiance from "../Components/Experiance";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import Hero from "../Components/Hero";
 import Projects from "../Components/Projects";
 import Skills from "../Components/Skills";
+
 const Home = () => {
 	return (
 		<div className="">
@@ -12,8 +13,8 @@ const Home = () => {
 				<Header />
 
 				<Hero />
-
 				<Skills />
+
 				{/* <h1 className="mt-10 font-bold md:text-[2.5rem] text-[1.4rem] ">
 					I have experience with front-end technologies such as{" "}
 					<span className="text-orange-600">HTML</span>,{" "}

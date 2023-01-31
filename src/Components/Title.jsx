@@ -4,8 +4,8 @@ const Title = (props) => {
 	return (
 		<div className="flex items-center ">
 			<h1
-				className="text-4xl mb-2  text-sky-400
-			  font-bold"
+				className="text-4xl  bg-clip-text text-transparent bg-gradient-to-tr from-cyan-500 to-blue-500 font-bold"
+				style={{ lineHeight: "56px" }}
 			>
 				{props.titlename}
 			</h1>

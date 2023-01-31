@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { BsArrowRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Hamburger from "hamburger-react";
 const Header = () => {
+	const [isOpen, setOpen] = useState(false);
 	return (
 		<div className="top-0 z-50 md:mt-5">
 			<div className="grid grid-cols-12 gap-4 items-center">
 				<div className="md:col-span-3 col-span-12">
 					<Link to="/">
 						<img src={logo} alt="" />
+					</Link>
+				</div>
+				<div className="flex justify-center md:col-span-3 md:hidden col-span-12">
+					<Link to="/">
+						{/* <Hamburger toggled={isOpen} toggle={setOpen} /> */}
 					</Link>
 				</div>
 				<div className="col-span-9 hidden md:flex self-center justify-end navbar">
@@ -23,14 +30,14 @@ const Header = () => {
 								Work
 							</li>
 						</Link>
-						<Link to="/about">
+						{/* <Link to="/about">
 							<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 								About
 							</li>
 						</Link>
 						<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 							Article
-						</li>
+						</li> */}
 					</ul>
 				</div>
 			</div>

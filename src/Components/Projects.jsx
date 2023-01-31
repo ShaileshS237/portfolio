@@ -91,8 +91,9 @@ const Projects = () => {
 									</span>
 								</div>
 							</div>
-							<div className="px-5 py-3  ">
-								<p className="">{val.description}</p>
+							<div className="px-5 py-1  ">
+								<p className="text-zinc-300 ">{val.description}</p>
+								{/* <p className="text-zinc-500 my-3">Last updated {val.lUdpate}</p> */}
 								{/* <div className="grid grid-cols-4">
 									<img
 										src={process.env.PUBLIC_URL + "images/skills/ionic.png"}

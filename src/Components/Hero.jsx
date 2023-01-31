@@ -4,9 +4,10 @@ import logo from "../assets/logo.png";
 import profile from "../assets/profile2.png";
 import bg from "../assets/background.png";
 import { BsArrowRight } from "react-icons/bs";
+import Social from "./Social";
 const Hero = () => {
 	return (
-		<div className="grid  lg:grid-rows-1 grid-cols-10 mt-10 gap-5">
+		<div className="grid  lg:grid-rows-1 grid-cols-10 md:mt-10 mt-2 gap-5">
 			<div
 				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
 				style={{ backgroundImage: `url(${bg})` }}
@@ -28,6 +29,7 @@ const Hero = () => {
 						Download Resume <BsArrowRight className="ml-5" />
 					</button>
 				</a>
+				{/* <Social align={"start"} mt={4} gap={1} /> */}
 			</div>
 			<div
 				className="rounded-xl bg-cover bg-center invisible lg:visible col-span-3"
