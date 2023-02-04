@@ -37,7 +37,7 @@ const Projects = () => {
 					of. These are just a few of them. <br />
 				</div>
 				<div className="col-span-12 mt-4 md:mt-0 md:col-span-2">
-					<Link to="/work">
+					<Link to="/projet">
 						<button className="w-[100%] text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 							View All Projects
 						</button>
