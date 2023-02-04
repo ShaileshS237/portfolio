@@ -1,35 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../assets/logo.png";
-import { BsArrowRight } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import Hamburger from "hamburger-react";
+import { Link, NavLink } from "react-router-dom";
 const Header = () => {
-	const [isOpen, setOpen] = useState(false);
 	return (
 		<div className="top-0 z-50 md:mt-5">
 			<div className="grid grid-cols-12 md:gap-4 items-center">
 				<div className="md:col-span-3 col-span-12">
-					<Link to="/">
+					<NavLink to="/">
 						<img className="h__image md:w-max w-[85%]" src={logo} alt="" />
-					</Link>
+					</NavLink>
 				</div>
 				{/* <div className="flex justify-center md:col-span-3 md:hidden col-span-12">
 					<Link to="/">
 						<Hamburger toggled={isOpen} toggle={setOpen} />
 					</Link>
 				</div> */}
-				<div className="md:col-span-9 col-span-12  md:flex self-center md:justify-end  navbar">
+				<nav className="md:col-span-9 col-span-12  md:flex self-center md:justify-end mb-5 md:mb-0 navbar">
 					<ul className="flex gap-5 text-white self-center justify-center ">
-						<Link to="/">
-							<li className=" p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
-								Home
-							</li>
-						</Link>
-						<Link to="/project">
-							<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
-								Projects
-							</li>
-						</Link>
+						<NavLink to="/">
+							{({ isActive }) =>
+								isActive ? (
+									<li className=" p-4 border-b-2 border-sky-500 border-opacity-100 duration-200 text-sky-500  cursor-pointer ">
+										Home
+									</li>
+								) : (
+									<li className="p-4 hover:text-sky-500  cursor-pointer ">
+										Home
+									</li>
+								)
+							}
+						</NavLink>
+						<NavLink to="/project">
+							{({ isActive }) =>
+								isActive ? (
+									<li className=" p-4 border-b-2 text-sky-500  border-sky-500 border-opacity-100  duration-200 cursor-pointer ">
+										Project
+									</li>
+								) : (
+									<li className="p-4 hover:text-sky-500 cursor-pointer">
+										Project
+									</li>
+								)
+							}
+						</NavLink>
 						{/* <Link to="/about">
 							<li className="p-4 border-b-2 border-sky-500 border-opacity-0 hover:border-opacity-100 hover:text-sky-500 duration-200 cursor-pointer active">
 								About
@@ -39,7 +52,7 @@ const Header = () => {
 							Article
 						</li> */}
 					</ul>
-				</div>
+				</nav>
 			</div>
 
 			{/* <div

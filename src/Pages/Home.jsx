@@ -11,10 +11,10 @@ const Home = () => {
 		<div className="">
 			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">
 				<Header />
-
 				<Hero />
 				<Skills />
-
+				<Projects />
+				<Experiance />
 				{/* <h1 className="mt-10 font-bold md:text-[2.5rem] text-[1.4rem] ">
 					I have experience with front-end technologies such as{" "}
 					<span className="text-orange-600">HTML</span>,{" "}
@@ -24,9 +24,6 @@ const Home = () => {
 					detail and a passion for creating seamless and intuitive user
 					experiences.
 				</h1> */}
-				<Projects />
-
-				<Experiance />
 			</div>
 
 			<Footer />
