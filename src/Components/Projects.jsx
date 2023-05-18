@@ -19,9 +19,9 @@ const Projects = () => {
 
 	return (
 		<div className="mt-10">
-			<Title width={"full"} titlename={"Project"} />
+			<Title width={"full"} titlename={"Projects"} />
 
-			<div className="grid grid-cols-12">
+			{/* <div className="grid grid-cols-12">
 				<div className="md:col-span-10 col-span-12">
 					For all the coding projects, check out my &nbsp;
 					<a
@@ -32,18 +32,22 @@ const Projects = () => {
 					>
 						Github Repos.
 					</a>
-					<br />
 					Over the past few years, I have coded things that I am sort-of proud
 					of. These are just a few of them. <br />
 				</div>
 				<div className="col-span-12 mt-4 md:mt-0 md:col-span-2">
-					<Link to="/project">
+					<a
+						href="https://github.com/ShaileshS237"
+						target="_blank"
+						rel="noreferrer"
+						className="text-[cyan]"
+					>
 						<button className="w-[100%] text-white px-3 py-2 rounded-lg bg-zinc-700 ">
 							View All Projects
 						</button>
-					</Link>
+					</a>
 				</div>
-			</div>
+			</div> */}
 			<div className="flex flex-col md:flex-row mt-3 gap-3">
 				<div>
 					<span className=" bg-green-500 dot"></span> : Completed
@@ -56,8 +60,8 @@ const Projects = () => {
 					<span className=" bg-orange-500 dot"></span> : In Progress
 				</div>
 			</div>
-			<div className="grid grid-cols-3 mt-7 gap-10 scroll-smooth">
-				{PROJECTS.slice(0, 6).map((val) => {
+			<div className="grid md:grid-cols-2 lg:grid-cols-3 mt-7 gap-10 scroll-smooth">
+				{PROJECTS.map((val) => {
 					return (
 						<div
 							key={val.id}
@@ -92,7 +96,7 @@ const Projects = () => {
 								</div>
 							</div>
 							<div className="px-5 py-1  ">
-								<p className="text-zinc-300 ">{val.description}</p>
+								<p className="text-zinc-300 mb-6">{val.description}</p>
 								{/* <p className="text-zinc-500 my-3">Last updated {val.lUdpate}</p> */}
 								{/* <div className="grid grid-cols-4">
 									<img
@@ -101,7 +105,7 @@ const Projects = () => {
 										className="rounded-mdl"
 									/>
 								</div> */}
-								<div className="flex gap-3 mt-3 mb-2">
+								{/* <div className="flex gap-3 mt-3 mb-2">
 									{val.href ? (
 										<a href={val.href} target="_blank" rel="noreferrer">
 											<img
@@ -132,12 +136,8 @@ const Projects = () => {
 									) : (
 										""
 									)}
-									{/* <Link to={`/aboutproject/${val.id}`}>
-										<button className=" text-white px-3 py-2 rounded-lg bg-zinc-700 ">
-											Know More
-										</button>
-									</Link> */}
-								</div>
+									
+								</div> */}
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>
 								</a> */}

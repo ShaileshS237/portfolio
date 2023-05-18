@@ -30,7 +30,7 @@ const Header = () => {
 								)
 							}
 						</NavLink>
-						<NavLink to="/project">
+						{/* <NavLink to="/project">
 							{({ isActive }) =>
 								isActive ? (
 									<li className=" p-4 border-b-2 text-sky-500  border-sky-500 border-opacity-100  duration-200 cursor-pointer ">
@@ -39,6 +39,19 @@ const Header = () => {
 								) : (
 									<li className="p-4 hover:text-sky-500 cursor-pointer">
 										Project
+									</li>
+								)
+							}
+						</NavLink> */}
+						<NavLink to="/about">
+							{({ isActive }) =>
+								isActive ? (
+									<li className=" p-4 border-b-2 text-sky-500  border-sky-500 border-opacity-100  duration-200 cursor-pointer ">
+										About Me
+									</li>
+								) : (
+									<li className="p-4 hover:text-sky-500 cursor-pointer">
+										About Me
 									</li>
 								)
 							}

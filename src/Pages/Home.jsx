@@ -24,9 +24,8 @@ const Home = () => {
 					detail and a passion for creating seamless and intuitive user
 					experiences.
 				</h1> */}
+				<Footer />
 			</div>
-
-			<Footer />
 		</div>
 	);
 };

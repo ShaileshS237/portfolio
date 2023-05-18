@@ -158,18 +158,18 @@ export const PROJECTS = [
 		href: "",
 		livelink: "https://play.google.com/store/apps/details?id=com.quickchicken",
 	},
-	{
-		id: 3,
-		project_name: "Quick Chicken - Website",
-		icon: "images/projects/projects_logo/qc_white.png",
-		description: "Online E-commerce Web application for meat delivery shop",
-		status: "1",
-		type: "Website",
-		lUdpate: "12 Jan 2022",
-		href: "",
-		project_type: "Freelance",
-		livelink: "http://quickchicken.in/",
-	},
+	// {
+	// 	id: 3,
+	// 	project_name: "Quick Chicken - Website",
+	// 	icon: "images/projects/projects_logo/qc_white.png",
+	// 	description: "Online E-commerce Web application for meat delivery shop",
+	// 	status: "1",
+	// 	type: "Website",
+	// 	lUdpate: "12 Jan 2022",
+	// 	href: "",
+	// 	project_type: "Freelance",
+	// 	livelink: "http://quickchicken.in/",
+	// },
 	{
 		id: 5,
 		project_name: "bktcard",
@@ -209,34 +209,34 @@ export const PROJECTS = [
 		href: "https://github.com/ShaileshS237/password-generator",
 		livelink: "",
 	},
-	{
-		id: 12,
-		project_name: "Placement Android App - Dashboard",
-		icon: "",
-		description:
-			"Placement Android App connects students with potential employers for internships and job placements. Features resume building, job search, interview scheduling, real-time updates, and secure communication for an efficient and effective placement process.",
-		status: "2",
-		lUdpate: "12 Jan 2022",
-		project_type: "Personal",
-		type: "Mobile App",
-		// techStack:[{id:}]
-		href: "https://github.com/ShaileshS237/password-generator",
-		livelink: "",
-	},
-	{
-		id: 9,
-		project_name: "NIT Kurukshtra College Website",
-		icon: "",
-		description:
-			"NIT Kurukshetra College Website showcases academic programs, research, campus life, facilities, and achievements, with information on admission, fees, scholarships, and events. Improves communication and promotes institute's image.",
-		status: "3",
-		lUdpate: "12 Jan 2022",
-		project_type: "Personal",
-		type: "Website",
-		// techStack:[{id:}]
-		href: "https://github.com/ShaileshS237/nitkkr",
-		livelink: "",
-	},
+	// {
+	// 	id: 12,
+	// 	project_name: "Placement Android App - Dashboard",
+	// 	icon: "",
+	// 	description:
+	// 		"Placement Android App connects students with potential employers for internships and job placements. Features resume building, job search, interview scheduling, real-time updates, and secure communication for an efficient and effective placement process.",
+	// 	status: "2",
+	// 	lUdpate: "12 Jan 2022",
+	// 	project_type: "Personal",
+	// 	type: "Mobile App",
+	// 	// techStack:[{id:}]
+	// 	href: "https://github.com/ShaileshS237/password-generator",
+	// 	livelink: "",
+	// },
+	// {
+	// 	id: 9,
+	// 	project_name: "NIT Kurukshtra College Website",
+	// 	icon: "",
+	// 	description:
+	// 		"NIT Kurukshetra College Website showcases academic programs, research, campus life, facilities, and achievements, with information on admission, fees, scholarships, and events. Improves communication and promotes institute's image.",
+	// 	status: "3",
+	// 	lUdpate: "12 Jan 2022",
+	// 	project_type: "Personal",
+	// 	type: "Website",
+	// 	// techStack:[{id:}]
+	// 	href: "https://github.com/ShaileshS237/nitkkr",
+	// 	livelink: "",
+	// },
 	{
 		id: 6,
 		project_name: "Netflix- Clone",
@@ -265,20 +265,20 @@ export const PROJECTS = [
 		livelink: "",
 	},
 
-	{
-		id: 10,
-		project_name: "Contact Parser using CSV file",
-		icon: "",
-		description:
-			"Contact Parser using CSV file is a tool that parses and extracts information from CSV files containing contact information. It organizes the data into structured format, and allows users to export the information into various file formats, such as vCard, Excel, and more.",
-		status: "1",
-		lUdpate: "12 Jan 2022",
-		project_type: "Personal",
-		type: "Website",
-		// techStack:[{id:}]
-		href: "https://github.com/ShaileshS237/nitkkr",
-		livelink: "",
-	},
+	// {
+	// 	id: 10,
+	// 	project_name: "Contact Parser using CSV file",
+	// 	icon: "",
+	// 	description:
+	// 		"Contact Parser using CSV file is a tool that parses and extracts information from CSV files containing contact information. It organizes the data into structured format, and allows users to export the information into various file formats, such as vCard, Excel, and more.",
+	// 	status: "1",
+	// 	lUdpate: "12 Jan 2022",
+	// 	project_type: "Personal",
+	// 	type: "Website",
+	// 	// techStack:[{id:}]
+	// 	href: "https://github.com/ShaileshS237/nitkkr",
+	// 	livelink: "",
+	// },
 	{
 		id: 11,
 		project_name: "Neumorphic Clock",
@@ -297,32 +297,43 @@ export const PROJECTS = [
 
 export const EXPERIANCE = [
 	{
+		id: 5,
+		comapny_name: "SIEMENS India",
+		location: "Bangalore",
+		role: "Software Engineer",
+		date: "Upcoming (July-2023)",
+	},
+	{
 		id: 1,
-		comapny_name: "Auum Platform.",
+		comapny_name: "Auum Platform",
 		location: "Bhubaneswar, Orissa, India(Remote)",
-		role: "Software Developer Intern",
-		date: "Jun 2021 - Present ",
+		role: "SDE Intern",
+		date: "Jun 2021 - May 2023 ",
+		logo: "../assets/auum_logo.png",
 	},
 	{
 		id: 4,
-		comapny_name: "Quick Chicken.",
+		comapny_name: "Quick Chicken",
 		location: "Pune, Maharashtra, India",
 		role: "Mobile Developer (Freelancer)",
 		date: "Jan 2022 - Jul 2022",
+		logo: "https://quickchicken.in/assets/while_logo.png",
 	},
 	{
 		id: 2,
-		comapny_name: "Victorrious Digital.",
+		comapny_name: "Victorious Digital Pvt Ltd.",
 		location: "Pune, Maharashtra, India",
-		role: "UI Designer & Graphic Designer ",
+		role: "Frontend Developer",
 		date: "Mar 2019 - Mar 2020 ",
+		logo: "https://victoriousdigital.in/wp-content/uploads/2022/06/vd-logo-final.webp",
 	},
 	{
 		id: 3,
-		comapny_name: "DigitizeBrand. ",
+		comapny_name: "DigitizeBrand",
 		location: "Pune, Maharashtra, India",
-		role: "Graphic & Motion Designer ",
+		role: "Frontend Developer",
 		date: "Feb 2018 - Feb 2019 ",
+		logo: "https://digitizebrand.com/asset/images/logo.png",
 	},
 ];
 

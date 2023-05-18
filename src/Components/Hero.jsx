@@ -5,11 +5,13 @@ import profile from "../assets/profile2.png";
 import bg from "../assets/background.png";
 import { BsArrowRight } from "react-icons/bs";
 import Social from "./Social";
+import { Link } from "react-router-dom";
 const Hero = () => {
+	let temp = [{ id: 1 }, { id: 1 }];
 	return (
-		<div className="grid  lg:grid-rows-1 grid-cols-10 md:mt-10 mt-2 gap-5">
+		<div className="md:mt-10 mt-2 gap-5 text-center">
 			<div
-				className="bg-zinc-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
+				className="bg-gray-700 p-10 col-span-10 lg:col-span-7 rounded-xl bg-cover "
 				style={{ backgroundImage: `url(${bg})` }}
 			>
 				{/* style={{ backgroundImage: `url(${bg})` }} */}
@@ -24,19 +26,22 @@ const Hero = () => {
 				<h1 className="text-2xl mt-3 font-light">
 					I ❤️ to Design & Developed Things
 				</h1>
-				<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
-					<button className=" border border-white flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
-						Download Resume <BsArrowRight className="ml-5" />
-					</button>
-				</a>
+				<div className="flex justify-center">
+					<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
+						<button className=" border border-white flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
+							Download Resume <BsArrowRight className="ml-5" />
+						</button>
+					</a>
+				</div>
+
 				{/* <Social align={"start"} mt={4} gap={1} /> */}
 			</div>
-			<div
+			{/* <div
 				className="rounded-xl bg-cover bg-center invisible lg:visible col-span-3"
 				style={{ backgroundImage: `url(${profile})` }}
 			>
-				{/* <img className="rounded-xl bg-cover bg-center " src={profile} alt="" /> */}
-			</div>
+				
+			</div> */}
 		</div>
 	);
 };

@@ -8,7 +8,7 @@ const About = () => {
 			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">
 				<Header />
 
-				<TitleHero title={"About Me"} color={"sky"} />
+				<TitleHero title={"About Me"} color={"gray"} />
 				<h1 className=" animate__animated animate__fadeIn mt-10 font-bold md:text-[3.00rem] text-[1.4rem]">
 					Hello <span className="rotate-45">👋</span>, at this point you already
 					knew me, Still (I'm Shailesh Sawale ).

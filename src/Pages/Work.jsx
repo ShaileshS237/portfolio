@@ -3,9 +3,11 @@ import Header from "../Components/Header";
 import TitleHero from "../Components/TitleHero";
 import Projects2 from "../Components/Projects2";
 import Footer from "../Components/Footer";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
-const Work = () => {
+const Work = (props) => {
+	const { state } = useLocation();
+	console.log(state);
 	return (
 		<div className="">
 			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">

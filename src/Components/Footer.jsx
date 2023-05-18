@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import Social from "./Social";
 const Footer = () => {
 	return (
-		<div className="container  mx-auto p-5 ">
+		<div className="py-5 ">
 			<div
 				className="md:mt-10 mb-7"
 				style={{ height: "0.5px", background: "#3f3f46" }}
 			></div>
 			<div className="text-center">
 				<h1 className="text-5xl md:text-7xl  font-bold text-zinc-700">
-					Say Hello!
+					Say Hello! <span className="wave">👋</span>
 				</h1>
 				<h1 className="text-md md:text-xl font-light mt-3 text-zinc-500">
 					Have an opportunity, wanna collaborate on something cool or just say
