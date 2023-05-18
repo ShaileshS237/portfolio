@@ -138,7 +138,7 @@ export const PROJECTS = [
 		type: "Mobile App",
 		lUdpate: "31 Dec 2022",
 		description:
-			"LoveAkot is a Social Media Android App for Akot(Native City) that aims to help people within a city. It helps in various ways like notifying what is going on in the city, help in to get contact no. of various people like electricians, plumbers, etc. in one click.",
+			"LoveAkot is an Android app designed for the city of Akot. It serves as a social media platform that helps residents stay informed about local events and activities. The app also provides convenient access to contact information for various service providers, such as electricians and plumbers, allowing users to connect with them effortlessly.",
 		status: "2",
 		project_type: "Personal",
 		route: "/work",
