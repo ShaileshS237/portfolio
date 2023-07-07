@@ -301,7 +301,7 @@ export const EXPERIANCE = [
 		comapny_name: "SIEMENS India",
 		location: "Bangalore",
 		role: "Software Engineer",
-		date: "Upcoming (July-2023)",
+		date: "July 2023 - Present",
 	},
 	{
 		id: 1,
