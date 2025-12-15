@@ -297,43 +297,67 @@ export const PROJECTS = [
 
 export const EXPERIANCE = [
 	{
-		id: 5,
-		comapny_name: "SIEMENS India",
-		location: "Bangalore",
-		role: "Software Engineer",
-		date: "July 2023 - Present",
-	},
-	{
 		id: 1,
-		comapny_name: "Auum Platform",
-		location: "Bhubaneswar, Orissa, India(Remote)",
-		role: "SDE Intern",
-		date: "Jun 2021 - May 2023 ",
-		logo: "../assets/auum_logo.png",
-	},
-	{
-		id: 4,
-		comapny_name: "Quick Chicken",
-		location: "Pune, Maharashtra, India",
-		role: "Mobile Developer (Freelancer)",
-		date: "Jan 2022 - Jul 2022",
-		logo: "https://quickchicken.in/assets/while_logo.png",
+		comapny_name: "Siemens",
+		location: "Bengaluru, Karnataka, India",
+		role: "Software Engineer",
+		date: "Jul 2024 - Present",
+		description: "Maintained and improved the client website using React.js, fixing bugs and optimizing performance. Developed Flutter UI components to enhance the IoT app's user experience. Designed interactive Figma prototypes and created marketing materials using Adobe Illustrator & Photoshop, including leaflets, posters, and daily social media content to boost brand engagement.",
+		skills: ["React.js", "Flutter", "Figma", "Adobe Illustrator", "Adobe Photoshop"]
 	},
 	{
 		id: 2,
-		comapny_name: "Victorious Digital Pvt Ltd.",
-		location: "Pune, Maharashtra, India",
-		role: "Frontend Developer",
-		date: "Mar 2019 - Mar 2020 ",
-		logo: "https://victoriousdigital.in/wp-content/uploads/2022/06/vd-logo-final.webp",
+		comapny_name: "Siemens",
+		location: "Bengaluru, Karnataka, India",
+		role: "PGET",
+		date: "Jul 2023 - Jun 2024",
+		description: "",
+		skills: []
 	},
 	{
 		id: 3,
-		comapny_name: "DigitizeBrand",
+		comapny_name: "AUUM Platforms",
+		location: "Bhubaneswar, Odisha, India · Remote",
+		role: "SDE Intern",
+		date: "Jun 2021 - Jun 2023",
+		description: "",
+		skills: ["Adobe Illustrator", "Figma", "React.js", "Adobe Photoshop", "Flutter"]
+	},
+	{
+		id: 4,
+		comapny_name: "National Institute of Technology",
+		location: "Kurukshetra, Haryana, India",
+		role: "Teaching Assistant",
+		date: "Nov 2021 - Jun 2023",
+		description: "",
+		skills: []
+	},
+	{
+		id: 5,
+		comapny_name: "Quick Chicken",
+		location: "Pune, Maharashtra, India · Remote",
+		role: "Mobile Developer",
+		date: "Jan 2022 - Jul 2022",
+		description: "As a software developer, I had the opportunity to work on the development of an Android app for a Pune-based startup called Quickchicken. The app was developed using the Ionic framework, which is based on Angular and allows for the creation of cross-platform apps using web technologies. I also utilized MySQL for the app's database and implemented push notifications using OneSignal. A REST API was used for communication between the app and the server, and Razerpay payment gateway was implemented to handle financial transactions.",
+		skills: ["Ionic", "Angular", "MySQL", "REST API"]
+	},
+	{
+		id: 6,
+		comapny_name: "Victorious Digital",
 		location: "Pune, Maharashtra, India",
-		role: "Frontend Developer",
-		date: "Feb 2018 - Feb 2019 ",
-		logo: "https://digitizebrand.com/asset/images/logo.png",
+		role: "Graphic Designer and UI Designer",
+		date: "Mar 2019 - Mar 2020",
+		description: "",
+		skills: ["Adobe Illustrator", "Adobe Creative Suite", "Figma", "Adobe XD", "Adobe Audition", "Adobe After Effects", "Adobe Photoshop", "Adobe Premiere Pro"]
+	},
+	{
+		id: 7,
+		comapny_name: "DigitizeBrand Hub (India) Pvt Ltd",
+		location: "Pune",
+		role: "Graphic Designer and Video Editor",
+		date: "Feb 2018 - Feb 2019",
+		description: "",
+		skills: ["Adobe Creative Suite", "Adobe Audition", "Adobe After Effects", "Adobe Premiere Pro"]
 	},
 ];
 
@@ -388,4 +412,31 @@ export const SOCAILS = [
 		icon: "icons/005-medium.png",
 		type: "Design Sharing ",
 	},
+];
+
+export const BLOGS = [
+	{
+		id: 1,
+		title: "Love Akot: Building a Hyperlocal Community App",
+		description: "My journey of building a social media platform for my hometown, Akot, to help residents stay informed and connected.",
+		date: "Dec 31, 2022",
+		tags: ["Mobile App", "Community", "Startup"],
+		link: "/blogs/love-akot"
+	},
+	{
+		id: 2,
+		title: "Mastering Tailwind CSS",
+		description: "Exploring the new features in Tailwind CSS and how it simplifies modern web styling workflows.",
+		date: "Nov 02, 2023",
+		tags: ["CSS", "Tailwind", "Design"],
+		link: "https://medium.com/@shaileshsawale7"
+	},
+	{
+		id: 3,
+		title: "The Future of Web Development",
+		description: "How AI tools like Copilot and ChatGPT are transforming the developer experience and productivity.",
+		date: "Dec 10, 2023",
+		tags: ["AI", "Future", "DevTools"],
+		link: "https://medium.com/@shaileshsawale7"
+	}
 ];

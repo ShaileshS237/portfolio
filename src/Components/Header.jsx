@@ -5,11 +5,7 @@ const Header = () => {
 	return (
 		<div className="top-0 z-50 md:mt-5">
 			<div className="grid grid-cols-12 md:gap-4 items-center">
-				<div className="md:col-span-3 col-span-12">
-					<NavLink to="/">
-						<img className="h__image md:w-max w-[85%]" src={logo} alt="" />
-					</NavLink>
-				</div>
+
 				{/* <div className="flex justify-center md:col-span-3 md:hidden col-span-12">
 					<Link to="/">
 						<Hamburger toggled={isOpen} toggle={setOpen} />
