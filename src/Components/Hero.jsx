@@ -28,7 +28,7 @@ const Hero = () => {
 				</h1>
 				<div className="flex justify-center">
 					<a href={process.env.PUBLIC_URL + "/Shailesh_Resume.pdf"}>
-						<button className=" border border-white flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
+						<button className=" border border-muted flex items-center px-6 py-3 mt-7 hover:bg-[#2f3034] text-white hover:text-white transition-all duration-500 rounded-xl">
 							Download Resume <BsArrowRight className="ml-5" />
 						</button>
 					</a>

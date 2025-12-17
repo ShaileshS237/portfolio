@@ -65,7 +65,7 @@ const Projects = () => {
 					return (
 						<div
 							key={val.id}
-							className="  md:transform-none hover:-translate-y-3 transition-all duration-300  animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-zinc-700 rounded-2xl overflow-hidden"
+							className="  md:transform-none hover:-translate-y-3 transition-all duration-300  animate__animated animate__fadeIn col-span-3 md:col-span-1 border border-muted rounded-2xl overflow-hidden"
 						>
 							<div className="p-3 bg-zinc-800 flex items-center justify-end">
 								<div>{checkStatus(val.status)}</div>

@@ -63,7 +63,7 @@ const AddBlogDialog = ({ isOpen, onClose, onSubmit }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 "
                 onClick={handleClose}
             >
                 <motion.div
@@ -71,11 +71,11 @@ const AddBlogDialog = ({ isOpen, onClose, onSubmit }) => {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.95, opacity: 0 }}
                     onClick={(e) => e.stopPropagation()}
-                    className="bg-background border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+                    className="bg-background border rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl  border-muted"
                 >
                     {/* Header */}
-                    <div className="flex items-center justify-between p-6 border-b sticky top-0 bg-background z-10">
-                        <h2 className="text-xl font-bold flex items-center gap-2">
+                    <div className="flex items-center justify-between p-6 border-b  border-muted sticky top-0 bg-background z-10">
+                        <h2 className="text-xl font-bold flex items-center gap-2 ">
                             {!isAuthenticated && <Lock className="w-5 h-5" />}
                             {isAuthenticated ? "Add New Blog" : "Authentication Required"}
                         </h2>
@@ -101,7 +101,7 @@ const AddBlogDialog = ({ isOpen, onClose, onSubmit }) => {
                                         autoFocus
                                     />
                                 </div>
-                                <Button type="submit" className="w-full">
+                                <Button type="submit" className="w-full" disabled={!password}>
                                     Authenticate
                                 </Button>
                             </form>

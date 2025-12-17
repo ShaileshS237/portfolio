@@ -17,7 +17,7 @@ const Experiance = () => {
 							return (
 								<div
 									key={val.id}
-									className=" mb-5 animate__animated animate__fadeIn col-span-2 md:col-span-1 border border-zinc-700 rounded-2xl overflow-hidden"
+									className=" mb-5 animate__animated animate__fadeIn col-span-2 md:col-span-1 border border-muted rounded-2xl overflow-hidden"
 								>
 									<div className="px-5 py-4 bg-zinc-800">
 										<div className="col-span-4 text-2xl md:text-3xl  font-bold text-zinc-500">
@@ -42,7 +42,7 @@ const Experiance = () => {
 							return (
 								<div
 									key={val.id}
-									className="  animate__animated animate__fadeIn col-span-2 md:col-span-1 border border-zinc-700 rounded-2xl overflow-hidden"
+									className="  animate__animated animate__fadeIn col-span-2 md:col-span-1 border border-muted rounded-2xl overflow-hidden"
 								>
 									<div className="px-5 py-4 bg-zinc-800">
 										<div className="col-span-4 text-2xl md:text-3xl  font-bold text-zinc-500">

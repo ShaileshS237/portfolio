@@ -6,8 +6,7 @@ const Footer = () => {
 	return (
 		<div className="py-5 ">
 			<div
-				className="md:mt-10 mb-7"
-				style={{ height: "0.5px", background: "#3f3f46" }}
+				className="md:mt-10 mb-7 h-px bg-border"
 			></div>
 			<div className="text-center">
 				<h1 className="text-5xl md:text-7xl  font-bold text-zinc-700">
@@ -35,7 +34,7 @@ const Footer = () => {
 					{SOCIAL.map((res) => {
 						return (
 							<div key={res.id} className="col-span-12 md:col-span-3">
-								<div className=" border rounded-lg border-white cursor-pointer grid grid-cols-6 py-5 px-5 hover:bg-zinc-900 text-white hover:text-white items-center">
+								<div className=" border rounded-lg border-muted cursor-pointer grid grid-cols-6 py-5 px-5 hover:bg-zinc-900 text-white hover:text-white items-center">
 									<div className="col-span-4 ">
 										<h1 className="text-2xl font-bold ">{res.name}</h1>
 										<h1 className="text-1xl font-light ">{res.type}</h1>
