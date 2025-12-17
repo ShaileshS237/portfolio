@@ -295,7 +295,7 @@ export const PROJECTS = [
 	},
 ];
 
-export const EXPERIANCE = [
+export const EXPERIENCE = [
 	{
 		id: 1,
 		comapny_name: "Siemens",
@@ -361,7 +361,7 @@ export const EXPERIANCE = [
 	},
 ];
 
-export const SOCAILS = [
+export const SOCIAL = [
 	{
 		id: 1,
 		name: "Linked In",

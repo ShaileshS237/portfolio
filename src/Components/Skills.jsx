@@ -1,6 +1,6 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
-import { SKILLS } from "../Constant/constant";
+import { SKILLS } from "@/constants";
 import SkillMarquee from "./SkillMarquee";
 import Title from "./Title";
 const Skills = () => {

@@ -40,7 +40,7 @@ const Hero = () => {
 				className="rounded-xl bg-cover bg-center invisible lg:visible col-span-3"
 				style={{ backgroundImage: `url(${profile})` }}
 			>
-				
+
 			</div> */}
 		</div>
 	);

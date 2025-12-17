@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { ArrowUpRight, Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
-import { BLOGS } from "../Constant/constant";
+import { BLOGS } from "@/constants";
 import { Link } from "react-router-dom";
 
 const Blogs = () => {

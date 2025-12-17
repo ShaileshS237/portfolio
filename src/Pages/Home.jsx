@@ -11,9 +11,9 @@ import {
 } from "@/Components/ui/card";
 import { Separator } from "@/Components/ui/separator";
 import {
-	EXPERIANCE,
+	EXPERIENCE,
 	PROJECTS
-} from "../Constant/constant";
+} from "@/constants";
 import {
 	FileText,
 	Github,
@@ -93,6 +93,7 @@ const Home = () => {
 	const [searchParams] = useSearchParams();
 	const isForV = searchParams.get("v") === "true";
 	const hasTracked = useRef(false);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
 		const trackVisitor = async () => {
@@ -201,7 +202,30 @@ const Home = () => {
 							>
 								{theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
 							</Button>
+
+							{/* Mobile Menu Button */}
+							<Button
+								variant="ghost"
+								size="icon"
+								className="h-9 w-9 md:hidden"
+								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+							>
+								<div className="space-y-1.5 w-4">
+									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
+									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+								</div>
+							</Button>
 						</div>
+					</div>
+				</div>
+
+				{/* Mobile Menu */}
+				<div className={`md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-sm border-t transition-all duration-300 ${isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
+					<div className="container max-w-3xl mx-auto px-4 py-4 flex flex-col gap-4 text-sm font-medium">
+						<a href="#work" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Work</a>
+						<Link to="/blogs" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Blogs</Link>
+						<a href="#projects" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Projects</a>
 					</div>
 				</div>
 			</nav>
@@ -350,7 +374,7 @@ const Home = () => {
 						Work Experience
 					</motion.h2>
 					<div className="space-y-8">
-						{EXPERIANCE.slice(0, 4).map((exp, index) => (
+						{EXPERIENCE.slice(0, 4).map((exp, index) => (
 							<motion.div
 								key={exp.id}
 								initial={{ opacity: 0, y: 20 }}

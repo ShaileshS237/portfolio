@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { Routes, Route, useParams } from "react-router-dom";
-import { PROJECTS } from "../Constant/constant";
+import { PROJECTS } from "@/constants";
 import bg from "../assets/background.png";
 
 const AboutProject = () => {

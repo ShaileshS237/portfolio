@@ -32,7 +32,7 @@ const Footer = () => {
 					Let's Connect There
 				</h1>
 				<div className="grid grid-cols-12 gap-4">
-					{SOCAILS.map((res) => {
+					{SOCIAL.map((res) => {
 						return (
 							<div key={res.id} className="col-span-12 md:col-span-3">
 								<div className=" border rounded-lg border-white cursor-pointer grid grid-cols-6 py-5 px-5 hover:bg-zinc-900 text-white hover:text-white items-center">
@@ -48,7 +48,7 @@ const Footer = () => {
 						);
 					})}
 				</div>
-				
+
 			</div> */}
 			<h6 className="text-center text-zinc-400 mt-5">
 				Designed and Developed with ❤️ by Shailesh

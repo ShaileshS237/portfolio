@@ -1,5 +1,5 @@
 import React from "react";
-import { PROJECTS } from "../Constant/constant";
+import { PROJECTS } from "@/constants";
 import Title from "./Title";
 import "animate.css";
 import { Link, NavLink } from "react-router-dom";
@@ -136,7 +136,7 @@ const Projects = () => {
 									) : (
 										""
 									)}
-									
+
 								</div> */}
 
 								{/* <button className=" text-white px-3 py-2 mt-3 rounded-lg border "></button>

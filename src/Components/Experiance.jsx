@@ -1,5 +1,5 @@
 import React from "react";
-import { EXPERIANCE } from "../Constant/constant";
+import { EXPERIENCE } from "@/constants";
 import Title from "./Title";
 import expImage from "../assets/workexp_1.png";
 import siemens from "../assets/siemens_logo.png";
@@ -13,7 +13,7 @@ const Experiance = () => {
 				</div>
 				<div className="col-span-6 md:col-span-4">
 					<div className="grid grid-cols-1 gap-5 scroll-smooth">
-						{EXPERIANCE.slice(0, 1).map((val, id) => {
+						{EXPERIENCE.slice(0, 1).map((val, id) => {
 							return (
 								<div
 									key={val.id}
@@ -28,7 +28,7 @@ const Experiance = () => {
 										<div className="col-span-4 my-4 text-4xl md:text-4xl  font-bold text-zinc-600 flex gap-3">
 											<img src={siemens} alt="" className="rounded-md" />
 											{/* <span className="text-[#0099a9]">
-												
+
 											</span> */}
 											({val.role}) , {val.location}
 										</div>
@@ -38,7 +38,7 @@ const Experiance = () => {
 						})}
 					</div>
 					<div className="grid grid-cols-2 gap-5 scroll-smooth">
-						{EXPERIANCE.slice(1).map((val, id) => {
+						{EXPERIENCE.slice(1).map((val, id) => {
 							return (
 								<div
 									key={val.id}

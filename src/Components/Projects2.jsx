@@ -1,5 +1,5 @@
 import React from "react";
-import { PROJECTS } from "../Constant/constant";
+import { PROJECTS } from "@/constants";
 import Title from "./Title";
 import "animate.css";
 import { Link, NavLink } from "react-router-dom";
@@ -137,7 +137,7 @@ const Projects2 = () => {
 				className="text-4xl text-zinc-400
 			  font-bold"
 			>
-			
+
 				UI Projects :
 			</h1>
 			<div className="grid grid-cols-4 gap-3 my-5 ">

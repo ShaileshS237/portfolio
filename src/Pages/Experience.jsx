@@ -4,7 +4,7 @@ import { useTheme } from "@/Components/theme-provider";
 import { ArrowLeft, ArrowUpRight, Moon, Sun } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent } from "@/Components/ui/card"; // Assuming these exist, otherwise I'll need to create standard divs
-import { EXPERIANCE } from "../Constant/constant";
+import { EXPERIENCE } from "@/constants";
 import { Badge } from "@/Components/ui/badge";
 
 const Experience = () => {
@@ -39,7 +39,7 @@ const Experience = () => {
                 </div>
 
                 <div className="space-y-12">
-                    {EXPERIANCE.map((exp, index) => (
+                    {EXPERIENCE.map((exp, index) => (
                         <div key={exp.id} className="relative pl-8 md:pl-0">
                             {/* Timeline Line (for styling flair) */}
                             <div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
