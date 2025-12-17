@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
 import { ArrowUpRight, Sun, Moon, Github, Globe } from "lucide-react";
 import { motion } from "framer-motion";
-import { PROJECTS } from "../Constant/constant";
+import { PROJECTS } from "@/constants";
 import { Link } from "react-router-dom";
 
 const Work = () => {

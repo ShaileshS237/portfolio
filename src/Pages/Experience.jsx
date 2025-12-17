@@ -66,73 +66,89 @@ const Experience = () => {
                 </div>
             </nav>
 
-            <div className="space-y-12">
-                {EXPERIANCE.map((exp, index) => (
-                    <div key={exp.id} className="relative pl-8 md:pl-0">
-                        {/* Timeline Line (for styling flair) */}
-                        <div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
+            <main className="container max-w-3xl mx-auto py-12 px-4 md:px-6 space-y-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="space-y-2"
+                >
+                    <h1 className="text-3xl font-bold tracking-tight">Experience</h1>
+                    <p className="text-muted-foreground">My professional journey and career milestones.</p>
+                </motion.div>
 
-                        <div className="md:grid md:grid-cols-[150px_1fr] md:gap-8 items-start">
-                            {/* Date Column */}
-                            <div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
-                                {/* Dot */}
-                                <div className="hidden md:block absolute right-[-5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
-                                {exp.date}
-                            </div>
+                <div className="space-y-12">
+                    {EXPERIENCE.map((exp, index) => (
+                        <motion.div
+                            key={exp.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="relative pl-8 md:pl-0"
+                        >
+                            {/* Timeline Line (for styling flair) */}
+                            <div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
 
-                            {/* Content Column */}
-                            <div className="flex flex-col gap-3 group">
-                                <div>
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                        <h2 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">
-                                            {exp.role}
-                                        </h2>
-                                        {exp.date.includes('Present') && (
-                                            <Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20 text-xs font-medium px-2 py-0.5">
-                                                Working
-                                            </Badge>
-                                        )}
-                                    </div>
-                                    <div className="flex items-center gap-2 text-foreground/80 mt-1 font-medium">
-                                        <span>{exp.comapny_name}</span>
-                                        <span className="text-muted-foreground">•</span>
-                                        <span className="text-muted-foreground text-sm">{exp.location}</span>
-                                    </div>
+                            <div className="md:grid md:grid-cols-[150px_1fr] md:gap-8 items-start">
+                                {/* Date Column */}
+                                <div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
+                                    {/* Dot */}
+                                    <div className="hidden md:block absolute right-[-5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
+                                    {exp.date}
                                 </div>
 
-                                {exp.description && (
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        {exp.description}
-                                    </p>
-                                )}
-
-                                {exp.skills && exp.skills.length > 0 && (
-                                    <div className="flex flex-wrap gap-2 mt-2">
-                                        {exp.skills.map((skill) => {
-                                            const { url, icon } = getSkillDetails(skill);
-                                            const Wrapper = url ? 'a' : 'span';
-                                            const props = url ? { href: url, target: "_blank", rel: "noreferrer" } : {};
-
-                                            return (
-                                                <Wrapper
-                                                    key={skill}
-                                                    {...props}
-                                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-dashed border-border bg-transparent text-xs font-medium text-muted-foreground hover:border-solid hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer"
-                                                >
-                                                    {icon}
-                                                    <span>{skill}</span>
-                                                </Wrapper>
-                                            );
-                                        })}
+                                {/* Content Column */}
+                                <div className="flex flex-col gap-3 group">
+                                    <div>
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <h2 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">
+                                                {exp.role}
+                                            </h2>
+                                            {exp.date.includes('Present') && (
+                                                <Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20 text-xs font-medium px-2 py-0.5">
+                                                    Working
+                                                </Badge>
+                                            )}
+                                        </div>
+                                        <div className="flex items-center gap-2 text-foreground/80 mt-1 font-medium">
+                                            <span>{exp.comapny_name}</span>
+                                            <span className="text-muted-foreground">•</span>
+                                            <span className="text-muted-foreground text-sm">{exp.location}</span>
+                                        </div>
                                     </div>
-                                )}
+
+                                    {exp.description && (
+                                        <p className="text-muted-foreground leading-relaxed">
+                                            {exp.description}
+                                        </p>
+                                    )}
+
+                                    {exp.skills && exp.skills.length > 0 && (
+                                        <div className="flex flex-wrap gap-2 mt-2">
+                                            {exp.skills.map((skill) => {
+                                                const { url, icon } = getSkillDetails(skill);
+                                                const Wrapper = url ? 'a' : 'span';
+                                                const props = url ? { href: url, target: "_blank", rel: "noreferrer" } : {};
+
+                                                return (
+                                                    <Wrapper
+                                                        key={skill}
+                                                        {...props}
+                                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-dashed border-border bg-transparent text-xs font-medium text-muted-foreground hover:border-solid hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer"
+                                                    >
+                                                        {icon}
+                                                        <span>{skill}</span>
+                                                    </Wrapper>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        </main>
-        </div >
+                        </motion.div>
+                    ))}
+                </div>
+            </main>
+        </div>
     );
 };
 
