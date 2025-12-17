@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@/Components/theme-provider";
 import { Button } from "@/Components/ui/button";
 import { Card, CardContent } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
-import { ArrowUpRight, Sun, Moon } from "lucide-react";
+import { ArrowUpRight, Sun, Moon, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import { BLOGS } from "../Constant/constant";
 import { Link } from "react-router-dom";
+import AddBlogDialog from "../Components/AddBlogDialog";
 
 const Blogs = () => {
     const { theme, setTheme } = useTheme();
+    const [blogs, setBlogs] = useState(BLOGS);
+    const [isAddBlogOpen, setIsAddBlogOpen] = useState(false);
+
+    const handleAddBlog = (newBlog) => {
+        setBlogs([newBlog, ...blogs]);
+        // In a real app, you would save this to a backend/database
+        console.log("New blog added:", newBlog);
+    };
 
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
@@ -35,17 +44,27 @@ const Blogs = () => {
             </nav>
 
             <main className="container max-w-3xl mx-auto py-12 px-4 md:px-6 space-y-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-2"
-                >
-                    <h1 className="text-3xl font-bold tracking-tight">Blogs</h1>
-                    <p className="text-muted-foreground">Thoughts, tutorials, and insights.</p>
-                </motion.div>
+                <div className="flex items-center justify-between">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="space-y-2"
+                    >
+                        <h1 className="text-3xl font-bold tracking-tight">Blogs</h1>
+                        <p className="text-muted-foreground">Thoughts, tutorials, and insights.</p>
+                    </motion.div>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setIsAddBlogOpen(true)}
+                        className="gap-2"
+                    >
+                        <Plus className="w-4 h-4" /> Add Blog
+                    </Button>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {BLOGS.map((blog, index) => {
+                    {blogs.map((blog, index) => {
                         const isInternal = blog.link.startsWith('/');
                         const Wrapper = isInternal ? Link : motion.a;
                         const props = isInternal
@@ -92,6 +111,12 @@ const Blogs = () => {
                     })}
                 </div>
             </main>
+
+            <AddBlogDialog
+                isOpen={isAddBlogOpen}
+                onClose={() => setIsAddBlogOpen(false)}
+                onSubmit={handleAddBlog}
+            />
         </div>
     );
 };
