@@ -1,4 +1,4 @@
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/Components/theme-provider";
 import QuoteSection from "../Components/QuoteSection";
@@ -88,14 +88,19 @@ const TimeDisplay = () => {
 };
 
 const Home = () => {
-	const { theme, setTheme } = useTheme();
+	const [displayName, setDisplayName] = useState("शैलेश");
 	const [visitCount, setVisitCount] = useState(0);
-	const [searchParams] = useSearchParams();
-	const isForV = searchParams.get("v") === "true";
+	const [isForV, setIsForV] = useState(false);
+	const { theme, setTheme } = useTheme();
+	const location = useLocation();
+	const searchParams = useSearchParams()[0]; // Keep useSearchParams for direct access if needed, or remove if location is sufficient
 	const hasTracked = useRef(false);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
+		// Update isForV based on location.search
+		setIsForV(new URLSearchParams(location.search).get("v") === "true");
+
 		const trackVisitor = async () => {
 			if (!supabase) return;
 
@@ -128,8 +133,6 @@ const Home = () => {
 	}, []);
 
 	// Name animation logic
-	const [displayName, setDisplayName] = useState("शैलेश");
-
 	useEffect(() => {
 		const names = [
 
@@ -408,7 +411,6 @@ const Home = () => {
 					</div>
 				</section>
 
-
 				{/* Projects Section */}
 				<section id="projects" className="space-y-8 mb-24">
 					<motion.h2
@@ -445,6 +447,90 @@ const Home = () => {
 					</div>
 				</section>
 
+				{/* GitHub Activity Section */}
+				<section className="space-y-6">
+					<motion.h2
+						initial={{ opacity: 0, x: -20 }}
+						whileInView={{ opacity: 1, x: 0 }}
+						viewport={{ once: true }}
+						className="text-2xl font-bold tracking-tight"
+					>
+						GitHub Activity
+					</motion.h2>
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.5 }}
+						className="rounded-lg border bg-card/50 p-4 overflow-hidden"
+					>
+						<div className="flex flex-col gap-4">
+							<motion.div
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								viewport={{ once: true }}
+								transition={{ delay: 0.2 }}
+								className="flex items-center justify-between"
+							>
+								<p className="text-sm text-muted-foreground">
+									Contributions in the last year
+								</p>
+								<a
+									href="https://github.com/ShaileshS237"
+									target="_blank"
+									rel="noreferrer"
+									className="text-xs font-medium text-primary hover:underline inline-flex items-center gap-1"
+								>
+									View Profile <ArrowUpRight className="w-3 h-3" />
+								</a>
+							</motion.div>
+							<motion.div
+								initial={{ opacity: 0, scale: 0.95 }}
+								whileInView={{ opacity: 1, scale: 1 }}
+								viewport={{ once: true }}
+								transition={{ delay: 0.3, duration: 0.5 }}
+								className="w-full overflow-x-auto"
+							>
+								<img
+									src="https://ghchart.rshah.org/ShaileshS237"
+									alt="GitHub Contribution Graph"
+									className="w-full h-auto dark:invert dark:hue-rotate-180"
+									loading="lazy"
+								/>
+							</motion.div>
+
+							{/* Less/More Scale and Stats */}
+							<motion.div
+								initial={{ opacity: 0 }}
+								whileInView={{ opacity: 1 }}
+								viewport={{ once: true }}
+								transition={{ delay: 0.5 }}
+								className="flex items-center justify-between text-xs text-muted-foreground pt-2"
+							>
+								<div className="flex items-center gap-2">
+									<span>Less</span>
+									<div className="flex gap-1">
+										<div className="w-2.5 h-2.5 rounded-sm bg-muted"></div>
+										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/20"></div>
+										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/40"></div>
+										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/60"></div>
+										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/80"></div>
+									</div>
+									<span>More</span>
+								</div>
+								<a
+									href="https://github.com/ShaileshS237?tab=overview"
+									target="_blank"
+									rel="noreferrer"
+									className="hover:text-foreground transition-colors"
+								>
+									View contribution details →
+								</a>
+							</motion.div>
+						</div>
+					</motion.div>
+				</section>
+
 				{/* Special Block for V */}
 				{isForV && (
 					<motion.section
@@ -471,11 +557,24 @@ const Home = () => {
 					</motion.section>
 				)}
 
-				<div className="mt-32" />
+				<div className="py-2" />
 
-				<QuoteSection />
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5 }}
+				>
+					<QuoteSection />
+				</motion.div>
 
-				<footer className="py-12 flex items-center justify-between text-sm text-muted-foreground">
+				<motion.footer
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					className="py-1 flex items-center justify-between text-sm text-muted-foreground"
+				>
 					<p>© {new Date().getFullYear()} Shailesh Sawale.</p>
 					<div className="flex items-center gap-4">
 						{visitCount > 0 && (
@@ -489,7 +588,7 @@ const Home = () => {
 							<span>All systems normal</span>
 						</div>
 					</div>
-				</footer>
+				</motion.footer>
 			</main>
 		</div >
 	);
