@@ -153,7 +153,7 @@ const LoveAkotBlog = () => {
                         </p>
 
                         <figure className="my-10">
-                            <div className="rounded-xl overflow-hidden shadow-sm border bg-muted/30">
+                            <div className="rounded-xl overflow-hidden shadow-sm border border-muted bg-muted/30">
                                 <img
                                     src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*aWYj9aSDa2CIBvzsazs9dw.png"
                                     alt="Love Akot V1.0 Interface"
@@ -182,7 +182,7 @@ const LoveAkotBlog = () => {
                             <img
                                 src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*B2eKf3OItZkiloi7E7haQg.png"
                                 alt="Love Akot V2.0 Features Snapshot"
-                                className="rounded-xl shadow-sm border w-full"
+                                className="rounded-xl shadow-sm border border-muted w-full"
                             />
                         </figure>
 
@@ -213,7 +213,7 @@ const LoveAkotBlog = () => {
                             <img
                                 src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*aAeKrzRq1ieSA_OyHREf4g.png"
                                 alt="More App Screens"
-                                className="rounded-xl shadow-sm border w-full"
+                                className="rounded-xl shadow-sm border border-muted w-full"
                             />
                         </figure>
 
@@ -230,7 +230,7 @@ const LoveAkotBlog = () => {
                                 { label: "Real-Time", value: "Live APIs (Weather, Markets)" },
                                 { label: "Auth", value: "OTPless (Passwordless)" },
                             ].map((item, i) => (
-                                <div key={i} className="flex items-center justify-between p-3 border rounded-lg bg-muted/20">
+                                <div key={i} className="flex items-center justify-between p-3 border border-muted rounded-lg bg-muted/20">
                                     <span className="font-medium text-muted-foreground">{item.label}</span>
                                     <span className="font-semibold">{item.value}</span>
                                 </div>
@@ -241,7 +241,7 @@ const LoveAkotBlog = () => {
                             <img
                                 src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*EZf1QvPfYTMOycWJiwJZSA.png"
                                 alt="System Architecture and Design"
-                                className="rounded-xl shadow-sm border w-full"
+                                className="rounded-xl shadow-sm border border-muted w-full"
                             />
                         </figure>
 

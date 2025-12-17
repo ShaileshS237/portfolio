@@ -133,7 +133,7 @@ const Experience = () => {
                                                     <Wrapper
                                                         key={skill}
                                                         {...props}
-                                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-dashed border-border bg-transparent text-xs font-medium text-muted-foreground hover:border-solid hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer"
+                                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-dashed border-muted bg-transparent text-xs font-medium text-muted-foreground hover:border-solid hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer"
                                                     >
                                                         {icon}
                                                         <span>{skill}</span>

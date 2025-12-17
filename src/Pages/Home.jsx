@@ -38,7 +38,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../lib/supabase";
 
 const TechBadge = ({ icon, name }) => (
-	<span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border bg-muted/50 text-sm font-medium align-middle mx-1 translate-y-[-2px]">
+	<span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-muted bg-muted/50 text-sm font-medium align-middle mx-1 translate-y-[-2px]">
 		{icon && <img src={process.env.PUBLIC_URL + icon} alt={name} className="w-4 h-4 object-contain" />}
 		<span>{name}</span>
 	</span>
@@ -48,7 +48,7 @@ const TechBadge = ({ icon, name }) => (
 
 const InfoItem = ({ icon, text, disabled }) => (
 	<div className={`flex items-center gap-3 ${disabled ? "opacity-50" : ""}`}>
-		<div className="flex items-center justify-center w-8 h-8 rounded-lg border bg-muted/50 text-muted-foreground shrink-0">
+		<div className="flex items-center justify-center w-8 h-8 rounded-lg border border-muted bg-muted/50 text-muted-foreground shrink-0">
 			{icon}
 		</div>
 		<span className="text-sm font-medium truncate">{text}</span>
@@ -56,7 +56,7 @@ const InfoItem = ({ icon, text, disabled }) => (
 );
 
 const SocialCard = ({ icon, name, handle, href }) => (
-	<a href={href} target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 rounded-xl border bg-card hover:bg-muted/50 transition-colors group text-left">
+	<a href={href} target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 rounded-xl border border-muted bg-card hover:bg-muted/50 transition-colors group text-left">
 		<div className="flex items-center gap-4">
 			<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-muted text-foreground group-hover:bg-background transition-colors shrink-0">
 				{icon}
@@ -387,7 +387,7 @@ const Home = () => {
 								className="group relative flex gap-4 transition-all"
 							>
 								<div className="absolute -left-3 top-0 h-full w-px bg-border group-hover:bg-primary/50 hidden md:block" />
-								<div className="relative mt-1 h-3 w-3 rounded-full border bg-background ring-2 ring-border group-hover:ring-primary hidden md:block" />
+								<div className="relative mt-1 h-3 w-3 rounded-full border border-muted bg-background ring-2 ring-border group-hover:ring-primary hidden md:block" />
 
 								<div className="flex flex-1 flex-col justify-start gap-1">
 									<div className="flex items-center justify-between">
@@ -429,7 +429,7 @@ const Home = () => {
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: index * 0.1 }}
-								className="group flex flex-col gap-2 rounded-lg border p-4 hover:bg-muted/50 transition-colors"
+								className="group flex flex-col gap-2 rounded-lg border p-4 border-muted hover:bg-muted/50 transition-colors"
 							>
 								<div className="flex items-center justify-between">
 									<h3 className="font-semibold group-hover:underline decoration-primary underline-offset-4">{project.project_name}</h3>
@@ -462,7 +462,7 @@ const Home = () => {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.5 }}
-						className="rounded-lg border bg-card/50 p-4 overflow-hidden"
+						className="rounded-lg border border-muted bg-card/50 p-4 overflow-hidden"
 					>
 						<div className="flex flex-col gap-4">
 							<motion.div
