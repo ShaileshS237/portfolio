@@ -133,29 +133,31 @@ export const MENULINKS = [
 export const PROJECTS = [
 	{
 		id: 1,
-		project_name: "Love Akot",
+		project_name: "Love Akot - A Fully-Fledged Hyperlocal App",
 		icon: "images/projects/projects_logo/la_logowhite.png",
 		type: "Mobile App",
 		lUdpate: "31 Dec 2022",
 		description:
-			"LoveAkot is an Android app designed for the city of Akot. It serves as a social media platform that helps residents stay informed about local events and activities. The app also provides convenient access to contact information for various service providers, such as electricians and plumbers, allowing users to connect with them effortlessly.",
+			"Love Akot is a hyperlocal, community-driven mobile app designed to address the digital needs of residents in Akot, Maharashtra. The app offers essential services such as room and flat search, local market prices, weather updates, real-time news, emergency information, and more. Built with the goal of fostering community engagement and empowering locals with accurate, real-time information, the app bridges the gap in digital services in small towns. Key Features: Market price tracking for farmers, local services and professionals directory, community discussion forum, classifieds section for buying/selling goods, real-time weather, petrol, gas, and gold price updates, emergency alerts, blood donation requests, public transport schedules, and more. Tech Stack: Angular, Ionic, Node.js, Express, MongoDB, AWS EC2, AWS S3, OTPless, Firebase Cloud Messaging (FCM)",
 		status: "2",
 		project_type: "Personal",
 		route: "/work",
 		href: "https://github.com/ShaileshS237/loveAkot",
 		livelink: "https://play.google.com/store/apps/details?id=com.loveakot",
+		website: "https://loveakot.com",
+		adminPanel: "https://admin.loveakot.com",
 		headerImage: "../public/images/projects/projects_logo/bktcard_logo.png",
 	},
 	{
 		id: 2,
-		project_name: "Quick Chicken - APP",
+		project_name: "Quick Chicken - Freelance Quick Commerce App",
 		type: "Mobile App",
 		icon: "images/projects/projects_logo/qc_white.png",
-		description: "Online E-commerce Android application for meat delivery shop",
+		description: "Quick Chicken is an on-demand meat delivery app that enables users to order fresh and high-quality chicken, mutton, and other meats directly to their doorstep. With a focus on convenience, freshness, and hygiene, Quick Chicken brings a variety of meat products from trusted local suppliers straight to the customer's home. Tech Stack: Ionic Capacitor, Node.js, Express, MySQL, Razorpay for payments, One Signal for notifications.",
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
-		href: "",
+		href: "https://github.com/ShaileshS237/QuickChicken",
 		livelink: "https://play.google.com/store/apps/details?id=com.quickchicken",
 	},
 	// {
@@ -298,30 +300,21 @@ export const PROJECTS = [
 export const EXPERIENCE = [
 	{
 		id: 1,
-		comapny_name: "Siemens",
-		location: "Bengaluru, Karnataka, India",
-		role: "Software Engineer",
-		date: "Jul 2024 - Present",
-		description: "Maintained and improved the client website using React.js, fixing bugs and optimizing performance. Developed Flutter UI components to enhance the IoT app's user experience. Designed interactive Figma prototypes and created marketing materials using Adobe Illustrator & Photoshop, including leaflets, posters, and daily social media content to boost brand engagement.",
-		skills: ["React.js", "Flutter", "Figma", "Adobe Illustrator", "Adobe Photoshop"]
-	},
-	{
-		id: 2,
-		comapny_name: "Siemens",
-		location: "Bengaluru, Karnataka, India",
-		role: "PGET",
-		date: "Jul 2023 - Jun 2024",
-		description: "",
-		skills: []
+		comapny_name: "Siemens Technology and Services Pvt. Ltd",
+		location: "Bengaluru, Karnataka",
+		role: "Software Development Engineer",
+		date: "Jul 2023 - Present",
+		description: "Designed and developed 10+ complex frontend components including Asset Details, Component Overview, and Vulnerabilities Tabs, enhancing OT Companion's usability. Resolved 150+ critical frontend bugs, identifying root causes and deploying timely fixes, boosting application stability by 25% and reducing production incidents by 30% through proactive triage and code improvements. Implemented document storage and interactive Map View using Geocoding APIs, increasing geographic data accuracy by 40% and improving user interaction scores.",
+		skills: ["Angular", "TypeScript", "Frontend Development", "Bug Fixing", "Geocoding APIs"]
 	},
 	{
 		id: 3,
-		comapny_name: "AUUM Platforms",
-		location: "Bhubaneswar, Odisha, India · Remote",
-		role: "SDE Intern",
+		comapny_name: "Auum Platform",
+		location: "Remote",
+		role: "Software Development Engineer Intern",
 		date: "Jun 2021 - Jun 2023",
-		description: "",
-		skills: ["Adobe Illustrator", "Figma", "React.js", "Adobe Photoshop", "Flutter"]
+		description: "Built a cross-platform Android application Agnaya using Flutter, enabling real-time monitoring and control for 1,000+ IoT-enabled gas stove units, increasing customer satisfaction by 25%. Maintained and debugged company website, improving page load speed by 40%, resolving 50+ critical issues, and boosting average session duration by 15%. Integrated 15+ RESTful APIs to enable real-time communication between the mobile app and IoT devices, ensuring 99.9% uptime and consistent data flow.",
+		skills: ["Flutter", "RESTful APIs", "IoT", "Web Development", "React.js"]
 	},
 	{
 		id: 4,

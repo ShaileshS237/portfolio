@@ -46,7 +46,7 @@ const Experience = () => {
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
             {/* Navbar (Kept from new design) */}
-            <nav className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/80">
+            <nav className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 border-b">
                 <div className="container max-w-3xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
@@ -66,7 +66,7 @@ const Experience = () => {
                 </div>
             </nav>
 
-            <main className="container max-w-3xl mx-auto py-12 px-4 md:px-6 space-y-12">
+            <main className="container max-w-3xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

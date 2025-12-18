@@ -11,8 +11,7 @@ import Experience from "./Pages/Experience";
 function App() {
 	return (
 		<BrowserRouter>
-
-
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/project" element={<Work />} />

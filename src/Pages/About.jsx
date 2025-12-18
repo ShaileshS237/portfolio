@@ -5,7 +5,7 @@ import TitleHero from "../Components/TitleHero";
 const About = () => {
 	return (
 		<div className="">
-			<div className="container2 lg:container mx-auto pt-5 p-5 md:p-0">
+			<div className="container2 lg:container mx-auto pt-24 p-5 md:p-0">
 				<Header />
 
 				<TitleHero title={"About Me"} color={"gray"} />

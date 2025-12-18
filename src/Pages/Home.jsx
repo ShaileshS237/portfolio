@@ -185,7 +185,7 @@ const Home = () => {
 	return (
 		<div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
 			{/* Navbar */}
-			<nav className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/80">
+			<nav className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 border-b">
 				<div className="container max-w-3xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
 					<span className="font-semibold text-lg tracking-tight">Shailesh</span>
 
@@ -233,7 +233,7 @@ const Home = () => {
 				</div>
 			</nav>
 
-			<main className="container max-w-3xl mx-auto py-12 px-4 md:px-6 space-y-12">
+			<main className="container max-w-3xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
 				{/* Hero Section */}
 				<motion.section
 					className="space-y-8 mt-8"
@@ -251,14 +251,14 @@ const Home = () => {
 						<div className="space-y-6">
 							<motion.h1 variants={itemVariants} className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl leading-[1.1]">
 								Hi, I'm <div className="inline-block relative text-left">
-									<span className="invisible opacity-0 px-1">Shailesh</span>
+									<span className="invisible px-1">Shailesh</span>
 									<AnimatePresence mode="wait">
 										<motion.span
 											key={displayName}
-											initial={{ opacity: 0, scale: 1.1 }}
-											animate={{ opacity: 1, scale: 1 }}
-											exit={{ opacity: 0, scale: 0.9 }}
-											transition={{ duration: 0.1, ease: "easeInOut" }}
+											initial={{ scale: 1 }}
+											animate={{ scale: 1 }}
+											exit={{ scale: 1 }}
+											transition={{ duration: 0.05, ease: "easeInOut" }}
 											className="absolute left-0 top-0 whitespace-nowrap text-foreground px-1"
 										>
 											{displayName}
@@ -367,52 +367,100 @@ const Home = () => {
 
 
 				{/* Work / Experience Section */}
-				<section id="work" className="space-y-8">
-					<motion.h2
+				<section id="work" className="space-y-8 scroll-mt-20">
+					<motion.div
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className="text-2xl font-bold tracking-tight"
+						className="flex items-center justify-between"
 					>
-						Work Experience
-					</motion.h2>
-					<div className="space-y-8">
-						{EXPERIENCE.slice(0, 4).map((exp, index) => (
+						<h2 className="text-2xl font-bold tracking-tight">Work Experience</h2>
+						<Link to="/experience" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4">
+							View All <ArrowUpRight className="w-3.5 h-3.5" />
+						</Link>
+					</motion.div>
+
+					<div className="relative border-l-2 border-muted/40 ml-3 md:ml-4 space-y-10 pb-4">
+						{EXPERIENCE.slice(0, 3).map((exp, index) => (
 							<motion.div
 								key={exp.id}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
+								initial={{ opacity: 0, x: -20 }}
+								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
-								transition={{ delay: index * 0.1 }}
-								className="group relative flex gap-4 transition-all"
+								transition={{ delay: index * 0.15 }}
+								className="relative pl-8 md:pl-12"
 							>
-								<div className="absolute -left-3 top-0 h-full w-px bg-border group-hover:bg-primary/50 hidden md:block" />
-								<div className="relative mt-1 h-3 w-3 rounded-full border border-muted bg-background ring-2 ring-border group-hover:ring-primary hidden md:block" />
-
-								<div className="flex flex-1 flex-col justify-start gap-1">
-									<div className="flex items-center justify-between">
-										<h3 className="font-semibold">{exp.role}</h3>
-										<span className="text-sm text-muted-foreground tabular-nums text-right shrink-0">{exp.date}</span>
-									</div>
-									<p className="text-sm text-foreground/80 font-medium">{exp.comapny_name} • {exp.location}</p>
-									{index === 0 && exp.description && (
-										<p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-											{exp.description}
-										</p>
-									)}
+								{/* Timeline Dot */}
+								<div className="absolute -left-[9px] top-6 overflow-hidden">
+									<div className="h-4 w-4 rounded-full border-2 border-background bg-muted-foreground/40 ring-4 ring-background transition-colors duration-300 group-hover:bg-primary group-hover:ring-primary/20" />
 								</div>
+
+								<Card className="group relative overflow-hidden border-muted hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 bg-card/50 backdrop-blur-sm">
+									{/* Gradient Accent */}
+									<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+									<CardContent className="p-5 md:p-6 space-y-4">
+										{/* Header */}
+										<div className="space-y-2">
+											<div className="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-4">
+												<div className="space-y-1">
+													<h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
+														{exp.role}
+													</h3>
+													<div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+														<span className="font-medium text-foreground/90">{exp.comapny_name}</span>
+														<span className="hidden md:inline">•</span>
+														<span className="flex items-center gap-1">
+															<MapPin className="w-3 h-3" />
+															{exp.location}
+														</span>
+													</div>
+												</div>
+												<Badge variant="secondary" className="w-fit shrink-0 font-mono text-[10px] uppercase tracking-wider bg-secondary/50 text-secondary-foreground border-transparent">
+													{exp.date}
+												</Badge>
+											</div>
+										</div>
+
+										{/* Description */}
+										{exp.description && (
+											<p className="text-sm text-muted-foreground leading-relaxed line-clamp-4 group-hover:line-clamp-none transition-all">
+												{exp.description}
+											</p>
+										)}
+
+										{/* Skills */}
+										{exp.skills && exp.skills.length > 0 && (
+											<div className="flex flex-wrap gap-2 pt-1">
+												{exp.skills.slice(0, 5).map((skill, i) => (
+													<div
+														key={i}
+														className="inline-flex items-center px-2 py-0.5 rounded textxs font-medium bg-primary/5 text-primary border border-primary/10 transition-colors hover:bg-primary/10"
+													>
+														<span className="text-[10px]">{skill}</span>
+													</div>
+												))}
+												{exp.skills.length > 5 && (
+													<span className="text-[10px] text-muted-foreground self-center">+{exp.skills.length - 5} more</span>
+												)}
+											</div>
+										)}
+									</CardContent>
+								</Card>
 							</motion.div>
 						))}
-						<div className="pl-4">
-							<Link to="/experience" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4">
-								View Full Experience <ArrowUpRight className="w-4 h-4" />
-							</Link>
-						</div>
+					</div>
+
+					{/* Mobile "View All" Link */}
+					<div className="sm:hidden pl-4">
+						<Link to="/experience" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4">
+							View Full Experience <ArrowUpRight className="w-4 h-4" />
+						</Link>
 					</div>
 				</section>
 
 				{/* Projects Section */}
-				<section id="projects" className="space-y-8 mb-24">
+				<section id="projects" className="space-y-8 mb-24 scroll-mt-20">
 					<motion.h2
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}

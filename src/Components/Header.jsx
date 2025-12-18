@@ -12,7 +12,7 @@ const Header = () => {
 	};
 
 	return (
-		<div className="top-0 z-50 md:mt-5">
+		<div className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 border-b">
 			<div className="grid grid-cols-12 md:gap-4 items-center relative">
 				{/* Hamburger Menu Button - Mobile Only */}
 				<div className="md:hidden col-span-12 flex justify-end mb-4 px-4">
