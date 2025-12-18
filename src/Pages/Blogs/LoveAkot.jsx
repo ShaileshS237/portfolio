@@ -6,6 +6,7 @@ import { Sun, Moon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/Components/ui/card";
+import Navbar from "@/Components/Navbar";
 
 const LoveAkotBlog = () => {
     const { theme, setTheme } = useTheme();
@@ -32,26 +33,11 @@ const LoveAkotBlog = () => {
 
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-pink-500/20">
-            {/* Navbar */}
-            <nav className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/80 ">
-                <div className="container max-w-3xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-8">
-                        <Link to="/blogs" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
-                            ← Back to Blogs
-                        </Link>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-9 w-9"
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        >
-                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                        </Button>
-                    </div>
-                </div>
-            </nav>
+            <Navbar
+                backTo="/blogs"
+                backText="← Back to Blogs"
+                sticky={true}
+            />
 
             <main className="container max-w-3xl mx-auto py-12 px-4 md:px-6">
                 <motion.article

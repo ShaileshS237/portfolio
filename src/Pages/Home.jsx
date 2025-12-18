@@ -2,6 +2,11 @@ import { useSearchParams, Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/Components/theme-provider";
 import QuoteSection from "../Components/QuoteSection";
+import Navbar from "@/Components/Navbar";
+import TechBadge from "@/Components/TechBadge";
+import InfoItem from "@/Components/InfoItem";
+import SocialCard from "@/Components/SocialCard";
+import TimeDisplay from "@/Components/TimeDisplay";
 
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -37,54 +42,77 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../lib/supabase";
 
-const TechBadge = ({ icon, name }) => (
-	<span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-muted bg-muted/50 text-sm font-medium align-middle mx-1 translate-y-[-2px]">
-		{icon && <img src={process.env.PUBLIC_URL + icon} alt={name} className="w-4 h-4 object-contain" />}
-		<span>{name}</span>
-	</span>
-);
+const getSkillDetails = (skill) => {
+	const normalize = (s) => s.toLowerCase().replace(/[\s\.]/g, '');
+	const key = normalize(skill);
 
+	const db = {
+		'reactjs': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'react': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'typescript': { url: 'https://www.typescriptlang.org', slug: 'typescript', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+		'javascript': { url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', slug: 'javascript', color: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/20' },
+		'nodejs': { url: 'https://nodejs.org', slug: 'nodedotjs', color: 'bg-green-600/10 text-green-700 dark:text-green-400 border-green-600/20' },
+		'python': { url: 'https://www.python.org', slug: 'python', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'java': { url: 'https://www.java.com', slug: 'openjdk', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+		'flutter': { url: 'https://flutter.dev', slug: 'flutter', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
+		'dart': { url: 'https://dart.dev', slug: 'dart', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'figma': { url: 'https://figma.com', slug: 'figma', color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' },
+		'adobeillustrator': { url: 'https://www.adobe.com/products/illustrator', slug: 'adobeillustrator', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+		'adobephotoshop': { url: 'https://www.adobe.com/products/photoshop', slug: 'adobephotoshop', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+		'ionic': { url: 'https://ionicframework.com', slug: 'ionic', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'angular': { url: 'https://angular.io', slug: 'angular', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+		'vue': { url: 'https://vuejs.org', slug: 'vuedotjs', color: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20' },
+		'vuejs': { url: 'https://vuejs.org', slug: 'vuedotjs', color: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20' },
+		'mysql': { url: 'https://www.mysql.com', slug: 'mysql', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+		'mongodb': { url: 'https://www.mongodb.com', slug: 'mongodb', color: 'bg-green-600/10 text-green-700 dark:text-green-400 border-green-600/20' },
+		'postgresql': { url: 'https://www.postgresql.org', slug: 'postgresql', color: 'bg-blue-700/10 text-blue-800 dark:text-blue-300 border-blue-700/20' },
+		'firebase': { url: 'https://firebase.google.com', slug: 'firebase', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+		'git': { url: 'https://git-scm.com', slug: 'git', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+		'docker': { url: 'https://www.docker.com', slug: 'docker', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'kubernetes': { url: 'https://kubernetes.io', slug: 'kubernetes', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+		'aws': { url: 'https://aws.amazon.com', slug: 'amazonaws', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+		'tailwindcss': { url: 'https://tailwindcss.com', slug: 'tailwindcss', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
+		'bootstrap': { url: 'https://getbootstrap.com', slug: 'bootstrap', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+		'sass': { url: 'https://sass-lang.com', slug: 'sass', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20' },
+		'redux': { url: 'https://redux.js.org', slug: 'redux', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+		'graphql': { url: 'https://graphql.org', slug: 'graphql', color: 'bg-pink-600/10 text-pink-700 dark:text-pink-400 border-pink-600/20' },
+		'restapi': { url: 'https://restfulapi.net', iconVal: <Globe className="w-3 h-3" />, color: 'bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/20' },
+		'html': { url: 'https://developer.mozilla.org/en-US/docs/Web/HTML', slug: 'html5', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+		'css': { url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', slug: 'css3', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'nextjs': { url: 'https://nextjs.org', slug: 'nextdotjs', color: 'bg-gray-800/10 text-gray-900 dark:text-gray-100 border-gray-800/20' },
+		'express': { url: 'https://expressjs.com', slug: 'express', color: 'bg-gray-600/10 text-gray-700 dark:text-gray-300 border-gray-600/20' },
+		'adobecreativesuite': { url: 'https://www.adobe.com/creativecloud.html', slug: 'adobecreativecloud', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+		'adobexd': { url: 'https://helpx.adobe.com/xd/get-started.html', slug: 'adobexd', color: 'bg-pink-600/10 text-pink-700 dark:text-pink-400 border-pink-600/20' },
+		'adobeaudition': { url: 'https://www.adobe.com/products/audition.html', slug: 'adobeaudition', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+		'adobeaftereffects': { url: 'https://www.adobe.com/products/aftereffects.html', slug: 'adobeaftereffects', color: 'bg-purple-700/10 text-purple-800 dark:text-purple-300 border-purple-700/20' },
+		'adobepremierepro': { url: 'https://www.adobe.com/products/premiere.html', slug: 'adobepremierepro', color: 'bg-purple-800/10 text-purple-900 dark:text-purple-300 border-purple-800/20' },
+	};
 
+	const match = db[key];
+	if (match) {
+		return {
+			url: match.url,
+			icon: match.slug ? <img src={`https://cdn.simpleicons.org/${match.slug}`} alt="" className="w-3 h-3 object-contain dark:invert" /> : match.iconVal,
+			color: match.color || 'bg-muted/50 text-muted-foreground border-muted'
+		};
+	}
 
-const InfoItem = ({ icon, text, disabled }) => (
-	<div className={`flex items-center gap-3 ${disabled ? "opacity-50" : ""}`}>
-		<div className="flex items-center justify-center w-8 h-8 rounded-lg border border-muted bg-muted/50 text-muted-foreground shrink-0">
-			{icon}
-		</div>
-		<span className="text-sm font-medium truncate">{text}</span>
-	</div>
-);
+	// Generate random color for unknown skills
+	const colors = [
+		'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
+		'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20',
+		'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
+		'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20',
+		'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20',
+		'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20',
+	];
+	const randomColor = colors[skill.length % colors.length];
 
-const SocialCard = ({ icon, name, handle, href }) => (
-	<a href={href} target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 rounded-xl border border-muted bg-card hover:bg-muted/50 transition-colors group text-left">
-		<div className="flex items-center gap-4">
-			<div className="flex items-center justify-center w-10 h-10 rounded-lg bg-muted text-foreground group-hover:bg-background transition-colors shrink-0">
-				{icon}
-			</div>
-			<div className="flex flex-col overflow-hidden">
-				<span className="text-sm font-semibold leading-none truncate">{name}</span>
-				<span className="text-xs text-muted-foreground mt-1 truncate">{handle}</span>
-			</div>
-		</div>
-		<ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
-	</a>
-);
-
-const TimeDisplay = () => {
-	const [time, setTime] = useState(new Date());
-
-	useEffect(() => {
-		const timer = setInterval(() => setTime(new Date()), 1000);
-		return () => clearInterval(timer);
-	}, []);
-
-	// Format time for India (IST)
-	const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false };
-	const timeString = time.toLocaleTimeString('en-US', options);
-
-	return (
-		<span className="font-mono">{timeString} <span className="text-muted-foreground text-xs ml-1">(IST)</span></span>
-	);
+	return {
+		url: null,
+		icon: <Terminal className="w-3 h-3" />,
+		color: randomColor
+	};
 };
 
 const Home = () => {
@@ -95,7 +123,6 @@ const Home = () => {
 	const location = useLocation();
 	const searchParams = useSearchParams()[0]; // Keep useSearchParams for direct access if needed, or remove if location is sufficient
 	const hasTracked = useRef(false);
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	useEffect(() => {
 		// Update isForV based on location.search
@@ -184,54 +211,15 @@ const Home = () => {
 
 	return (
 		<div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
-			{/* Navbar */}
-			<nav className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 border-b">
-				<div className="container max-w-3xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-					<span className="font-semibold text-lg tracking-tight">Shailesh</span>
-
-					<div className="flex items-center gap-6">
-						<div className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
-							<a href="#work" className="hover:text-foreground transition-colors">Work</a>
-							<Link to="/blogs" className="hover:text-foreground transition-colors">Blogs</Link>
-							<a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-						</div>
-
-						<div className="flex items-center gap-2">
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-9 w-9"
-								onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-							>
-								{theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-							</Button>
-
-							{/* Mobile Menu Button */}
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-9 w-9 md:hidden"
-								onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-							>
-								<div className="space-y-1.5 w-4">
-									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
-									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "opacity-0" : ""}`}></span>
-									<span className={`block w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
-								</div>
-							</Button>
-						</div>
-					</div>
-				</div>
-
-				{/* Mobile Menu */}
-				<div className={`md:hidden absolute top-16 left-0 right-0 bg-background/95 backdrop-blur-sm border-t transition-all duration-300 ${isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0 overflow-hidden"}`}>
-					<div className="container max-w-3xl mx-auto px-4 py-4 flex flex-col gap-4 text-sm font-medium">
-						<a href="#work" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Work</a>
-						<Link to="/blogs" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Blogs</Link>
-						<a href="#projects" className="hover:text-foreground transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Projects</a>
-					</div>
-				</div>
-			</nav>
+			<Navbar
+				backToHome={false}
+				title="Shailesh"
+				navLinks={[
+					{ label: "Work", href: "#work", external: true },
+					{ label: "Blogs", href: "/blogs", external: false },
+					{ label: "Projects", href: "#projects", external: true }
+				]}
+			/>
 
 			<main className="container max-w-3xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
 				{/* Hero Section */}
@@ -276,37 +264,19 @@ const Home = () => {
 								<div className="leading-normal">
 									Currently working with
 									<div className="inline-flex flex-wrap gap-2 items-center align-middle mx-1.5">
-										<a href="https://angular.io" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-dashed border-border hover:bg-muted/50 hover:border-primary/50 transition-colors text-sm text-foreground no-underline">
-											<svg viewBox="0 0 128 128" className="w-4 h-4 object-contain">
-												<path fill="#dd0031" d="M64 4L9 23l8 73 47 28 46-28 8-73z"></path>
-												<path fill="#c3002f" d="M64 4v120l47-28 8-73z"></path>
-												<path fill="#fff" d="M64 24L37 85h11l6-14h20l6 14h11L64 24zm-9 39l9-21 9 21h-18z"></path>
-											</svg>
-											<span>Angular</span>
-										</a>
-										<a href="https://www.typescriptlang.org" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-dashed border-border hover:bg-muted/50 hover:border-primary/50 transition-colors text-sm text-foreground no-underline">
-											<svg viewBox="0 0 128 128" className="w-4 h-4 rounded-sm">
-												<path fill="#fff" d="M22.67 47h99.67v73.67H22.67z" />
-												<path fill="#007acc" d="M1.5 63.91v62.5h125v-125H1.5zm100.73-5a15.56 15.56 0 017.82 4.5 20.58 20.58 0 013 4c0 .16-5.4 3.81-8.69 5.85-.12.08-.6-.44-1.13-1.23a7.09 7.09 0 00-5.87-3.53c-3.79-.26-6.23 1.73-6.21 5a4.58 4.58 0 00.54 2.34c.83 1.73 2.38 2.76 7.24 4.86 8.95 3.85 12.78 6.39 15.16 10 2.66 4 3.25 10.46 1.45 15.24-2 5.2-6.9 8.73-13.83 9.9a38.32 38.32 0 01-9.52-.1 23 23 0 01-12.72-6.63c-1.15-1.27-3.39-4.58-3.25-4.82a9.34 9.34 0 011.15-.73L82 101l3.59-2.08.75 1.11a16.78 16.78 0 004.74 4.54c4 2.1 9.46 1.81 12.16-.62a5.43 5.43 0 00.69-6.92c-1-1.39-3-2.56-8.59-5-6.45-2.78-9.23-4.5-11.77-7.24a16.48 16.48 0 01-3.43-6.25 25 25 0 01-.22-8c1.33-6.23 6-10.58 12.82-11.87a31.66 31.66 0 019.49.26zm-29.34 5.24v5.12H56.66v46.23H45.15V69.26H28.88v-5a49.19 49.19 0 01.12-5.17C29.08 59 39 59 51 59h21.83z" />
-											</svg>
-											<span>TypeScript</span>
-										</a>
-										<a href="https://nodejs.org" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-dashed border-border hover:bg-muted/50 hover:border-primary/50 transition-colors text-sm text-foreground no-underline">
-											<svg viewBox="0 0 128 128" className="w-4 h-4 object-contain">
-												<path fill="#83CD29" d="M64 9l55 32v64l-55 32-55-32V41L64 9z"></path>
-												<path fill="#fff" d="M102 47l-38 21-38-21 38-22 38 22zM26 81l36 21V63L26 42v39zm40 21l36-21V41l-36 22v39z"></path>
-												<path fill="#333" d="M100 83v.5a2 2 0 01-1 1.7l-9 5a2 2 0 01-2 0l-9-5a2 2 0 01-1-1.7V83a2 2 0 011-1.8l9-5a2 2 0 012 0l9 5a2 2 0 011 1.8z"></path>
-											</svg>
-											<span>Node.js</span>
-										</a>
-										<a href="https://www.mongodb.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-dashed border-border hover:bg-muted/50 hover:border-primary/50 transition-colors text-sm text-foreground no-underline">
-											<svg viewBox="0 0 128 128" className="w-4 h-4 object-contain">
-												<path fill="#4DB33D" d="M64 120a14 14 0 01-14-17c0-6 14-40 14-40s12 30 12 40a12 12 0 01-12 17z"></path>
-												<path fill="#3FA037" d="M64 57s2 23 2 30c0 8 4 17 12 17 8 0 11-7 11-16 0-8-10-33-10-33L64 57z"></path>
-												<path fill="#fff" d="M63 85c1-12 1-38 1-38s-11 19-11 36c0 16 5 26 10 26 0 0-1-12 0-24z"></path>
-											</svg>
-											<span>MongoDB</span>
-										</a>
+										{['Angular', 'TypeScript', 'Node.js', 'MongoDB'].map((tech) => {
+											const { url, icon, color } = getSkillDetails(tech);
+											return (
+												<TechBadge
+													key={tech}
+													skill={tech}
+													url={url}
+													icon={icon}
+													color={color}
+													variant="default"
+												/>
+											);
+										})}
 									</div>
 									and building <Link to="/blogs/love-akot" className="text-foreground font-medium hover:underline underline-offset-4 decoration-primary inline-block">Love Akot</Link>, a hyperlocal community app for my hometown.
 								</div>
@@ -380,79 +350,78 @@ const Home = () => {
 						</Link>
 					</motion.div>
 
-					<div className="relative border-l-2 border-muted/40 ml-3 md:ml-4 space-y-10 pb-4">
+					<div className="space-y-12">
 						{EXPERIENCE.slice(0, 3).map((exp, index) => (
 							<motion.div
 								key={exp.id}
-								initial={{ opacity: 0, x: -20 }}
-								whileInView={{ opacity: 1, x: 0 }}
+								initial={{ opacity: 0, y: 10 }}
+								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: true }}
-								transition={{ delay: index * 0.15 }}
-								className="relative pl-8 md:pl-12"
+								transition={{ delay: index * 0.1 }}
+								className="relative pl-8 md:pl-0"
 							>
-								{/* Timeline Dot */}
-								<div className="absolute -left-[9px] top-6 overflow-hidden">
-									<div className="h-4 w-4 rounded-full border-2 border-background bg-muted-foreground/40 ring-4 ring-background transition-colors duration-300 group-hover:bg-primary group-hover:ring-primary/20" />
-								</div>
+								{/* Timeline Line */}
+								<div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
 
-								<Card className="group relative overflow-hidden border-muted hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 bg-card/50 backdrop-blur-sm">
-									{/* Gradient Accent */}
-									<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+								<div className="md:grid md:grid-cols-[150px_1fr] md:gap-8 items-start">
+									{/* Date Column */}
+									<div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
+										{/* Dot */}
+										<div className="hidden md:block absolute right-[-5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
+										{exp.date}
+									</div>
 
-									<CardContent className="p-5 md:p-6 space-y-4">
-										{/* Header */}
-										<div className="space-y-2">
-											<div className="flex flex-col md:flex-row md:items-start justify-between gap-2 md:gap-4">
-												<div className="space-y-1">
-													<h3 className="text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
-														{exp.role}
-													</h3>
-													<div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-														<span className="font-medium text-foreground/90">{exp.comapny_name}</span>
-														<span className="hidden md:inline">•</span>
-														<span className="flex items-center gap-1">
-															<MapPin className="w-3 h-3" />
-															{exp.location}
-														</span>
-													</div>
-												</div>
-												<Badge variant="secondary" className="w-fit shrink-0 font-mono text-[10px] uppercase tracking-wider bg-secondary/50 text-secondary-foreground border-transparent">
-													{exp.date}
-												</Badge>
+									{/* Content Column */}
+									<div className="flex flex-col gap-3 group">
+										<div>
+											<div className="flex items-center gap-2 flex-wrap">
+												<h2 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">
+													{exp.role}
+												</h2>
+												{exp.date.includes('Present') && (
+													<Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20 text-xs font-medium px-2 py-0.5">
+														Working
+													</Badge>
+												)}
+											</div>
+											<div className="flex items-center gap-2 text-foreground/80 mt-1 font-medium">
+												<span>{exp.comapny_name}</span>
+												<span className="text-muted-foreground">•</span>
+												<span className="text-muted-foreground text-sm">{exp.location}</span>
 											</div>
 										</div>
 
-										{/* Description */}
 										{exp.description && (
-											<p className="text-sm text-muted-foreground leading-relaxed line-clamp-4 group-hover:line-clamp-none transition-all">
+											<p className="text-muted-foreground leading-relaxed">
 												{exp.description}
 											</p>
 										)}
 
-										{/* Skills */}
 										{exp.skills && exp.skills.length > 0 && (
-											<div className="flex flex-wrap gap-2 pt-1">
-												{exp.skills.slice(0, 5).map((skill, i) => (
-													<div
-														key={i}
-														className="inline-flex items-center px-2 py-0.5 rounded textxs font-medium bg-primary/5 text-primary border border-primary/10 transition-colors hover:bg-primary/10"
-													>
-														<span className="text-[10px]">{skill}</span>
-													</div>
-												))}
-												{exp.skills.length > 5 && (
-													<span className="text-[10px] text-muted-foreground self-center">+{exp.skills.length - 5} more</span>
-												)}
+											<div className="flex flex-wrap gap-2 mt-2">
+												{exp.skills.map((skill) => {
+													const { url, icon, color } = getSkillDetails(skill);
+													return (
+														<TechBadge
+															key={skill}
+															skill={skill}
+															url={url}
+															icon={icon}
+															color={color}
+															variant="compact"
+														/>
+													);
+												})}
 											</div>
 										)}
-									</CardContent>
-								</Card>
+									</div>
+								</div>
 							</motion.div>
 						))}
 					</div>
 
 					{/* Mobile "View All" Link */}
-					<div className="sm:hidden pl-4">
+					<div className="sm:hidden">
 						<Link to="/experience" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4">
 							View Full Experience <ArrowUpRight className="w-4 h-4" />
 						</Link>
@@ -498,18 +467,19 @@ const Home = () => {
 				{/* GitHub Activity Section */}
 				<section className="space-y-6">
 					<motion.h2
-						initial={{ opacity: 0, x: -20 }}
-						whileInView={{ opacity: 1, x: 0 }}
-						viewport={{ once: true }}
+						initial={{ opacity: 0, x: -50, filter: "blur(10px)" }}
+						whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+						viewport={{ once: true, margin: "-50px" }}
+						transition={{ duration: 0.6, ease: "easeOut" }}
 						className="text-2xl font-bold tracking-tight"
 					>
 						GitHub Activity
 					</motion.h2>
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						transition={{ duration: 0.5 }}
+						initial={{ opacity: 0, y: 40, scale: 0.95 }}
+						whileInView={{ opacity: 1, y: 0, scale: 1 }}
+						viewport={{ once: true, margin: "-50px" }}
+						transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
 						className="rounded-lg border border-muted bg-card/50 p-4 overflow-hidden"
 					>
 						<div className="flex flex-col gap-4">
@@ -617,10 +587,10 @@ const Home = () => {
 				</motion.div>
 
 				<motion.footer
-					initial={{ opacity: 0 }}
-					whileInView={{ opacity: 1 }}
-					viewport={{ once: true }}
-					transition={{ duration: 0.5, delay: 0.2 }}
+					initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+					whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+					viewport={{ once: true, margin: "-30px" }}
+					transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
 					className="py-1 flex items-center justify-between text-sm text-muted-foreground"
 				>
 					<p>© {new Date().getFullYear()} Shailesh Sawale.</p>

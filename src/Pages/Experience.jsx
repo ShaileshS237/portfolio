@@ -1,80 +1,100 @@
 
 import React from "react";
 import { useTheme } from "@/Components/theme-provider";
-import { Button } from "@/Components/ui/button";
 import { Card } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
-import { Sun, Moon, ArrowLeft, Globe } from "lucide-react";
+import { Globe, Terminal } from "lucide-react";
+import TechBadge from "@/Components/TechBadge";
 import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/constants";
-import { Link } from "react-router-dom";
+import Navbar from "@/Components/Navbar";
+import PageHeader from "@/Components/PageHeader";
+import PageContainer, { MainContent } from "@/Components/PageContainer";
 
 const getSkillDetails = (skill) => {
     const normalize = (s) => s.toLowerCase().replace(/[\s\.]/g, '');
     const key = normalize(skill);
 
     const db = {
-        'reactjs': { url: 'https://react.dev', slug: 'react' },
-        'flutter': { url: 'https://flutter.dev', slug: 'flutter' },
-        'figma': { url: 'https://figma.com', slug: 'figma' },
-        'adobeillustrator': { url: 'https://www.adobe.com/products/illustrator', slug: 'adobeillustrator' },
-        'adobephotoshop': { url: 'https://www.adobe.com/products/photoshop', slug: 'adobephotoshop' },
-        'ionic': { url: 'https://ionicframework.com', slug: 'ionic' },
-        'angular': { url: 'https://angular.io', slug: 'angular' },
-        'mysql': { url: 'https://www.mysql.com', slug: 'mysql' },
-        'restapi': { url: 'https://restfulapi.net', iconVal: <Globe className="w-3 h-3" /> },
-        'adobecreativesuite': { url: 'https://www.adobe.com/creativecloud.html', slug: 'adobecreativecloud' },
-        'adobexd': { url: 'https://helpx.adobe.com/xd/get-started.html', slug: 'adobexd' },
-        'adobeaudition': { url: 'https://www.adobe.com/products/audition.html', slug: 'adobeaudition' },
-        'adobeaftereffects': { url: 'https://www.adobe.com/products/aftereffects.html', slug: 'adobeaftereffects' },
-        'adobepremierepro': { url: 'https://www.adobe.com/products/premiere.html', slug: 'adobepremierepro' },
+        'reactjs': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'react': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'typescript': { url: 'https://www.typescriptlang.org', slug: 'typescript', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+        'javascript': { url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', slug: 'javascript', color: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/20' },
+        'nodejs': { url: 'https://nodejs.org', slug: 'nodedotjs', color: 'bg-green-600/10 text-green-700 dark:text-green-400 border-green-600/20' },
+        'python': { url: 'https://www.python.org', slug: 'python', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'java': { url: 'https://www.java.com', slug: 'openjdk', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+        'flutter': { url: 'https://flutter.dev', slug: 'flutter', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
+        'dart': { url: 'https://dart.dev', slug: 'dart', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'figma': { url: 'https://figma.com', slug: 'figma', color: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' },
+        'adobeillustrator': { url: 'https://www.adobe.com/products/illustrator', slug: 'adobeillustrator', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+        'adobephotoshop': { url: 'https://www.adobe.com/products/photoshop', slug: 'adobephotoshop', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+        'ionic': { url: 'https://ionicframework.com', slug: 'ionic', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'angular': { url: 'https://angular.io', slug: 'angular', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+        'vue': { url: 'https://vuejs.org', slug: 'vuedotjs', color: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20' },
+        'vuejs': { url: 'https://vuejs.org', slug: 'vuedotjs', color: 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20' },
+        'mysql': { url: 'https://www.mysql.com', slug: 'mysql', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+        'mongodb': { url: 'https://www.mongodb.com', slug: 'mongodb', color: 'bg-green-600/10 text-green-700 dark:text-green-400 border-green-600/20' },
+        'postgresql': { url: 'https://www.postgresql.org', slug: 'postgresql', color: 'bg-blue-700/10 text-blue-800 dark:text-blue-300 border-blue-700/20' },
+        'firebase': { url: 'https://firebase.google.com', slug: 'firebase', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+        'git': { url: 'https://git-scm.com', slug: 'git', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+        'docker': { url: 'https://www.docker.com', slug: 'docker', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'kubernetes': { url: 'https://kubernetes.io', slug: 'kubernetes', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
+        'aws': { url: 'https://aws.amazon.com', slug: 'amazonaws', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+        'tailwindcss': { url: 'https://tailwindcss.com', slug: 'tailwindcss', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
+        'bootstrap': { url: 'https://getbootstrap.com', slug: 'bootstrap', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+        'sass': { url: 'https://sass-lang.com', slug: 'sass', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20' },
+        'redux': { url: 'https://redux.js.org', slug: 'redux', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+        'graphql': { url: 'https://graphql.org', slug: 'graphql', color: 'bg-pink-600/10 text-pink-700 dark:text-pink-400 border-pink-600/20' },
+        'restapi': { url: 'https://restfulapi.net', iconVal: <Globe className="w-3 h-3" />, color: 'bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/20' },
+        'html': { url: 'https://developer.mozilla.org/en-US/docs/Web/HTML', slug: 'html5', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
+        'css': { url: 'https://developer.mozilla.org/en-US/docs/Web/CSS', slug: 'css3', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+        'nextjs': { url: 'https://nextjs.org', slug: 'nextdotjs', color: 'bg-gray-800/10 text-gray-900 dark:text-gray-100 border-gray-800/20' },
+        'express': { url: 'https://expressjs.com', slug: 'express', color: 'bg-gray-600/10 text-gray-700 dark:text-gray-300 border-gray-600/20' },
+        'adobecreativesuite': { url: 'https://www.adobe.com/creativecloud.html', slug: 'adobecreativecloud', color: 'bg-red-600/10 text-red-700 dark:text-red-400 border-red-600/20' },
+        'adobexd': { url: 'https://helpx.adobe.com/xd/get-started.html', slug: 'adobexd', color: 'bg-pink-600/10 text-pink-700 dark:text-pink-400 border-pink-600/20' },
+        'adobeaudition': { url: 'https://www.adobe.com/products/audition.html', slug: 'adobeaudition', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
+        'adobeaftereffects': { url: 'https://www.adobe.com/products/aftereffects.html', slug: 'adobeaftereffects', color: 'bg-purple-700/10 text-purple-800 dark:text-purple-300 border-purple-700/20' },
+        'adobepremierepro': { url: 'https://www.adobe.com/products/premiere.html', slug: 'adobepremierepro', color: 'bg-purple-800/10 text-purple-900 dark:text-purple-300 border-purple-800/20' },
     };
 
     const match = db[key];
     if (match) {
         return {
             url: match.url,
-            icon: match.slug ? <img src={`https://cdn.simpleicons.org/${match.slug}`} alt="" className="w-3 h-3 object-contain dark:invert" /> : match.iconVal
+            icon: match.slug ? <img src={`https://cdn.simpleicons.org/${match.slug}`} alt="" className="w-3 h-3 object-contain dark:invert" /> : match.iconVal,
+            color: match.color || 'bg-muted/50 text-muted-foreground border-muted'
         };
     }
-    return { url: null, icon: null };
+
+    // Generate random color for unknown skills
+    const colors = [
+        'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20',
+        'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20',
+        'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20',
+        'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20',
+        'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20',
+        'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20',
+    ];
+    const randomColor = colors[skill.length % colors.length];
+
+    return {
+        url: null,
+        icon: <Terminal className="w-3 h-3" />,
+        color: randomColor
+    };
 };
 
 const Experience = () => {
     const { theme, setTheme } = useTheme();
 
     return (
-        <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
-            {/* Navbar (Kept from new design) */}
-            <nav className="fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 border-b">
-                <div className="container max-w-3xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-8">
-                        <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
-                            ← Back to Home
-                        </Link>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-9 w-9"
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        >
-                            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                        </Button>
-                    </div>
-                </div>
-            </nav>
-
-            <main className="container max-w-3xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="space-y-2"
-                >
-                    <h1 className="text-3xl font-bold tracking-tight">Experience</h1>
-                    <p className="text-muted-foreground">My professional journey and career milestones.</p>
-                </motion.div>
+        <PageContainer>
+            <Navbar />
+            <MainContent>
+                <PageHeader
+                    title="Experience"
+                    description="My professional journey and career milestones."
+                />
 
                 <div className="space-y-12">
                     {EXPERIENCE.map((exp, index) => (
@@ -92,7 +112,7 @@ const Experience = () => {
                                 {/* Date Column */}
                                 <div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
                                     {/* Dot */}
-                                    <div className="hidden md:block absolute right-[-5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
+                                    <div className="hidden md:block absolute right-[-5px] top-[0.5rem] w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
                                     {exp.date}
                                 </div>
 
@@ -125,19 +145,16 @@ const Experience = () => {
                                     {exp.skills && exp.skills.length > 0 && (
                                         <div className="flex flex-wrap gap-2 mt-2">
                                             {exp.skills.map((skill) => {
-                                                const { url, icon } = getSkillDetails(skill);
-                                                const Wrapper = url ? 'a' : 'span';
-                                                const props = url ? { href: url, target: "_blank", rel: "noreferrer" } : {};
-
+                                                const { url, icon, color } = getSkillDetails(skill);
                                                 return (
-                                                    <Wrapper
+                                                    <TechBadge
                                                         key={skill}
-                                                        {...props}
-                                                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border border-dashed border-muted bg-transparent text-xs font-medium text-muted-foreground hover:border-solid hover:text-foreground hover:bg-muted/50 transition-all cursor-pointer"
-                                                    >
-                                                        {icon}
-                                                        <span>{skill}</span>
-                                                    </Wrapper>
+                                                        skill={skill}
+                                                        url={url}
+                                                        icon={icon}
+                                                        color={color}
+                                                        variant="default"
+                                                    />
                                                 );
                                             })}
                                         </div>
@@ -147,8 +164,8 @@ const Experience = () => {
                         </motion.div>
                     ))}
                 </div>
-            </main>
-        </div>
+            </MainContent>
+        </PageContainer>
     );
 };
 
