@@ -4,6 +4,7 @@ import { useTheme } from "@/Components/theme-provider";
 import QuoteSection from "../Components/QuoteSection";
 import Navbar from "@/Components/Navbar";
 import TechBadge from "@/Components/TechBadge";
+import ExperienceCard from "@/Components/ExperienceCard";
 import InfoItem from "@/Components/InfoItem";
 import SocialCard from "@/Components/SocialCard";
 import TimeDisplay from "@/Components/TimeDisplay";
@@ -352,71 +353,13 @@ const Home = () => {
 
 					<div className="space-y-12">
 						{EXPERIENCE.slice(0, 3).map((exp, index) => (
-							<motion.div
+							<ExperienceCard
 								key={exp.id}
-								initial={{ opacity: 0, y: 10 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1 }}
-								className="relative pl-8 md:pl-0"
-							>
-								{/* Timeline Line */}
-								<div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
-
-								<div className="md:grid md:grid-cols-[150px_1fr] md:gap-8 items-start">
-									{/* Date Column */}
-									<div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
-										{/* Dot */}
-										<div className="hidden md:block absolute right-[-5px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300"></div>
-										{exp.date}
-									</div>
-
-									{/* Content Column */}
-									<div className="flex flex-col gap-3 group">
-										<div>
-											<div className="flex items-center gap-2 flex-wrap">
-												<h2 className="text-xl font-bold leading-tight group-hover:text-primary transition-colors">
-													{exp.role}
-												</h2>
-												{exp.date.includes('Present') && (
-													<Badge className="bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20 hover:bg-green-500/20 text-xs font-medium px-2 py-0.5">
-														Working
-													</Badge>
-												)}
-											</div>
-											<div className="flex items-center gap-2 text-foreground/80 mt-1 font-medium">
-												<span>{exp.comapny_name}</span>
-												<span className="text-muted-foreground">•</span>
-												<span className="text-muted-foreground text-sm">{exp.location}</span>
-											</div>
-										</div>
-
-										{exp.description && (
-											<p className="text-muted-foreground leading-relaxed">
-												{exp.description}
-											</p>
-										)}
-
-										{exp.skills && exp.skills.length > 0 && (
-											<div className="flex flex-wrap gap-2 mt-2">
-												{exp.skills.map((skill) => {
-													const { url, icon, color } = getSkillDetails(skill);
-													return (
-														<TechBadge
-															key={skill}
-															skill={skill}
-															url={url}
-															icon={icon}
-															color={color}
-															variant="compact"
-														/>
-													);
-												})}
-											</div>
-										)}
-									</div>
-								</div>
-							</motion.div>
+								exp={exp}
+								index={index}
+								getSkillDetails={getSkillDetails}
+								variant="compact"
+							/>
 						))}
 					</div>
 
