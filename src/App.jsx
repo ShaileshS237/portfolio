@@ -8,6 +8,7 @@ import Blogs from "./Pages/Blogs";
 import LoveAkotBlog from "./Pages/Blogs/LoveAkot";
 import ScrollToTop from "./Components/ScrollToTop";
 import Experience from "./Pages/Experience";
+import Gear from "./Pages/Gear";
 function App() {
 	return (
 		<BrowserRouter>
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/blogs" element={<Blogs />} />
 				<Route path="/blogs/love-akot" element={<LoveAkotBlog />} />
 				<Route path="/experience" element={<Experience />} />
+				<Route path="/gear" element={<Gear />} />
 			</Routes>
 		</BrowserRouter>
 	);

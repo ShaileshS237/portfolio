@@ -143,8 +143,8 @@ export const PROJECTS = [
 		project_type: "Personal",
 		route: "/work",
 		href: "https://github.com/ShaileshS237/loveAkot",
-		livelink: "https://play.google.com/store/apps/details?id=com.loveakot",
-		website: "https://loveakot.com",
+		livelink: "https://play.google.com/store/apps/details?id=com.loveakot.android",
+		website: "https://loveakot.in",
 		adminPanel: "https://admin.loveakot.com",
 		headerImage: "../public/images/projects/projects_logo/bktcard_logo.png",
 	},
@@ -182,7 +182,7 @@ export const PROJECTS = [
 		lUdpate: "12 Jan 2022",
 		type: "Website",
 		href: "https://github.com/ShaileshS237/BktCard",
-		livelink: "",
+		livelink: "https://bktcard.netlify.app/",
 	},
 	{
 		id: 4,
@@ -305,7 +305,8 @@ export const EXPERIENCE = [
 		role: "Software Development Engineer",
 		date: "Jul 2023 - Present",
 		description: "Designed and developed 10+ complex frontend components including Asset Details, Component Overview, and Vulnerabilities Tabs, enhancing OT Companion's usability. Resolved 150+ critical frontend bugs, identifying root causes and deploying timely fixes, boosting application stability by 25% and reducing production incidents by 30% through proactive triage and code improvements. Implemented document storage and interactive Map View using Geocoding APIs, increasing geographic data accuracy by 40% and improving user interaction scores.",
-		skills: ["Angular", "TypeScript", "Frontend Development", "Bug Fixing", "Geocoding APIs"]
+		skills: ["Angular", "TypeScript", "Frontend Development", "Bug Fixing", "Geocoding APIs"],
+		type: "technical"
 	},
 	{
 		id: 3,
@@ -314,7 +315,8 @@ export const EXPERIENCE = [
 		role: "Software Development Engineer Intern",
 		date: "Jun 2021 - Jun 2023",
 		description: "Built a cross-platform Android application Agnaya using Flutter, enabling real-time monitoring and control for 1,000+ IoT-enabled gas stove units, increasing customer satisfaction by 25%. Maintained and debugged company website, improving page load speed by 40%, resolving 50+ critical issues, and boosting average session duration by 15%. Integrated 15+ RESTful APIs to enable real-time communication between the mobile app and IoT devices, ensuring 99.9% uptime and consistent data flow.",
-		skills: ["Flutter", "RESTful APIs", "IoT", "Web Development", "React.js"]
+		skills: ["Flutter", "RESTful APIs", "IoT", "Web Development", "React.js"],
+		type: "technical"
 	},
 	{
 		id: 4,
@@ -322,8 +324,9 @@ export const EXPERIENCE = [
 		location: "Kurukshetra, Haryana, India",
 		role: "Teaching Assistant",
 		date: "Nov 2021 - Jun 2023",
-		description: "",
-		skills: []
+		description: "Assisted professors in conducting lab sessions for B.Tech students, providing guidance on programming concepts and project development. Managed and evaluated student assignments, fostering a supportive learning environment and improving student engagement.",
+		skills: ["C++", "Data Structures", "Teaching"],
+		type: "non-technical"
 	},
 	{
 		id: 5,
@@ -332,7 +335,8 @@ export const EXPERIENCE = [
 		role: "Mobile Developer",
 		date: "Jan 2022 - Jul 2022",
 		description: "As a software developer, I had the opportunity to work on the development of an Android app for a Pune-based startup called Quickchicken. The app was developed using the Ionic framework, which is based on Angular and allows for the creation of cross-platform apps using web technologies. I also utilized MySQL for the app's database and implemented push notifications using OneSignal. A REST API was used for communication between the app and the server, and Razerpay payment gateway was implemented to handle financial transactions.",
-		skills: ["Ionic", "Angular", "MySQL", "REST API"]
+		skills: ["Ionic", "Angular", "MySQL", "REST API"],
+		type: "technical"
 	},
 	{
 		id: 6,
@@ -340,8 +344,9 @@ export const EXPERIENCE = [
 		location: "Pune, Maharashtra, India",
 		role: "Graphic Designer and UI Designer",
 		date: "Mar 2019 - Mar 2020",
-		description: "",
-		skills: ["Adobe Illustrator", "Adobe Creative Suite", "Figma", "Adobe XD", "Adobe Audition", "Adobe After Effects", "Adobe Photoshop", "Adobe Premiere Pro"]
+		description: "Created visually compelling designs for digital and print media, focusing on user interface elements and brand identity. Collaborated with cross-functional teams to deliver high-quality design solutions that met client requirements and enhanced user experiences.",
+		skills: ["Adobe Illustrator", "Adobe Creative Suite", "Figma", "Adobe XD", "Adobe Audition", "Adobe After Effects", "Adobe Photoshop", "Adobe Premiere Pro"],
+		type: "technical"
 	},
 	{
 		id: 7,
@@ -349,8 +354,9 @@ export const EXPERIENCE = [
 		location: "Pune",
 		role: "Graphic Designer and Video Editor",
 		date: "Feb 2018 - Feb 2019",
-		description: "",
-		skills: ["Adobe Creative Suite", "Adobe Audition", "Adobe After Effects", "Adobe Premiere Pro"]
+		description: "Produced creative graphic content and edited engaging videos for social media and marketing campaigns. Managed multiple design projects from concept to completion, ensuring brand consistency and high production quality.",
+		skills: ["Adobe Creative Suite", "Adobe Audition", "Adobe After Effects", "Adobe Premiere Pro"],
+		type: "technical"
 	},
 ];
 
@@ -431,5 +437,95 @@ export const BLOGS = [
 		date: "Dec 10, 2023",
 		tags: ["AI", "Future", "DevTools"],
 		link: "https://medium.com/@shaileshsawale7"
+	}
+];
+
+export const GEAR_ITEMS = [
+	{
+		category: "Workstation",
+		items: [
+			{
+				id: 1,
+				name: "MacBook Air M4 (14-inch)",
+				description: "My main machine for development and design.",
+				icon: "Laptop"
+			},
+			{
+				id: 13,
+				name: "Asus ROG Strix G",
+				description: "A powerful gaming laptop for heavy workloads.",
+				icon: "Laptop"
+			},
+			{
+				id: 2,
+				name: "LG 29-inch Long Monitor",
+				description: "Primary display for coding and multitasking.",
+				icon: "Monitor"
+			},
+			{
+				id: 3,
+				name: "Logitech MX 3S Mouse",
+				description: "Handy mouse and keyboard for productivity and ergonomic comfort.",
+				icon: "Mouse"
+			},
+			{
+				id: 4,
+				name: "Logitech MX Keyboard",
+				description: "Handy mouse and keyboard for productivity and ergonomic comfort.",
+				icon: "Keyboard"
+			},
+			{
+				id: 5,
+				name: "LG 27 inch monitor",
+				description: "Secondary display for coding and multitasking.",
+				icon: "Monitor"
+			}
+		]
+	},
+	{
+		category: "Audio & Accessories",
+		items: [
+			{
+				id: 6,
+				name: "Apple AirPods Pro (2nd Gen)",
+				description: "For meetings and casual listening on the go.",
+				icon: "Headphones"
+			},
+			{
+				id: 7,
+				name: "iPhone 14",
+				description: "My daily driver and test device for mobile apps.",
+				icon: "Smartphone"
+			},
+			{
+				id: 12,
+				name: "Realme X7 Max",
+				description: "Secondary testing device for Android apps.",
+				icon: "Smartphone"
+			}
+		]
+	},
+	{
+		category: "Software & Tools",
+		items: [
+			{
+				id: 8,
+				name: "VS Code",
+				description: "My go-to editor with a minimal setup.",
+				icon: "Code"
+			},
+			{
+				id: 9,
+				name: "Google Antigravity",
+				description: "A powerful agentic AI coding assistant designed by Google DeepMind.",
+				icon: "Sparkles"
+			},
+			{
+				id: 11,
+				name: "Figma",
+				description: "Where all my design ideas come to life.",
+				icon: "Layout"
+			}
+		]
 	}
 ];

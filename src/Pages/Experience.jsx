@@ -86,27 +86,64 @@ const getSkillDetails = (skill) => {
 };
 
 const Experience = () => {
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
+
+    const technicalExperiences = EXPERIENCE.filter(exp => exp.type === 'technical');
+    const nonTechnicalExperiences = EXPERIENCE.filter(exp => exp.type === 'non-technical');
 
     return (
-        <PageContainer>
-            <Navbar />
+        <PageContainer title="Experience">
+            <Navbar title="Experience" />
             <MainContent>
                 <PageHeader
                     title="Experience"
                     description="My professional journey and career milestones."
                 />
 
-                <div className="space-y-12">
-                    {EXPERIENCE.map((exp, index) => (
-                        <ExperienceCard
-                            key={exp.id}
-                            exp={exp}
-                            index={index}
-                            getSkillDetails={getSkillDetails}
-                            variant="default"
-                        />
-                    ))}
+                <div className="space-y-16">
+                    {/* Technical Experience Section */}
+                    {technicalExperiences.length > 0 && (
+                        <div className="space-y-8">
+                            <div className="flex items-center gap-4">
+                                <h2 className="text-2xl font-bold tracking-tight">Technical Experience</h2>
+                                <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
+                            </div>
+                            <div className="space-y-12">
+                                {technicalExperiences.map((exp, index) => (
+                                    <ExperienceCard
+                                        key={exp.id}
+                                        exp={exp}
+                                        index={index}
+                                        getSkillDetails={getSkillDetails}
+                                        variant="compact"
+                                        isCollapsible={false}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Non-Technical Experience Section */}
+                    {nonTechnicalExperiences.length > 0 && (
+                        <div className="space-y-8">
+                            <div className="flex items-center gap-4">
+                                <h2 className="text-2xl font-bold tracking-tight">Non-Technical Experience</h2>
+                                <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
+                            </div>
+                            <div className="space-y-12">
+                                {nonTechnicalExperiences.map((exp, index) => (
+                                    <ExperienceCard
+                                        key={exp.id}
+                                        exp={exp}
+                                        index={index}
+                                        getSkillDetails={getSkillDetails}
+                                        variant="compact"
+                                        isCollapsible={false}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </MainContent>
         </PageContainer>

@@ -5,9 +5,11 @@ import QuoteSection from "../Components/QuoteSection";
 import Navbar from "@/Components/Navbar";
 import TechBadge from "@/Components/TechBadge";
 import ExperienceCard from "@/Components/ExperienceCard";
+import ProjectCard from "@/Components/ProjectCard";
 import InfoItem from "@/Components/InfoItem";
 import SocialCard from "@/Components/SocialCard";
 import TimeDisplay from "@/Components/TimeDisplay";
+import PageContainer from "@/Components/PageContainer";
 
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -211,14 +213,15 @@ const Home = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
+		<PageContainer title="Shailesh Sawale | Full-Stack Engineer & Product Builder">
 			<Navbar
 				backToHome={false}
 				title="Shailesh"
 				navLinks={[
 					{ label: "Work", href: "#work", external: true },
 					{ label: "Blogs", href: "/blogs", external: false },
-					{ label: "Projects", href: "#projects", external: true }
+					{ label: "Projects", href: "#projects", external: true },
+					{ label: "Gear", href: "/gear", external: false }
 				]}
 			/>
 
@@ -239,7 +242,7 @@ const Home = () => {
 
 						<div className="space-y-6">
 							<motion.h1 variants={itemVariants} className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl leading-[1.1]">
-								Hi, I'm <div className="inline-block relative text-left">
+								Hi, I'm <Link to="/" className="inline-block relative text-left group/name">
 									<span className="invisible px-1">Shailesh</span>
 									<AnimatePresence mode="wait">
 										<motion.span
@@ -248,12 +251,12 @@ const Home = () => {
 											animate={{ scale: 1 }}
 											exit={{ scale: 1 }}
 											transition={{ duration: 0.05, ease: "easeInOut" }}
-											className="absolute left-0 top-0 whitespace-nowrap text-foreground px-1"
+											className="absolute left-0 top-0 whitespace-nowrap text-foreground px-1 group-hover/name:text-primary transition-colors cursor-pointer"
 										>
 											{displayName}
 										</motion.span>
 									</AnimatePresence>
-								</div>
+								</Link>
 								<span className="block text-muted-foreground mt-2 text-3xl sm:text-4xl">a Full-Stack Engineer & Product Builder.</span>
 							</motion.h1>
 
@@ -346,33 +349,30 @@ const Home = () => {
 						className="flex items-center justify-between"
 					>
 						<h2 className="text-2xl font-bold tracking-tight">Work Experience</h2>
-						<Link to="/experience" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline underline-offset-4">
-							View All <ArrowUpRight className="w-3.5 h-3.5" />
-						</Link>
+						<Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex items-center gap-1.5 text-primary hover:text-primary hover:bg-primary/10">
+							<Link to="/experience">
+								View All <ArrowUpRight className="w-3.5 h-3.5" />
+							</Link>
+						</Button>
 					</motion.div>
 
 					<div className="space-y-12">
-						{EXPERIENCE.slice(0, 3).map((exp, index) => (
+						{EXPERIENCE.filter(exp => exp.type === 'technical').slice(0, 3).map((exp, index) => (
 							<ExperienceCard
 								key={exp.id}
 								exp={exp}
 								index={index}
 								getSkillDetails={getSkillDetails}
 								variant="compact"
+								initiallyExpanded={index === 0}
 							/>
 						))}
 					</div>
 
-					{/* Mobile "View All" Link */}
-					<div className="sm:hidden">
-						<Link to="/experience" className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline underline-offset-4">
-							View Full Experience <ArrowUpRight className="w-4 h-4" />
-						</Link>
-					</div>
 				</section>
 
 				{/* Projects Section */}
-				<section id="projects" className="space-y-8 mb-24 scroll-mt-20">
+				<section id="projects" className="space-y-8 mb-12 scroll-mt-20">
 					<motion.h2
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
@@ -381,28 +381,9 @@ const Home = () => {
 					>
 						Projects
 					</motion.h2>
-					<div className="grid grid-cols-1 gap-4">
-						{PROJECTS.map((project, index) => (
-							<motion.div
-								key={project.id}
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
-								transition={{ delay: index * 0.1 }}
-								className="group flex flex-col gap-2 rounded-lg border p-4 border-muted hover:bg-muted/50 transition-colors"
-							>
-								<div className="flex items-center justify-between">
-									<h3 className="font-semibold group-hover:underline decoration-primary underline-offset-4">{project.project_name}</h3>
-									<div className="flex gap-2">
-										{project.href && <a href={project.href} target="_blank" rel="noreferrer"><Github className="w-4 h-4 text-muted-foreground hover:text-foreground" /></a>}
-									</div>
-								</div>
-								<p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
-								<div className="flex gap-2 mt-2">
-									<Badge variant="secondary" className="text-[10px] px-1.5 py-0 rounded-sm font-normal">{project.type}</Badge>
-									<Badge variant="secondary" className="text-[10px] px-1.5 py-0 rounded-sm font-normal">{project.project_type}</Badge>
-								</div>
-							</motion.div>
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+						{PROJECTS.slice(0, 4).map((project, index) => (
+							<ProjectCard key={project.id} project={project} index={index} />
 						))}
 					</div>
 				</section>
@@ -551,7 +532,7 @@ const Home = () => {
 					</div>
 				</motion.footer>
 			</main>
-		</div >
+		</PageContainer >
 	);
 };
 

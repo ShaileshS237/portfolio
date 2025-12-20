@@ -7,14 +7,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/Components/ui/card";
 import Navbar from "@/Components/Navbar";
+import PageContainer from "@/Components/PageContainer";
 
 const LoveAkotBlog = () => {
     const { theme, setTheme } = useTheme();
-
-    // Scroll to top on mount
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
 
     const fadeInUp = {
         hidden: { opacity: 0, y: 20 },
@@ -32,7 +28,7 @@ const LoveAkotBlog = () => {
     };
 
     return (
-        <div className="min-h-screen bg-background font-sans text-foreground selection:bg-pink-500/20">
+        <PageContainer title="Love Akot | Building a Hyperlocal Community App">
             <Navbar
                 backTo="/blogs"
                 backText="← Back to Blogs"
@@ -251,7 +247,7 @@ const LoveAkotBlog = () => {
                     </motion.div>
                 </motion.article>
             </main>
-        </div>
+        </PageContainer>
     );
 };
 

@@ -1,5 +1,5 @@
 // Data constants for the application
-export { SKILLS, PROJECTS, EXPERIENCE, SOCIAL, BLOGS } from './data';
+export { SKILLS, PROJECTS, EXPERIENCE, SOCIAL, BLOGS, GEAR_ITEMS } from './data';
 
 // Configuration constants
 export const APP_CONFIG = {

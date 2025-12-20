@@ -15,14 +15,14 @@ const Work = () => {
 	const { theme, setTheme } = useTheme();
 
 	return (
-		<PageContainer>
-			<Navbar />
+		<PageContainer title="Projects">
+			<Navbar title="Work" />
 			<MainContent>
 				<PageHeader
 					title="Projects"
 					description="A showcase of my apps, websites, and experiments."
 				/>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
 					{PROJECTS.map((project, index) => (
 						<ProjectCard key={project.id} project={project} index={index} />
 					))}

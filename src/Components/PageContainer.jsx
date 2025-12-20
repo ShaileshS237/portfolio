@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const PageContainer = ({ children, maxWidth = "max-w-3xl" }) => {
+const PageContainer = ({ children, title = "Shailesh Sawale" }) => {
+    useEffect(() => {
+        document.title = title.includes("Shailesh") ? title : `${title} | Shailesh Sawale`;
+    }, [title]);
+
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/10">
             {children}

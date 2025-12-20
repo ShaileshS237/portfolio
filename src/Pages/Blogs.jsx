@@ -21,8 +21,8 @@ const Blogs = () => {
     };
 
     return (
-        <PageContainer>
-            <Navbar />
+        <PageContainer title="Blogs">
+            <Navbar title="Blogs" />
             <MainContent>
                 <PageHeader
                     title="Blogs"

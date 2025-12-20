@@ -1,12 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/Components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import TechBadge from "@/Components/TechBadge";
 
-const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default" }) => {
+const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", initiallyExpanded = false, isCollapsible = true }) => {
+    const [isExpanded, setIsExpanded] = React.useState(initiallyExpanded);
     const showBullets = variant === "compact";
-    const techBadgeVariant = variant === "compact" ? "compact" : "default";
+    const techBadgeVariant = "default";
     const dotTopPosition = variant === "compact" ? "top-1.5" : "top-[0.5rem]";
+
+    // If not collapsible, we force expanded state
+    const effectiveIsExpanded = isCollapsible ? isExpanded : true;
 
     return (
         <motion.div
@@ -48,20 +54,45 @@ const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default" }) =>
                     </div>
 
                     {exp.description && (
-                        showBullets ? (
-                            <div className="text-muted-foreground leading-relaxed space-y-2">
-                                {exp.description.split('.').filter(sentence => sentence.trim()).map((sentence, idx) => (
-                                    <div key={idx} className="flex gap-2 items-start">
-                                        <span className="text-primary mt-1.5 flex-shrink-0">•</span>
-                                        <span>{sentence.trim()}.</span>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-muted-foreground leading-relaxed">
-                                {exp.description}
-                            </p>
-                        )
+                        <div className="space-y-2">
+                            {(isCollapsible && variant === "compact") && (
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => setIsExpanded(!isExpanded)}
+                                    className="h-8 px-2 text-primary hover:text-primary hover:bg-primary/10 -ml-2 gap-1 text-xs font-medium"
+                                >
+                                    {isExpanded ? (
+                                        <>Hide Description <ChevronUp className="w-3 h-3" /></>
+                                    ) : (
+                                        <>Show Description <ChevronDown className="w-3 h-3" /></>
+                                    )}
+                                </Button>
+                            )}
+
+                            {(effectiveIsExpanded || (variant !== "compact")) && (
+                                <div className="overflow-hidden">
+                                    <motion.div
+                                        initial={false}
+                                        animate={{ height: "auto", opacity: 1 }}
+                                        className="text-muted-foreground leading-relaxed"
+                                    >
+                                        {showBullets ? (
+                                            <div className="space-y-2">
+                                                {exp.description.split('.').filter(sentence => sentence.trim()).map((sentence, idx) => (
+                                                    <div key={idx} className="flex gap-2 items-start">
+                                                        <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+                                                        <span>{sentence.trim()}.</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <p>{exp.description}</p>
+                                        )}
+                                    </motion.div>
+                                </div>
+                            )}
+                        </div>
                     )}
 
                     {exp.skills && exp.skills.length > 0 && (

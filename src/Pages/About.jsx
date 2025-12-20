@@ -7,8 +7,8 @@ import "animate.css";
 
 const About = () => {
 	return (
-		<PageContainer>
-			<Navbar />
+		<PageContainer title="About">
+			<Navbar title="About" />
 			<MainContent>
 				<PageHeader title="About Me" description="Get to know me better" />
 
