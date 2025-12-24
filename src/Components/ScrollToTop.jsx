@@ -1,24 +1,50 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 
 export default function ScrollToTop() {
-	const { pathname } = useLocation();
+	const { pathname, search } = useLocation();
 	const navType = useNavigationType();
+	const positionsRef = useRef({});
+	const pathKey = useMemo(() => `${pathname}${search}`, [pathname, search]);
+	const prevPathRef = useRef(pathKey);
+
+	// Track scroll position per route so we can restore it on back/forward
+	useEffect(() => {
+		const handleScroll = () => {
+			positionsRef.current[pathKey] = window.scrollY;
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [pathKey]);
 
 	useEffect(() => {
-		// Only scroll to top if it's a PUSH navigation (new page)
-		// Skip on POP navigation (back/forward) to allow browser to restore scroll position
-		if (navType !== "POP") {
-			window.scrollTo(0, 0);
-
-			// Double check after a tiny delay to handle any late layout shifts
-			const timeoutId = setTimeout(() => {
-				window.scrollTo(0, 0);
-			}, 10);
-
-			return () => clearTimeout(timeoutId);
+		const previousPathKey = prevPathRef.current;
+		if (previousPathKey !== pathKey) {
+			positionsRef.current[previousPathKey] = window.scrollY;
 		}
-	}, [pathname, navType]);
+
+		let timeoutId;
+		let rafId;
+
+		if (navType === "POP") {
+			const savedY = positionsRef.current[pathKey] ?? 0;
+			rafId = requestAnimationFrame(() => {
+				window.scrollTo(0, savedY);
+				timeoutId = window.setTimeout(() => window.scrollTo(0, savedY), 20);
+			});
+		} else {
+			window.scrollTo(0, 0);
+			timeoutId = window.setTimeout(() => window.scrollTo(0, 0), 10);
+		}
+
+		prevPathRef.current = pathKey;
+
+		return () => {
+			if (timeoutId) clearTimeout(timeoutId);
+			if (rafId) cancelAnimationFrame(rafId);
+		};
+	}, [pathKey, navType]);
 
 	return null;
 }

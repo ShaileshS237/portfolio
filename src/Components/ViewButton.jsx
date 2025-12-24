@@ -26,7 +26,7 @@ const ViewButton = ({
 
     if (to) {
         return (
-            <Link to={to} className="group">
+            <Link to={to} className="group" onClick={onClick}>
                 {content}
             </Link>
         );
@@ -39,6 +39,7 @@ const ViewButton = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"
+                onClick={onClick}
             >
                 {content}
             </a>

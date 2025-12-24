@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useTheme } from "@/Components/theme-provider";
 import { Button } from "@/Components/ui/button";
 import { Sun, Moon, ArrowLeft } from "lucide-react";
@@ -16,6 +16,7 @@ const Navbar = ({
     const { theme, setTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     const isVMode = searchParams.get("v") === "true";
     const queryString = isVMode ? "?v=true" : "";
 
@@ -29,21 +30,33 @@ const Navbar = ({
     const positionClass = sticky ? "sticky" : "fixed";
     const borderClass = !title ? "border-b border-muted" : "";
 
+    const handleBack = () => {
+        const historyIdx = window.history?.state?.idx ?? 0;
+        if (historyIdx > 0) {
+            navigate(-1);
+            return;
+        }
+
+        if (backTo) {
+            navigate(getLinkPath(backTo));
+            return;
+        }
+
+        navigate(-1);
+    };
+
     return (
         <nav className={`${positionClass} top-0 left-0 right-0 z-50 w-full backdrop-blur-sm bg-background/80 ${borderClass}`}>
             <div className="container max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between ">
                 {/* Left side */}
                 <div className="flex items-center gap-4">
                     {backToHome && (
-                        <Link
-                            to={getLinkPath(backTo)}
-                            className="flex items-center justify-center h-10 w-10 rounded-lg border border-muted bg-background hover:bg-muted transition-colors"
+                        <button
+                            onClick={handleBack}
+                            className="group flex items-center justify-center h-10 w-10 rounded-lg border border-muted bg-background hover:bg-muted transition-colors"
                         >
-                            <span className="text-base">
-
-                                <ArrowLeft className="h-4 w-4" />
-                            </span>
-                        </Link>
+                            <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+                        </button>
                     )}
                     {title && (
                         <Link to={getLinkPath("/")} className="font-semibold text-lg tracking-tight hover:text-primary transition-colors">

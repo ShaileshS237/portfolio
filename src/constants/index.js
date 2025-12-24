@@ -1,5 +1,6 @@
 // Data constants for the application
 export { SKILLS, PROJECTS, EXPERIENCE, SOCIAL, BLOGS, GEAR_ITEMS } from './data';
+export { TECH_ICONS, TECH_KEYWORDS, PROJECT_STATUS_CONFIG, BENTO_GRADIENTS } from './projectMeta';
 
 // Configuration constants
 export const APP_CONFIG = {

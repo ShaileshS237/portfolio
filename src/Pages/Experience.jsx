@@ -92,11 +92,11 @@ const Experience = () => {
     const nonTechnicalExperiences = EXPERIENCE.filter(exp => exp.type === 'non-technical');
 
     return (
-        <PageContainer title="Experience">
-            <Navbar title="Experience" />
+        <PageContainer title="Work Experience">
+            <Navbar title="Work Experience" />
             <MainContent>
                 <PageHeader
-                    title="Experience"
+                    title="Work Experience"
                     description="My professional journey and career milestones."
                 />
 

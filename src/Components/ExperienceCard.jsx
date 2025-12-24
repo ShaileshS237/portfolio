@@ -78,14 +78,14 @@ const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", init
                                         className="text-muted-foreground leading-relaxed"
                                     >
                                         {showBullets ? (
-                                            <div className="space-y-2">
-                                                {exp.description.split('.').filter(sentence => sentence.trim()).map((sentence, idx) => (
-                                                    <div key={idx} className="flex gap-2 items-start">
-                                                        <span className="text-primary mt-1.5 flex-shrink-0">•</span>
-                                                        <span>{sentence.trim()}.</span>
-                                                    </div>
+                                            <ul className="space-y-2 list-none">
+                                                {exp.description.split(/(?<=[.!?])\s+(?=[A-Z])/).filter(sentence => sentence.trim()).map((sentence, idx) => (
+                                                    <li key={idx} className="flex gap-3">
+                                                        <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-muted-foreground mt-[0.5em]"></span>
+                                                        <span>{sentence.trim()}</span>
+                                                    </li>
                                                 ))}
-                                            </div>
+                                            </ul>
                                         ) : (
                                             <p>{exp.description}</p>
                                         )}
