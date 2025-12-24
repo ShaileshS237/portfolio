@@ -246,7 +246,7 @@ const Home = () => {
 				]}
 			/>
 
-			<main className="container max-w-3xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
+			<main className="container max-w-6xl mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12">
 				{/* Hero Section */}
 				<motion.section
 					className="space-y-8 mt-8"
@@ -409,7 +409,12 @@ const Home = () => {
 					</motion.div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 						{PROJECTS.slice(0, 4).map((project, index) => (
-							<ProjectCard key={project.id} project={project} index={index} />
+							<ProjectCard
+								key={project.id}
+								project={project}
+								index={index}
+								size={project.project_name.toLowerCase().includes('love akot') ? 'wide' : 'normal'}
+							/>
 						))}
 					</div>
 				</section>

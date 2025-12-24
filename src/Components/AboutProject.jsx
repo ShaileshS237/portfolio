@@ -28,7 +28,7 @@ const AboutProject = () => {
 	return (
 		<PageContainer>
 			<Navbar />
-			<MainContent maxWidth="max-w-5xl">
+			<MainContent maxWidth="max-w-6xl">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}

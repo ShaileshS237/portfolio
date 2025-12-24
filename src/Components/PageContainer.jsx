@@ -12,7 +12,7 @@ const PageContainer = ({ children, title = "Shailesh Sawale" }) => {
     );
 };
 
-export const MainContent = ({ children, maxWidth = "max-w-3xl" }) => {
+export const MainContent = ({ children, maxWidth = "max-w-6xl" }) => {
     return (
         <main className={`container ${maxWidth} mx-auto pt-24 pb-12 px-4 md:px-6 space-y-12`}>
             {children}

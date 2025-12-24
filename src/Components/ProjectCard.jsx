@@ -2,161 +2,262 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
-import { ArrowUpRight, Github, Globe } from "lucide-react";
+import {
+    ArrowUpRight,
+    Github,
+    ExternalLink,
+    Smartphone,
+    Globe,
+    Cpu,
+} from "lucide-react";
+import { Button } from "@/Components/ui/button";
 
-import Tooltip from "@/Components/Tooltip";
+// Tech icon mapping with Simple Icons (real logos) and colors
+const techIcons = {
+    react: { slug: "react", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    reactjs: { slug: "react", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    "react native": { slug: "react", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    angular: { slug: "angular", color: "text-red-400", bg: "bg-red-500/10" },
+    ionic: { slug: "ionic", color: "text-blue-400", bg: "bg-blue-500/10" },
+    "ionic capacitor": { slug: "capacitor", color: "text-blue-400", bg: "bg-blue-500/10" },
+    capacitor: { slug: "capacitor", color: "text-blue-400", bg: "bg-blue-500/10" },
+    flutter: { slug: "flutter", color: "text-sky-400", bg: "bg-sky-500/10" },
+    "node.js": { slug: "nodedotjs", color: "text-green-400", bg: "bg-green-500/10" },
+    nodejs: { slug: "nodedotjs", color: "text-green-400", bg: "bg-green-500/10" },
+    express: { slug: "express", color: "text-zinc-400", bg: "bg-zinc-500/10" },
+    mongodb: { slug: "mongodb", color: "text-emerald-400", bg: "bg-emerald-500/10" },
+    mysql: { slug: "mysql", color: "text-blue-400", bg: "bg-blue-500/10" },
+    firebase: { slug: "firebase", color: "text-amber-400", bg: "bg-amber-500/10" },
+    "firebase cloud messaging": { slug: "firebase", color: "text-amber-400", bg: "bg-amber-500/10" },
+    fcm: { slug: "firebase", color: "text-amber-400", bg: "bg-amber-500/10" },
+    aws: { slug: "amazonaws", color: "text-orange-400", bg: "bg-orange-500/10" },
+    "aws ec2": { slug: "amazonec2", color: "text-orange-400", bg: "bg-orange-500/10" },
+    "aws s3": { slug: "amazons3", color: "text-orange-400", bg: "bg-orange-500/10" },
+    razorpay: { slug: "razorpay", color: "text-indigo-400", bg: "bg-indigo-500/10" },
+    tailwind: { slug: "tailwindcss", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    tailwindcss: { slug: "tailwindcss", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+    typescript: { slug: "typescript", color: "text-blue-500", bg: "bg-blue-500/10" },
+    javascript: { slug: "javascript", color: "text-yellow-400", bg: "bg-yellow-500/10" },
+    python: { slug: "python", color: "text-blue-400", bg: "bg-blue-500/10" },
+    nextjs: { slug: "nextdotjs", color: "text-zinc-400", bg: "bg-zinc-500/10" },
+    "next.js": { slug: "nextdotjs", color: "text-zinc-400", bg: "bg-zinc-500/10" },
+    vue: { slug: "vuedotjs", color: "text-green-400", bg: "bg-green-500/10" },
+    vuejs: { slug: "vuedotjs", color: "text-green-400", bg: "bg-green-500/10" },
+    docker: { slug: "docker", color: "text-blue-400", bg: "bg-blue-500/10" },
+    graphql: { slug: "graphql", color: "text-pink-400", bg: "bg-pink-500/10" },
+    redis: { slug: "redis", color: "text-red-400", bg: "bg-red-500/10" },
+    postgresql: { slug: "postgresql", color: "text-blue-400", bg: "bg-blue-500/10" },
+    supabase: { slug: "supabase", color: "text-emerald-400", bg: "bg-emerald-500/10" },
+    vercel: { slug: "vercel", color: "text-zinc-400", bg: "bg-zinc-500/10" },
+    git: { slug: "git", color: "text-orange-400", bg: "bg-orange-500/10" },
+    github: { slug: "github", color: "text-zinc-400", bg: "bg-zinc-500/10" },
+    figma: { slug: "figma", color: "text-purple-400", bg: "bg-purple-500/10" },
+    otpless: { slug: null, color: "text-violet-400", bg: "bg-violet-500/10" },
+    default: { slug: null, color: "text-muted-foreground", bg: "bg-muted/50" },
+};
 
-const ProjectCard = ({ project, index = 0, variant = "default" }) => {
-    const primaryLink = project.website || project.livelink || project.href || "#";
+const getTechIcon = (techName) => {
+    const normalizedName = techName.toLowerCase().trim();
+    return techIcons[normalizedName] || techIcons.default;
+};
 
-    // Extract tech tags from description if not provided in project
-    const getTechTags = () => {
-        if (project.techStack) return project.techStack;
-        // Simple heuristic: find "Tech Stack:" in description or common keywords
-        const keywords = ['Angular', 'Ionic', 'React', 'Node.js', 'Express', 'MongoDB', 'MySQL', 'Firebase', 'Flutter', 'Next.js', 'TypeScript', 'Tailwind', 'AWS'];
-        const tags = keywords.filter(k => project.description.includes(k));
-        return tags.slice(0, 4);
+// Tech Icon Component using Simple Icons CDN
+const TechIcon = ({ tech, size = "sm" }) => {
+    const { slug, color, bg } = getTechIcon(tech);
+    const sizeClass = size === "lg" ? "w-5 h-5" : "w-4 h-4";
+    const paddingClass = size === "lg" ? "p-2.5" : "p-2";
+
+    return (
+        <div
+            className={`${paddingClass} rounded-xl ${bg} border border-border/30 transition-all duration-300 `}
+            title={tech}
+        >
+            {slug ? (
+                <img
+                    src={`https://cdn.simpleicons.org/${slug}`}
+                    alt={tech}
+                    className={`${sizeClass} object-contain dark:invert`}
+                />
+            ) : (
+                <Cpu className={`${sizeClass} ${color}`} />
+            )}
+        </div>
+    );
+};
+
+// Extract tech stack from description
+const extractTechStack = (description) => {
+    if (!description) return [];
+    const techMatch = description.match(/Tech Stack:([^.]+)/i);
+    if (techMatch) {
+        return techMatch[1].split(",").map((tech) => tech.trim()).filter(Boolean).slice(0, 6);
+    }
+    const keywords = ["Angular", "Ionic", "React", "Node.js", "Express", "MongoDB", "MySQL", "Firebase", "AWS"];
+    return keywords.filter((k) => description.toLowerCase().includes(k.toLowerCase())).slice(0, 6);
+};
+
+// Paragon-style Bento Card Component
+const ProjectCard = ({ project, index = 0, size = "normal" }) => {
+    const techStack = project.techStack || extractTechStack(project.description);
+    const isLarge = size === "large";
+    const isWide = size === "wide";
+    const isTall = size === "tall";
+    const isFeatured = isLarge || isWide || isTall;
+
+    const getDescription = (desc) => {
+        if (!desc) return "";
+        const cleanDesc = desc.replace(/Tech Stack:[^.]+\.?/i, "").trim();
+        const maxLen = isFeatured ? 180 : 100;
+        const firstPart = cleanDesc.split(".").slice(0, 2).join(". ");
+        return firstPart.length > maxLen ? firstPart.substring(0, maxLen) + "..." : firstPart + ".";
     };
 
-    const techTags = getTechTags();
+    const primaryLink = project.website || project.livelink || project.href || "#";
 
-    if (variant === "compact") {
-        return (
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group flex flex-col gap-2 rounded-lg border p-4 hover:bg-muted/50 transition-colors bg-card/50"
-            >
-                <div className="flex items-center justify-between">
-                    <h2 className="font-semibold group-hover:underline decoration-primary underline-offset-4 line-clamp-1">
-                        {project.project_name}
-                    </h2>
-                    <div className="flex gap-2 shrink-0">
-                        {project.href && (
-                            <Tooltip content="Source Code">
-                                <a href={project.href} target="_blank" rel="noreferrer" className="p-1 hover:text-primary transition-colors">
-                                    <Github className="w-4 h-4" />
-                                </a>
-                            </Tooltip>
-                        )}
-                        <Tooltip content="View Project">
-                            <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                        </Tooltip>
-                    </div>
-                </div>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                    {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-2">
-                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0 rounded-sm font-normal">
-                        {project.type}
-                    </Badge>
-                    {project.status === "2" ? (
-                        <Badge className="text-[10px] px-1.5 py-0 rounded-sm font-medium bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
-                            Completed
-                        </Badge>
-                    ) : (
-                        <Badge className="text-[10px] px-1.5 py-0 rounded-sm font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">
-                            Working
-                        </Badge>
-                    )}
-                </div>
-            </motion.div>
-        );
-    }
+    // Paragon-style gradient backgrounds based on card position
+    const getGradientStyle = () => {
+        const gradients = [
+            "from-violet-500/5 via-transparent to-transparent",
+            "from-cyan-500/5 via-transparent to-transparent",
+            "from-amber-500/5 via-transparent to-transparent",
+            "from-emerald-500/5 via-transparent to-transparent",
+            "from-rose-500/5 via-transparent to-transparent",
+            "from-blue-500/5 via-transparent to-transparent",
+        ];
+        return gradients[index % gradients.length];
+    };
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="group relative h-full flex flex-col rounded-xl border border-muted bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/20 overflow-hidden"
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: [0.22, 1, 0.36, 1]
+            }}
+            className={`
+                ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
+                ${isWide ? "md:col-span-2" : ""}
+                ${isTall ? "md:row-span-2" : ""}
+            `}
         >
-            {/* Project Image */}
-            <div className="aspect-[16/9] w-full relative overflow-hidden bg-muted/30">
-                <img
-                    src={project.icon || '/images/projects/placeholder.png'}
-                    alt={project.project_name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    onError={(e) => {
-                        e.target.src = 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop';
-                    }}
-                />
-                {/* Project Logo Overlay - Always Visible */}
-                {project.icon && (
-                    <div className="absolute bottom-4 left-4 z-20 w-32 h-12 rounded-lg p-1.5 shadow-lg backdrop-blur-sm">
-                        <img
-                            src={project.icon}
-                            alt=""
-                            className="w-full h-full object-contain"
-                        />
-                    </div>
-                )}
+            <a
+                href={primaryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block h-full group"
+            >
+                <Card className={`
+                    relative h-full overflow-hidden
+                    rounded-xl border border-muted shadow-none
+                    bg-gradient-to-br from-card/80 via-card to-card/90
+                    transition-all duration-700 ease-out
+                    ${isFeatured ? "p-8 md:p-10" : "p-6 md:p-7"}
+                `}>
+                    {/* Animated gradient orbs - Paragon style */}
+                    <div className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${getGradientStyle()} rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+                    <div className={`absolute -bottom-24 -left-24 w-48 h-48 bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 delay-100`} />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-4 z-10">
-                    <div className="flex gap-3 ml-auto">
-                        {project.href && (
-                            <Tooltip content="Source Code">
-                                <a href={project.href} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">
-                                    <Github className="w-4 h-4 text-white" />
-                                </a>
-                            </Tooltip>
-                        )}
-                        {project.livelink && (
-                            <Tooltip content="Live Demo">
-                                <a href={project.livelink} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">
-                                    <Globe className="w-4 h-4 text-white" />
-                                </a>
-                            </Tooltip>
-                        )}
-                    </div>
-                </div>
-            </div>
+                    {/* Subtle border glow effect */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="p-5 flex flex-col flex-1 space-y-3">
-                <div className="flex items-start justify-between gap-4">
-                    <div className="space-y-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
+                    {/* Content */}
+                    <CardContent className="relative z-10 p-0 h-full flex flex-col">
+                        {/* Header with tech icons and arrow */}
+                        <div className="flex items-start justify-between mb-6">
+                            {/* Tech Stack Icons Row */}
+                            <div className="flex items-center gap-2 flex-wrap">
+                                {techStack.slice(0, isFeatured ? 5 : 3).map((tech, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.2 + i * 0.05 }}
+                                    >
+                                        <TechIcon tech={tech} size={isFeatured ? "lg" : "sm"} />
+                                    </motion.div>
+                                ))}
+                                {techStack.length > (isFeatured ? 5 : 3) && (
+                                    <span className="text-xs text-muted-foreground px-2 py-1 rounded-lg bg-muted/30">
+                                        +{techStack.length - (isFeatured ? 5 : 3)}
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Arrow indicator */}
+                            <div className="shrink-0 p-2.5 rounded-full bg-muted/30 border border-border/30 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-all duration-500 group-hover:rotate-45 group-hover:scale-110">
+                                <ArrowUpRight className={isFeatured ? "w-5 h-5" : "w-4 h-4"} />
+                            </div>
+                        </div>
+
+                        {/* Title & Content */}
+                        <div className="flex-1">
+                            <h3 className={`
+                                font-bold leading-tight mb-3
+                                ${isFeatured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"}
+                                group-hover:text-primary transition-colors duration-300
+                            `}>
                                 {project.project_name}
                             </h3>
-                            {project.status === "2" ? (
-                                <Badge className="text-[10px] px-1.5 py-0 rounded-sm font-medium bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">
-                                    Completed
-                                </Badge>
-                            ) : (
-                                <Badge className="text-[10px] px-1.5 py-0 rounded-sm font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">
-                                    Working
-                                </Badge>
-                            )}
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span>{project.project_type}</span>
-                            <span>•</span>
-                            <span>{project.type}</span>
-                        </div>
-                    </div>
-                    <Tooltip content="Visit Link">
-                        <a href={primaryLink} target="_blank" rel="noreferrer" className="shrink-0 p-2 rounded-lg hover:bg-muted transition-colors">
-                            <ArrowUpRight className="w-5 h-5" />
-                        </a>
-                    </Tooltip>
-                </div>
 
-                <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                    {project.description}
-                </p>
+                            {/* Project Type Badge */}
+                            <div className="flex items-center gap-2 mb-4 flex-wrap">
+                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border border-border/30">
+                                    {project.type === "Mobile App" ? (
+                                        <Smartphone className="w-3.5 h-3.5" />
+                                    ) : (
+                                        <Globe className="w-3.5 h-3.5" />
+                                    )}
+                                    {project.type}
+                                </span>
+                                {project.project_type && (
+                                    <span className="text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border border-border/30">
+                                        {project.project_type}
+                                    </span>
+                                )}
+                            </div>
 
-                <div className="pt-2 flex flex-wrap gap-2 mt-auto">
-                    {techTags.map(tag => (
-                        <span key={tag} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-            </div>
+                            {/* Description */}
+                            <p className={`
+                                text-muted-foreground leading-relaxed
+                                ${isFeatured ? "text-base md:text-lg line-clamp-4" : "text-sm line-clamp-3"}
+                            `}>
+                                {getDescription(project.description)}
+                            </p>
+                        </div>
+
+                        {/* Action Links - Paragon style */}
+                        <div className="flex items-center justify-between gap-3 mt-auto pt-6">
+                            <div className="flex items-center gap-2">
+                                {project.href && (
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="gap-2 text-muted-foreground hover:text-foreground rounded-full px-4 h-9 border border-border/30 hover:border-border hover:bg-muted/50"
+                                        asChild
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <a href={project.href} target="_blank" rel="noopener noreferrer">
+                                            <Github className="w-4 h-4" />
+                                            <span className="hidden sm:inline">Source</span>
+                                        </a>
+                                    </Button>
+                                )}
+                            </div>
+                            <motion.span
+                                className="inline-flex items-center gap-2 text-sm text-primary font-semibold"
+                                whileHover={{ x: 5 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                View project
+                                <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
+                            </motion.span>
+                        </div>
+                    </CardContent>
+                </Card>
+            </a>
         </motion.div>
     );
 };

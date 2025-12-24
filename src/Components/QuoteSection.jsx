@@ -30,7 +30,7 @@ const QuoteSection = () => {
     const [quote] = useState(() => QUOTES[Math.floor(Math.random() * QUOTES.length)]);
 
     return (
-        <div className="relative max-w-3xl mx-auto py-8 px-6 text-center">
+        <div className="relative max-w-6xl mx-auto py-8 px-6 text-center">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none">
                 <Quote className="w-24 h-24" />
             </div>
