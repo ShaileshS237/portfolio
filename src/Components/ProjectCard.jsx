@@ -84,8 +84,19 @@ const ProjectCard = ({ project, index = 0, variant = "default" }) => {
                         e.target.src = 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop';
                     }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <div className="flex gap-3">
+                {/* Project Logo Overlay - Always Visible */}
+                {project.icon && (
+                    <div className="absolute bottom-4 left-4 z-20 w-32 h-12 rounded-lg p-1.5 shadow-lg backdrop-blur-sm">
+                        <img
+                            src={project.icon}
+                            alt=""
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-end p-4 z-10">
+                    <div className="flex gap-3 ml-auto">
                         {project.href && (
                             <Tooltip content="Source Code">
                                 <a href={project.href} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">

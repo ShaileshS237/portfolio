@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTheme } from "@/Components/theme-provider";
 import { Button } from "@/Components/ui/button";
 import { Sun, Moon } from "lucide-react";
@@ -15,6 +15,16 @@ const Navbar = ({
 }) => {
     const { theme, setTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [searchParams] = useSearchParams();
+    const isVMode = searchParams.get("v") === "true";
+    const queryString = isVMode ? "?v=true" : "";
+
+    const getLinkPath = (path) => {
+        if (!path) return path;
+        // Don't append to hash links or external links if handled here (though external usually are <a>)
+        if (path.startsWith("#")) return path;
+        return `${path}${queryString}`;
+    };
 
     const positionClass = sticky ? "sticky" : "fixed";
     const borderClass = !title ? "border-b border-muted" : "";
@@ -26,14 +36,14 @@ const Navbar = ({
                 <div className="flex items-center gap-4">
                     {backToHome && (
                         <Link
-                            to={backTo}
+                            to={getLinkPath(backTo)}
                             className="flex items-center justify-center h-9 w-9 rounded-lg border border-muted bg-background hover:bg-muted transition-colors"
                         >
                             <span className="text-sm">←</span>
                         </Link>
                     )}
                     {title && (
-                        <Link to="/" className="font-semibold text-lg tracking-tight hover:text-primary transition-colors">
+                        <Link to={getLinkPath("/")} className="font-semibold text-lg tracking-tight hover:text-primary transition-colors">
                             {title}
                         </Link>
                     )}
@@ -56,7 +66,7 @@ const Navbar = ({
                                 ) : (
                                     <Link
                                         key={index}
-                                        to={link.href}
+                                        to={getLinkPath(link.href)}
                                         className="hover:text-foreground transition-colors"
                                     >
                                         {link.label}
@@ -115,7 +125,7 @@ const Navbar = ({
                             ) : (
                                 <Link
                                     key={index}
-                                    to={link.href}
+                                    to={getLinkPath(link.href)}
                                     className="hover:text-foreground transition-colors"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >

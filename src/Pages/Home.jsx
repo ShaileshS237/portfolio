@@ -52,6 +52,7 @@ const getSkillDetails = (skill) => {
 	const db = {
 		'reactjs': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
 		'react': { url: 'https://react.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
+		'reactnative': { url: 'https://reactnative.dev', slug: 'react', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
 		'typescript': { url: 'https://www.typescriptlang.org', slug: 'typescript', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
 		'javascript': { url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', slug: 'javascript', color: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 border-yellow-500/20' },
 		'nodejs': { url: 'https://nodejs.org', slug: 'nodedotjs', color: 'bg-green-600/10 text-green-700 dark:text-green-400 border-green-600/20' },
@@ -116,6 +117,21 @@ const getSkillDetails = (skill) => {
 		icon: <Terminal className="w-3 h-3" />,
 		color: randomColor
 	};
+};
+
+const getOrdinalSuffix = (i) => {
+	const j = i % 10,
+		k = i % 100;
+	if (j === 1 && k !== 11) {
+		return "st";
+	}
+	if (j === 2 && k !== 12) {
+		return "nd";
+	}
+	if (j === 3 && k !== 13) {
+		return "rd";
+	}
+	return "th";
 };
 
 const Home = () => {
@@ -192,6 +208,11 @@ const Home = () => {
 		return () => clearInterval(intervalId);
 	}, []);
 
+	const getLinkPath = (path) => {
+		const isVMode = searchParams.get("v") === "true";
+		return isVMode ? `${path}?v=true` : path;
+	};
+
 	const containerVariants = {
 		hidden: { opacity: 0 },
 		visible: {
@@ -242,7 +263,7 @@ const Home = () => {
 
 						<div className="space-y-6">
 							<motion.h1 variants={itemVariants} className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl leading-[1.1]">
-								Hi, I'm <Link to="/" className="inline-block relative text-left group/name">
+								Hi, I'm <Link to={getLinkPath("/")} className="inline-block relative text-left group/name">
 									<span className="invisible px-1">Shailesh</span>
 									<AnimatePresence mode="wait">
 										<motion.span
@@ -268,7 +289,7 @@ const Home = () => {
 								<div className="leading-normal">
 									Currently working with
 									<div className="inline-flex flex-wrap gap-2 items-center align-middle mx-1.5">
-										{['Angular', 'TypeScript', 'Node.js', 'MongoDB'].map((tech) => {
+										{['React Native', 'Node.js', 'AWS', 'PostgreSQL', 'MongoDB'].map((tech) => {
 											const { url, icon, color } = getSkillDetails(tech);
 											return (
 												<TechBadge
@@ -282,7 +303,7 @@ const Home = () => {
 											);
 										})}
 									</div>
-									and building <Link to="/blogs/love-akot" className="text-foreground font-medium hover:underline underline-offset-4 decoration-primary inline-block">Love Akot</Link>, a hyperlocal community app for my hometown.
+									and building <Link to={getLinkPath("/blogs/love-akot")} className="text-foreground font-medium hover:underline underline-offset-4 decoration-primary inline-block">Love Akot</Link>, a hyperlocal community app for my hometown.
 								</div>
 								<p>
 									Driven by impact, not just code.
@@ -350,7 +371,7 @@ const Home = () => {
 					>
 						<h2 className="text-2xl font-bold tracking-tight">Work Experience</h2>
 						<Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex items-center gap-1.5 text-primary hover:text-primary hover:bg-primary/10">
-							<Link to="/experience">
+							<Link to={getLinkPath("/experience")}>
 								View All <ArrowUpRight className="w-3.5 h-3.5" />
 							</Link>
 						</Button>
@@ -373,14 +394,19 @@ const Home = () => {
 
 				{/* Projects Section */}
 				<section id="projects" className="space-y-8 mb-12 scroll-mt-20">
-					<motion.h2
+					<motion.div
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className="text-2xl font-bold tracking-tight"
+						className="flex items-center justify-between"
 					>
-						Projects
-					</motion.h2>
+						<h2 className="text-2xl font-bold tracking-tight">Projects</h2>
+						<Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex items-center gap-1.5 text-primary hover:text-primary hover:bg-primary/10">
+							<Link to={getLinkPath("/project")}>
+								View All <ArrowUpRight className="w-3.5 h-3.5" />
+							</Link>
+						</Button>
+					</motion.div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 						{PROJECTS.slice(0, 4).map((project, index) => (
 							<ProjectCard key={project.id} project={project} index={index} />
@@ -520,15 +546,12 @@ const Home = () => {
 					<p>© {new Date().getFullYear()} Shailesh Sawale.</p>
 					<div className="flex items-center gap-4">
 						{visitCount > 0 && (
-							<div className="flex items-center gap-2">
-								<span className="font-medium text-foreground">{visitCount.toLocaleString()}</span>
-								<span>visits</span>
+							<div className="flex items-center gap-1.5">
+								<span>You are</span>
+								<span className="font-medium text-foreground">{visitCount.toLocaleString()}{getOrdinalSuffix(visitCount)}</span>
+								<span>visitor</span>
 							</div>
 						)}
-						<div className="flex items-center gap-2">
-							<span className="w-2 h-2 rounded-full bg-green-500" />
-							<span>All systems normal</span>
-						</div>
 					</div>
 				</motion.footer>
 			</main>

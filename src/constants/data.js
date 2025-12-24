@@ -134,12 +134,12 @@ export const PROJECTS = [
 	{
 		id: 1,
 		project_name: "Love Akot - A Fully-Fledged Hyperlocal App",
-		icon: "images/projects/projects_logo/la_logowhite.png",
+		icon: "images/projects/projects_logo/la_logo.png",
 		type: "Mobile App",
 		lUdpate: "31 Dec 2022",
 		description:
 			"Love Akot is a hyperlocal, community-driven mobile app designed to address the digital needs of residents in Akot, Maharashtra. The app offers essential services such as room and flat search, local market prices, weather updates, real-time news, emergency information, and more. Built with the goal of fostering community engagement and empowering locals with accurate, real-time information, the app bridges the gap in digital services in small towns. Key Features: Market price tracking for farmers, local services and professionals directory, community discussion forum, classifieds section for buying/selling goods, real-time weather, petrol, gas, and gold price updates, emergency alerts, blood donation requests, public transport schedules, and more. Tech Stack: Angular, Ionic, Node.js, Express, MongoDB, AWS EC2, AWS S3, OTPless, Firebase Cloud Messaging (FCM)",
-		status: "2",
+		status: "1",
 		project_type: "Personal",
 		route: "/work",
 		href: "https://github.com/ShaileshS237/loveAkot",
@@ -154,7 +154,7 @@ export const PROJECTS = [
 		type: "Mobile App",
 		icon: "images/projects/projects_logo/qc_white.png",
 		description: "Quick Chicken is an on-demand meat delivery app that enables users to order fresh and high-quality chicken, mutton, and other meats directly to their doorstep. With a focus on convenience, freshness, and hygiene, Quick Chicken brings a variety of meat products from trusted local suppliers straight to the customer's home. Tech Stack: Ionic Capacitor, Node.js, Express, MySQL, Razorpay for payments, One Signal for notifications.",
-		status: "1",
+		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
 		href: "https://github.com/ShaileshS237/QuickChicken",
@@ -418,25 +418,33 @@ export const BLOGS = [
 		id: 1,
 		title: "Love Akot: Building a Hyperlocal Community App",
 		description: "My journey of building a social media platform for my hometown, Akot, to help residents stay informed and connected.",
-		date: "Dec 31, 2022",
+		date: "May 08, 2024",
 		tags: ["Mobile App", "Community", "Startup"],
 		link: "/blogs/love-akot"
 	},
 	{
 		id: 2,
-		title: "Mastering Tailwind CSS",
-		description: "Exploring the new features in Tailwind CSS and how it simplifies modern web styling workflows.",
-		date: "Nov 02, 2023",
-		tags: ["CSS", "Tailwind", "Design"],
-		link: "https://medium.com/@shaileshsawale7"
+		title: "Beyond AI: The Top 10 Developer Tools Every Modern Engineer Needs in 2025 🚀",
+		description: "In today’s fast-paced tech world, great productivity isn’t just about writing code — it’s about crafting a seamless workflow. Here’s a list of tools every modern engineer needs.",
+		date: "Jul 07, 2025",
+		tags: ["Productivity", "DevTools", "AI"],
+		link: "https://medium.com/@shaileshsawale7/beyond-ai-the-top-10-developer-tools-every-modern-engineer-needs-in-2025-b9acd74baaf2"
 	},
 	{
 		id: 3,
-		title: "The Future of Web Development",
-		description: "How AI tools like Copilot and ChatGPT are transforming the developer experience and productivity.",
-		date: "Dec 10, 2023",
-		tags: ["AI", "Future", "DevTools"],
-		link: "https://medium.com/@shaileshsawale7"
+		title: "🔐 Unlocking Closures in JavaScript — Made Simple",
+		description: "If you’re learning JavaScript, chances are you’ve heard the term “closure” tossed around. It may sound complicated, but it's simpler than you think.",
+		date: "May 24, 2025",
+		tags: ["JavaScript", "Concepts", "Web Dev"],
+		link: "https://medium.com/@shaileshsawale7/unlocking-closures-in-javascript-made-simple-2a31616aa1aa"
+	},
+	{
+		id: 4,
+		title: "Top 5+ Angular Design System Worth considering In 2023",
+		description: "A design system for Angular is a set of reusable UI components, guidelines, and design principles that allow for consistent and cohesive development.",
+		date: "Jan 16, 2023",
+		tags: ["Angular", "Design System", "UI/UX"],
+		link: "https://medium.com/@shaileshsawale7/top-5-angular-design-system-worth-considering-in-2023-e64f18d173a1"
 	}
 ];
 
