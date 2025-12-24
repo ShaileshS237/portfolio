@@ -10,6 +10,7 @@ import InfoItem from "@/Components/InfoItem";
 import SocialCard from "@/Components/SocialCard";
 import TimeDisplay from "@/Components/TimeDisplay";
 import PageContainer from "@/Components/PageContainer";
+import ViewButton from "@/Components/ViewButton";
 
 import { Badge } from "@/Components/ui/badge";
 import { Button } from "@/Components/ui/button";
@@ -370,11 +371,9 @@ const Home = () => {
 						className="flex items-center justify-between"
 					>
 						<h2 className="text-2xl font-bold tracking-tight">Work Experience</h2>
-						<Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex items-center gap-1.5 text-primary hover:text-primary hover:bg-primary/10">
-							<Link to={getLinkPath("/experience")}>
-								View All <ArrowUpRight className="w-3.5 h-3.5" />
-							</Link>
-						</Button>
+						<ViewButton to={getLinkPath("/experience")} className="hidden sm:inline-flex">
+							View All
+						</ViewButton>
 					</motion.div>
 
 					<div className="space-y-12">
@@ -401,11 +400,9 @@ const Home = () => {
 						className="flex items-center justify-between"
 					>
 						<h2 className="text-2xl font-bold tracking-tight">Projects</h2>
-						<Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex items-center gap-1.5 text-primary hover:text-primary hover:bg-primary/10">
-							<Link to={getLinkPath("/project")}>
-								View All <ArrowUpRight className="w-3.5 h-3.5" />
-							</Link>
-						</Button>
+						<ViewButton to={getLinkPath("/project")} className="hidden sm:inline-flex">
+							View All
+						</ViewButton>
 					</motion.div>
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 						{PROJECTS.slice(0, 4).map((project, index) => (

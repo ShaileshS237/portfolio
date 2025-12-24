@@ -174,10 +174,10 @@ export const PROJECTS = [
 	// },
 	{
 		id: 5,
-		project_name: "bktcard",
+		project_name: "Memo Bucket",
 		icon: "images/projects/projects_logo/bktcard_logo.png",
 		description:
-			"BKTcard is a note-taking app that streamlines organization through categorization. With customizable buckets, you have the flexibility to categorize your notes in a way that suits your needs.",
+			"Memo Bucket is a note-taking app that streamlines organization through categorization. With customizable buckets, you have the flexibility to categorize your notes in a way that suits your needs.",
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		type: "Website",

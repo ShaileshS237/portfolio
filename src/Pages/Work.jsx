@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/Components/ui/button";
-import { ArrowRight, Sparkles, ExternalLink } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { PROJECTS } from "@/constants";
 import Navbar from "@/Components/Navbar";
 import PageHeader from "@/Components/PageHeader";
 import PageContainer, { MainContent } from "@/Components/PageContainer";
 import ProjectCard from "@/Components/ProjectCard";
+import ViewButton from "@/Components/ViewButton";
 
 // Paragon-style bento grid pattern
 // Creates visual hierarchy with varying card sizes for dynamic layouts
@@ -72,21 +72,9 @@ const Work = () => {
 					className="flex flex-col items-center mt-24 gap-4"
 				>
 					<p className="text-muted-foreground text-sm">Want to see more?</p>
-					<Button
-						size="lg"
-						className="gap-3 rounded-full px-10 py-7 text-base font-semibold bg-gradient-to-r from-primary via-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:scale-105 group"
-						asChild
-					>
-						<a
-							href="https://github.com/ShaileshS237?tab=repositories"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<ExternalLink className="w-5 h-5" />
-							View all on GitHub
-							<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-						</a>
-					</Button>
+					<ViewButton href="https://github.com/ShaileshS237?tab=repositories" className="text-base">
+						View all on GitHub
+					</ViewButton>
 				</motion.div>
 			</MainContent>
 		</PageContainer>

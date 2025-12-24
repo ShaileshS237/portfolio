@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/badge";
+import ViewButton from "@/Components/ViewButton";
 import {
     ArrowUpRight,
     Github,
@@ -246,14 +247,9 @@ const ProjectCard = ({ project, index = 0, size = "normal" }) => {
                                     </Button>
                                 )}
                             </div>
-                            <motion.span
-                                className="inline-flex items-center gap-2 text-sm text-primary font-semibold"
-                                whileHover={{ x: 5 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
+                            <ViewButton>
                                 View project
-                                <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
-                            </motion.span>
+                            </ViewButton>
                         </div>
                     </CardContent>
                 </Card>
