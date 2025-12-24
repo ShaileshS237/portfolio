@@ -1,20 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PROJECTS, TECH_KEYWORDS, PROJECT_STATUS_CONFIG } from "@/constants";
+import { PROJECTS, TECH_KEYWORDS, PROJECT_STATUS_CONFIG, TECH_ICONS } from "@/constants";
 import Navbar from "@/Components/Navbar";
 import PageContainer, { MainContent } from "@/Components/PageContainer";
 import ViewButton from "@/Components/ViewButton";
 import { Button } from "@/Components/ui/button";
-import { Circle, Github, Globe, ExternalLink, Smartphone, Play } from "lucide-react";
+import { Circle, Github, Globe, ExternalLink, Smartphone, Play, Cpu } from "lucide-react";
+import Tooltip from "@/Components/Tooltip";
 
 const extractTechStack = (description, fallback = []) => {
-	if (!description) return fallback;
+	// If fallback (techStack property) exists, use it first
+	if (fallback && fallback.length > 0) return fallback;
+
+	if (!description) return [];
 	const techMatch = description.match(/Tech Stack:([^.]+)/i);
 	if (techMatch) {
 		return techMatch[1].split(",").map((tech) => tech.trim()).filter(Boolean);
 	}
-	return TECH_KEYWORDS.filter((k) => description.toLowerCase().includes(k.toLowerCase()));
+	const keywords = TECH_KEYWORDS.filter((k) => description.toLowerCase().includes(k.toLowerCase()));
+	return keywords.length > 0 ? keywords : [];
 };
 
 const sanitizeDescription = (description) => {
@@ -26,15 +31,100 @@ const sanitizeDescription = (description) => {
 		.filter(Boolean);
 };
 
+const getTechIcon = (techName) => {
+	const normalizedName = techName.toLowerCase().trim();
+	return TECH_ICONS[normalizedName] || TECH_ICONS.default;
+};
+
+// Tech Icon Component for detail page
+const TechBadge = ({ tech }) => {
+	const { slug, color, bg } = getTechIcon(tech);
+
+	return (
+		<Tooltip content={tech}>
+			<motion.div
+				initial={{ opacity: 0, scale: 0.8 }}
+				animate={{ opacity: 1, scale: 1 }}
+				className={`inline-flex items-center gap-2 px-3 py-2 rounded-full ${bg} border border-border/30 transition-all hover:scale-105 cursor-default`}
+			>
+				<div className="w-5 h-5 flex items-center justify-center">
+					{slug ? (
+						<img
+							src={`https://cdn.simpleicons.org/${slug}`}
+							alt={tech}
+							className="w-full h-full object-contain brightness-0 dark:brightness-100 dark:invert"
+							style={{ filter: 'contrast(1.2)' }}
+						/>
+					) : (
+						<Cpu className={`w-4 h-4 ${color}`} />
+					)}
+				</div>
+				<span className="text-sm font-medium">{tech}</span>
+			</motion.div>
+		</Tooltip>
+	);
+};
+
 const AboutProject = () => {
 	const { id } = useParams();
 	const [projectDetails, setProjectDetails] = useState(null);
 	const [showVideoModal, setShowVideoModal] = useState(false);
+	const [activeSection, setActiveSection] = useState("overview");
+	const sidebarWrapperRef = useRef(null);
+	const sidebarContentRef = useRef(null);
+	const [sidebarStyle, setSidebarStyle] = useState({});
 
 	useEffect(() => {
 		const match = PROJECTS.find((project) => String(project.id) === String(id));
 		setProjectDetails(match || null);
 	}, [id]);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			const sections = ["overview", "vision", "why-built", "features", "differentiators", "my-role", "status", "impact", "roadmap", "demo"];
+			const currentSection = sections.find((section) => {
+				const element = document.getElementById(section);
+				if (element) {
+					const rect = element.getBoundingClientRect();
+					return rect.top <= 150 && rect.bottom >= 150;
+				}
+				return false;
+			});
+			if (currentSection) {
+				setActiveSection(currentSection);
+			}
+
+			// Sidebar fixed fallback for sticky issues
+			const wrapper = sidebarWrapperRef.current;
+			const content = sidebarContentRef.current;
+			if (wrapper && content) {
+				const wrapperRect = wrapper.getBoundingClientRect();
+				const contentRect = content.getBoundingClientRect();
+				const shouldFix = wrapperRect.top <= 100;
+				if (shouldFix) {
+					setSidebarStyle({
+						position: "fixed",
+						top: "96px",
+						left: `${wrapperRect.left}px`,
+						width: `${wrapperRect.width}px`,
+					});
+					// Preserve layout height
+					wrapper.style.minHeight = `${contentRect.height}px`;
+				} else {
+					setSidebarStyle({});
+					wrapper.style.minHeight = "";
+				}
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("resize", handleScroll);
+		handleScroll();
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("resize", handleScroll);
+		};
+	}, [projectDetails]);
 
 	const techStack = useMemo(
 		() => extractTechStack(projectDetails?.description, projectDetails?.techStack || []),
@@ -55,18 +145,49 @@ const AboutProject = () => {
 	const statusConfig = PROJECT_STATUS_CONFIG[projectDetails.status] || { label: "Unknown", color: "bg-muted text-muted-foreground border-border" };
 	const descriptionLines = sanitizeDescription(projectDetails.description);
 	const primaryLink = projectDetails.website || projectDetails.livelink || projectDetails.href || "";
+	const projectLogo = projectDetails.icon || projectDetails.headerImage || "";
+
+	// Generate table of contents based on available sections
+	const tableOfContents = [
+		{ id: "overview", label: "Overview" },
+		projectDetails.vision && { id: "vision", label: "Vision & Purpose" },
+		projectDetails.whyBuilt && { id: "why-built", label: "Why I Built This" },
+		projectDetails.features && { id: "features", label: "Core Features" },
+		projectDetails.differentiators && { id: "differentiators", label: "What Makes It Different" },
+		projectDetails.myRole && { id: "my-role", label: "My Role" },
+		projectDetails.currentStatus && { id: "status", label: "Current Status" },
+		projectDetails.impact && { id: "impact", label: "Impact" },
+		projectDetails.roadmap && { id: "roadmap", label: "Roadmap" },
+		{ id: "demo", label: "Demo Video" },
+	].filter(Boolean);
+
+	const scrollToSection = (sectionId) => {
+		const element = document.getElementById(sectionId);
+		if (element) {
+			setActiveSection(sectionId);
+			const offset = 100;
+			const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+			window.scrollTo({ top: elementPosition - offset, behavior: "smooth" });
+		}
+	};
+
+	const handleDemoClick = () => {
+		setActiveSection("demo");
+		setShowVideoModal(true);
+	};
 
 	return (
 		<PageContainer title={`${projectDetails.project_name} | Project`}>
 			<Navbar title="Project Details" />
 			<MainContent maxWidth="max-w-6xl">
-				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					className="space-y-10"
-				>
+				<div className="space-y-10">
 					{/* Hero */}
-					<div className="relative overflow-hidden rounded-2xl border border-muted bg-gradient-to-br from-primary/5 via-card to-background p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10">
+					<motion.div
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ duration: 0.25 }}
+						className="relative overflow-hidden rounded-2xl border border-muted bg-gradient-to-br from-primary/5 via-card to-background p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10"
+					>
 						<div className="flex-1 space-y-4">
 							<p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Project Spotlight</p>
 							<h1 className="text-3xl md:text-4xl font-bold leading-tight">{projectDetails.project_name}</h1>
@@ -117,26 +238,42 @@ const AboutProject = () => {
 									</Button>
 								)}
 							</div>
+
+							{/* Tech Stack */}
+							{techStack.length > 0 && (
+								<div className="space-y-3 pt-4 border-t border-border/30">
+									<h3 className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Tech Stack</h3>
+									<div className="flex flex-wrap gap-2">
+										{techStack.map((tech, idx) => (
+											<TechBadge key={idx} tech={tech} />
+										))}
+									</div>
+								</div>
+							)}
 						</div>
 
-						{projectDetails.icon && (
-							<div className="w-full md:w-56 h-32 md:h-40 flex items-center justify-center rounded-xl bg-muted/40 border border-border/50 p-4 self-start">
-								<img src={projectDetails.icon} alt={projectDetails.project_name} className="w-full h-full object-contain" />
-							</div>
-						)}
-					</div>
+						<div className="w-full md:w-56 h-32 md:h-40 flex items-center justify-center rounded-xl bg-muted/40 border border-border/50 p-4 self-start">
+							{projectLogo ? (
+								<img src={projectLogo} alt={projectDetails.project_name} className="w-full h-full object-contain" />
+							) : (
+								<div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/70 to-primary flex items-center justify-center text-2xl font-semibold text-primary-foreground">
+									{projectDetails.project_name?.[0] || "P"}
+								</div>
+							)}
+						</div>
+					</motion.div>
 
 					{/* Description */}
-					<div className="grid gap-6 md:grid-cols-3">
-						<div className="md:col-span-2 space-y-6">
-							<h2 className="text-lg font-semibold">Overview</h2>
+					<div className="grid gap-6 lg:grid-cols-4 items-start overflow-visible">
+						<div className="lg:col-span-3 space-y-6">
+							<h2 id="overview" className="text-lg font-semibold scroll-mt-24">Overview</h2>
 							<p className="text-muted-foreground leading-relaxed">
 								{projectDetails.description}
 							</p>
 
 							{/* Vision Section */}
 							{projectDetails.vision && (
-								<div className="space-y-3">
+								<div id="vision" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-primary rounded-full" />
 										<h3 className="text-base font-semibold">Vision & Purpose</h3>
@@ -149,7 +286,7 @@ const AboutProject = () => {
 
 							{/* Why I Built This */}
 							{projectDetails.whyBuilt && (
-								<div className="space-y-3">
+								<div id="why-built" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-amber-500 rounded-full" />
 										<h3 className="text-base font-semibold">Why I Built This</h3>
@@ -162,7 +299,7 @@ const AboutProject = () => {
 
 							{/* Core Features */}
 							{projectDetails.features && projectDetails.features.length > 0 && (
-								<div className="space-y-4">
+								<div id="features" className="space-y-4 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-primary rounded-full" />
 										<h3 className="text-base font-semibold">Core Features</h3>
@@ -193,7 +330,7 @@ const AboutProject = () => {
 
 							{/* What Makes It Different */}
 							{projectDetails.differentiators && (
-								<div className="space-y-3">
+								<div id="differentiators" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-primary rounded-full" />
 										<h3 className="text-base font-semibold">What Makes It Different</h3>
@@ -206,7 +343,7 @@ const AboutProject = () => {
 
 							{/* My Role */}
 							{projectDetails.myRole && (
-								<div className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-2">
+								<div id="my-role" className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-2 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<h3 className="text-base font-semibold">My Role (Founder & Developer)</h3>
 									</div>
@@ -218,7 +355,7 @@ const AboutProject = () => {
 
 							{/* Current Status */}
 							{projectDetails.currentStatus && (
-								<div className="space-y-3">
+								<div id="status" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-green-500 rounded-full" />
 										<h3 className="text-base font-semibold">Current Status</h3>
@@ -231,7 +368,7 @@ const AboutProject = () => {
 
 							{/* After Launch & Impact */}
 							{projectDetails.impact && projectDetails.impact.length > 0 && (
-								<div className="space-y-3">
+								<div id="impact" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-emerald-500 rounded-full" />
 										<h3 className="text-base font-semibold">After Launch & Impact</h3>
@@ -255,7 +392,7 @@ const AboutProject = () => {
 
 							{/* Future Roadmap */}
 							{projectDetails.roadmap && projectDetails.roadmap.length > 0 && (
-								<div className="space-y-3">
+								<div id="roadmap" className="space-y-3 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<div className="w-1 h-6 bg-primary rounded-full" />
 										<h3 className="text-base font-semibold">Future Roadmap</h3>
@@ -278,12 +415,12 @@ const AboutProject = () => {
 							)}
 
 							{/* Demo Video Placeholder */}
-							<div className="mt-6">
+							<div id="demo" className="mt-6 scroll-mt-24">
 								<h3 className="text-base font-semibold mb-3">Demo Video</h3>
 								{projectDetails.videoLink ? (
 									<div
-										className="aspect-video w-full overflow-hidden rounded-xl border border-border/50 bg-black/60 cursor-pointer group/video relative"
-										onClick={() => setShowVideoModal(true)}
+										className="aspect-video w-full overflow-hidden rounded-xl border border-border/50 bg-black/60 cursor-pointer group/video relative transition-transform duration-200 hover:scale-[1.01]"
+										onClick={handleDemoClick}
 									>
 										<img
 											src="/loveakot_webiste.png"
@@ -297,7 +434,7 @@ const AboutProject = () => {
 										</div>
 									</div>
 								) : (
-									<div className="aspect-video w-full rounded-xl border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+									<div className="aspect-video w-full rounded-xl border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200">
 										<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,120,120,0.1),transparent_50%)]" />
 										<img
 											src="/loveakot_webiste.png"
@@ -315,21 +452,31 @@ const AboutProject = () => {
 							</div>
 						</div>
 
-						<div className="space-y-4">
-							<h2 className="text-lg font-semibold">Tech Stack</h2>
-							<div className="flex flex-wrap gap-2">
-								{techStack.length > 0 ? (
-									techStack.map((tech, idx) => (
-										<span
-											key={idx}
-											className="px-3 py-1.5 rounded-lg border border-border/40 bg-muted/50 text-sm text-foreground/90"
+						{/* On This Page Sidebar */}
+						<div
+							ref={sidebarWrapperRef}
+							className="hidden lg:block lg:col-span-1 self-start"
+						>
+							<div
+								ref={sidebarContentRef}
+								className="sticky top-24 space-y-4"
+								style={sidebarStyle}
+							>
+								<h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">On This Page</h2>
+								<nav className="space-y-1">
+									{tableOfContents.map((item) => (
+										<button
+											key={item.id}
+											onClick={() => scrollToSection(item.id)}
+											className={`w-full text-left text-sm px-3 py-2 rounded-lg transition-all border-l-2 ${activeSection === item.id
+												? "border-primary bg-primary/10 text-primary font-medium"
+												: "border-transparent hover:border-muted-foreground/30 hover:bg-muted/50 text-muted-foreground hover:text-foreground"
+												}`}
 										>
-											{tech}
-										</span>
-									))
-								) : (
-									<span className="text-muted-foreground text-sm">No tech details available.</span>
-								)}
+											{item.label}
+										</button>
+									))}
+								</nav>
 							</div>
 						</div>
 					</div>
@@ -395,7 +542,7 @@ const AboutProject = () => {
 							)}
 						</div>
 					</div>
-				</motion.div>
+				</div>
 
 				{/* Video Modal */}
 				{showVideoModal && projectDetails.videoLink && (
