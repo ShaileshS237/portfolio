@@ -1,7 +1,8 @@
 [build]
-  command = "npm run build"
+  command = "npm cache clean --force && npm install && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
+  NPM_TOKEN = ""
