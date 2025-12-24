@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/Components/ui/card";
-import { Badge } from "@/Components/ui/badge";
 import ViewButton from "@/Components/ViewButton";
 import Tooltip from "@/Components/Tooltip";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +8,13 @@ import { TECH_ICONS, TECH_KEYWORDS, PROJECT_STATUS_CONFIG, BENTO_GRADIENTS } fro
 import {
     ArrowUpRight,
     Github,
-    ExternalLink,
     Smartphone,
     Globe,
     Cpu,
     Circle,
+    Play,
+    ChevronRight,
+    ChevronLeft,
 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 
@@ -23,26 +24,34 @@ const getTechIcon = (techName) => {
 };
 
 // Tech Icon Component using Simple Icons CDN
-const TechIcon = ({ tech, size = "sm" }) => {
+const TechIcon = ({ tech, size = "sm", index = 0, isNew = false }) => {
     const { slug, color, bg } = getTechIcon(tech);
     const sizeClass = size === "lg" ? "w-5 h-5" : "w-4 h-4";
     const paddingClass = size === "lg" ? "p-2.5" : "p-2";
 
     return (
         <Tooltip content={tech}>
-            <div
+            <motion.div
+                initial={isNew ? { opacity: 0, scale: 0 } : false}
+                animate={isNew ? { opacity: 1, scale: 1 } : {}}
+                transition={{
+                    duration: 0.15,
+                    delay: isNew ? index * 0.03 : 0,
+                    ease: [0.34, 1.56, 0.64, 1]
+                }}
                 className={`${paddingClass} rounded-xl ${bg} border border-border/30 transition-all duration-300 `}
             >
                 {slug ? (
                     <img
                         src={`https://cdn.simpleicons.org/${slug}`}
                         alt={tech}
-                        className={`${sizeClass} object-contain dark:invert`}
+                        className={`${sizeClass} object-contain ${color} brightness-0 dark:brightness-100 dark:invert`}
+                        style={{ filter: 'contrast(1.2)' }}
                     />
                 ) : (
                     <Cpu className={`${sizeClass} ${color}`} />
                 )}
-            </div>
+            </motion.div>
         </Tooltip>
     );
 };
@@ -63,8 +72,10 @@ const getStatusConfig = (status) => {
 };
 
 // Paragon-style Bento Card Component
-const ProjectCard = ({ project, index = 0, size = "normal" }) => {
+const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) => {
     const navigate = useNavigate();
+    const [showVideoModal, setShowVideoModal] = useState(false);
+    const [expandedTech, setExpandedTech] = useState(false);
     const techStack = project.techStack || extractTechStack(project.description);
     const isLarge = size === "large";
     const isWide = size === "wide";
@@ -156,12 +167,12 @@ const ProjectCard = ({ project, index = 0, size = "normal" }) => {
                         </div>
 
                         {/* Title & Content */}
-                        <div className="flex-1">
+                        <div className="flex-1 flex flex-col">
                             <h3 className={`
                                 font-bold leading-tight mb-3
                                 ${isFeatured ? "text-2xl md:text-3xl" : "text-lg md:text-xl"}
                                 group-hover:text-primary transition-colors duration-300
-                            `}>
+                           `}>
                                 {project.project_name}
                             </h3>
 
@@ -195,51 +206,138 @@ const ProjectCard = ({ project, index = 0, size = "normal" }) => {
                             `}>
                                 {getDescription(project.description)}
                             </p>
+
+                            {/* Tech icons under description */}
+                            <div
+                                className="flex items-center gap-1.5 flex-wrap mt-4"
+                                onMouseEnter={() => setExpandedTech(true)}
+                                onMouseLeave={() => setExpandedTech(false)}
+                            >
+                                {(expandedTech ? techStack : techStack.slice(0, isFeatured ? 4 : 3)).map((tech, i) => {
+                                    const isNewIcon = expandedTech && i >= (isFeatured ? 4 : 3);
+                                    return (
+                                        <TechIcon
+                                            key={i}
+                                            tech={tech}
+                                            size="sm"
+                                            index={i - (isFeatured ? 4 : 3)}
+                                            isNew={isNewIcon}
+                                        />
+                                    );
+                                })}
+                                {techStack.length > (isFeatured ? 4 : 3) && !expandedTech && (
+                                    <div className="px-2 py-2 rounded-xl bg-muted/30 transition-all border border-border/30 flex items-center gap-1 overflow-hidden">
+                                        <span className="text-xs text-muted-foreground font-medium">
+                                            +{techStack.length - (isFeatured ? 4 : 3)} More
+                                        </span>
+
+                                    </div>
+                                )}
+                            </div>
+
+                            {showVideo && project.id === 1 && (
+                                <div className="mt-4 w-full">
+                                    {project.videoLink ? (
+                                        <div
+                                            className="aspect-video w-full overflow-hidden rounded-lg border border-border/50 bg-black/60 cursor-pointer group/video relative"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setShowVideoModal(true);
+                                            }}
+                                        >
+                                            <img
+                                                src="loveakot_webiste.png"
+                                                alt="Video thumbnail"
+                                                className="w-full h-full object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 group-hover/video:bg-black/60 transition-colors flex items-center justify-center">
+                                                <div className="w-16 h-16 rounded-full bg-primary/90 group-hover/video:bg-primary flex items-center justify-center transition-all group-hover/video:scale-110">
+                                                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="aspect-video w-full rounded-lg border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+                                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,120,120,0.1),transparent_50%)]" />
+                                            <img
+                                                src="loveakot_webiste.png"
+                                                alt="Placeholder"
+                                                className="absolute inset-0 w-full h-full object-cover opacity-20"
+                                            />
+                                            <div className="relative z-10 flex flex-col items-center gap-3">
+                                                <div className="w-16 h-16 rounded-full bg-muted/60 border border-border/40 flex items-center justify-center">
+                                                    <Play className="w-8 h-8 text-muted-foreground" />
+                                                </div>
+                                                <p className="text-sm font-medium text-muted-foreground">Demo video coming soon</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         {/* Action Links - Paragon style */}
-                        <div className="flex items-center justify-between gap-3 mt-auto pt-6">
-                            {/* Tech Stack Icons */}
-                            <div className="flex items-center gap-1.5">
-                                {techStack.slice(0, isFeatured ? 4 : 3).map((tech, i) => (
-                                    <TechIcon key={i} tech={tech} size="sm" />
-                                ))}
-                                {techStack.length > (isFeatured ? 4 : 3) && (
-                                    <span className="text-xs text-muted-foreground px-2 py-1 rounded-lg bg-muted/30">
-                                        +{techStack.length - (isFeatured ? 4 : 3)}
-                                    </span>
-                                )}
-                            </div>
+                        <div className="flex items-center justify-end gap-2 mt-auto pt-6 w-full">
+                            {project.href && (
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="gap-2 text-muted-foreground hover:text-foreground rounded-full px-4 h-9 border border-border/30 hover:border-border hover:bg-muted/50"
+                                    asChild
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    <a href={project.href} target="_blank" rel="noopener noreferrer">
+                                        <Github className="w-4 h-4" />
+                                        <span className="hidden sm:inline">Source</span>
+                                    </a>
+                                </Button>
+                            )}
 
-                            {/* Source and View Website buttons */}
-                            <div className="flex items-center gap-2">
-                                {project.href && (
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="gap-2 text-muted-foreground hover:text-foreground rounded-full px-4 h-9 border border-border/30 hover:border-border hover:bg-muted/50"
-                                        asChild
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <a href={project.href} target="_blank" rel="noopener noreferrer">
-                                            <Github className="w-4 h-4" />
-                                            <span className="hidden sm:inline">Source</span>
-                                        </a>
-                                    </Button>
-                                )}
-                                {primaryLink && (
-                                    <ViewButton
-                                        href={primaryLink}
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        View Website
-                                    </ViewButton>
-                                )}
-                            </div>
+                            {primaryLink && (
+                                <ViewButton
+                                    href={primaryLink}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    View Website
+                                </ViewButton>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
             </div>
+
+            {/* Video Modal */}
+            {showVideoModal && project.videoLink && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setShowVideoModal(false);
+                    }}
+                >
+                    <div
+                        className="relative w-full max-w-5xl mx-4 aspect-video rounded-xl overflow-hidden shadow-2xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowVideoModal(false);
+                            }}
+                            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+                        >
+                            ✕
+                        </button>
+                        <iframe
+                            title={`${project.project_name} demo video`}
+                            src={project.videoLink.replace('watch?v=', 'embed/').split('&')[0]}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            className="w-full h-full"
+                        />
+                    </div>
+                </div>
+            )}
         </motion.div>
     );
 };

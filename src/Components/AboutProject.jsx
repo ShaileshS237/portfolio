@@ -6,7 +6,7 @@ import Navbar from "@/Components/Navbar";
 import PageContainer, { MainContent } from "@/Components/PageContainer";
 import ViewButton from "@/Components/ViewButton";
 import { Button } from "@/Components/ui/button";
-import { Circle, Github, Globe, ExternalLink, Smartphone } from "lucide-react";
+import { Circle, Github, Globe, ExternalLink, Smartphone, Play } from "lucide-react";
 
 const extractTechStack = (description, fallback = []) => {
 	if (!description) return fallback;
@@ -29,6 +29,7 @@ const sanitizeDescription = (description) => {
 const AboutProject = () => {
 	const { id } = useParams();
 	const [projectDetails, setProjectDetails] = useState(null);
+	const [showVideoModal, setShowVideoModal] = useState(false);
 
 	useEffect(() => {
 		const match = PROJECTS.find((project) => String(project.id) === String(id));
@@ -127,15 +128,189 @@ const AboutProject = () => {
 
 					{/* Description */}
 					<div className="grid gap-6 md:grid-cols-3">
-						<div className="md:col-span-2 space-y-4">
+						<div className="md:col-span-2 space-y-6">
 							<h2 className="text-lg font-semibold">Overview</h2>
-							<div className="space-y-3 text-muted-foreground leading-relaxed">
-								{descriptionLines.length > 0 ? (
-									descriptionLines.map((line, idx) => (
-										<p key={idx}>{line}.</p>
-									))
+							<p className="text-muted-foreground leading-relaxed">
+								{projectDetails.description}
+							</p>
+
+							{/* Vision Section */}
+							{projectDetails.vision && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-primary rounded-full" />
+										<h3 className="text-base font-semibold">Vision & Purpose</h3>
+									</div>
+									<p className="text-muted-foreground leading-relaxed pl-4">
+										{projectDetails.vision}
+									</p>
+								</div>
+							)}
+
+							{/* Why I Built This */}
+							{projectDetails.whyBuilt && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-amber-500 rounded-full" />
+										<h3 className="text-base font-semibold">Why I Built This</h3>
+									</div>
+									<p className="text-muted-foreground leading-relaxed pl-4">
+										{projectDetails.whyBuilt}
+									</p>
+								</div>
+							)}
+
+							{/* Core Features */}
+							{projectDetails.features && projectDetails.features.length > 0 && (
+								<div className="space-y-4">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-primary rounded-full" />
+										<h3 className="text-base font-semibold">Core Features</h3>
+									</div>
+									<div className="grid gap-3 sm:grid-cols-2">
+										{projectDetails.features.map((feature, idx) => (
+											<motion.div
+												key={idx}
+												initial={{ opacity: 0, y: 10 }}
+												animate={{ opacity: 1, y: 0 }}
+												transition={{ delay: idx * 0.1 }}
+												className="group relative rounded-lg border border-border/50 bg-muted/30 p-4 hover:border-primary/40 hover:bg-primary/5 transition-all"
+											>
+												<div className="flex items-start gap-3">
+													<span className="text-2xl flex-shrink-0">{feature.icon}</span>
+													<div className="space-y-1">
+														<h4 className="text-sm font-semibold">{feature.title}</h4>
+														<p className="text-xs text-muted-foreground leading-relaxed">
+															{feature.description}
+														</p>
+													</div>
+												</div>
+											</motion.div>
+										))}
+									</div>
+								</div>
+							)}
+
+							{/* What Makes It Different */}
+							{projectDetails.differentiators && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-primary rounded-full" />
+										<h3 className="text-base font-semibold">What Makes It Different</h3>
+									</div>
+									<p className="text-muted-foreground leading-relaxed pl-4">
+										{projectDetails.differentiators}
+									</p>
+								</div>
+							)}
+
+							{/* My Role */}
+							{projectDetails.myRole && (
+								<div className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-2">
+									<div className="flex items-center gap-2">
+										<h3 className="text-base font-semibold">My Role (Founder & Developer)</h3>
+									</div>
+									<p className="text-muted-foreground leading-relaxed text-sm">
+										{projectDetails.myRole}
+									</p>
+								</div>
+							)}
+
+							{/* Current Status */}
+							{projectDetails.currentStatus && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-green-500 rounded-full" />
+										<h3 className="text-base font-semibold">Current Status</h3>
+									</div>
+									<p className="text-muted-foreground leading-relaxed pl-4">
+										{projectDetails.currentStatus}
+									</p>
+								</div>
+							)}
+
+							{/* After Launch & Impact */}
+							{projectDetails.impact && projectDetails.impact.length > 0 && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-emerald-500 rounded-full" />
+										<h3 className="text-base font-semibold">After Launch & Impact</h3>
+									</div>
+									<div className="grid gap-2 sm:grid-cols-2 pl-4">
+										{projectDetails.impact.map((item, idx) => (
+											<motion.div
+												key={idx}
+												initial={{ opacity: 0, x: -10 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: idx * 0.05 }}
+												className="flex items-start gap-2 text-muted-foreground text-sm rounded-lg border border-border/40 bg-muted/20 p-3 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+											>
+												<span className="text-emerald-500 mt-0.5 flex-shrink-0">✓</span>
+												<span>{item}</span>
+											</motion.div>
+										))}
+									</div>
+								</div>
+							)}
+
+							{/* Future Roadmap */}
+							{projectDetails.roadmap && projectDetails.roadmap.length > 0 && (
+								<div className="space-y-3">
+									<div className="flex items-center gap-2">
+										<div className="w-1 h-6 bg-primary rounded-full" />
+										<h3 className="text-base font-semibold">Future Roadmap</h3>
+									</div>
+									<ul className="space-y-2 pl-4">
+										{projectDetails.roadmap.map((item, idx) => (
+											<motion.li
+												key={idx}
+												initial={{ opacity: 0, x: -10 }}
+												animate={{ opacity: 1, x: 0 }}
+												transition={{ delay: idx * 0.05 }}
+												className="flex items-start gap-2 text-muted-foreground text-sm"
+											>
+												<span className="text-primary mt-1">•</span>
+												<span>{item}</span>
+											</motion.li>
+										))}
+									</ul>
+								</div>
+							)}
+
+							{/* Demo Video Placeholder */}
+							<div className="mt-6">
+								<h3 className="text-base font-semibold mb-3">Demo Video</h3>
+								{projectDetails.videoLink ? (
+									<div
+										className="aspect-video w-full overflow-hidden rounded-xl border border-border/50 bg-black/60 cursor-pointer group/video relative"
+										onClick={() => setShowVideoModal(true)}
+									>
+										<img
+											src="/loveakot_webiste.png"
+											alt="Video thumbnail"
+											className="w-full h-full object-cover"
+										/>
+										<div className="absolute inset-0 bg-black/40 group-hover/video:bg-black/60 transition-colors flex items-center justify-center">
+											<div className="w-20 h-20 rounded-full bg-primary/90 group-hover/video:bg-primary flex items-center justify-center transition-all group-hover/video:scale-110">
+												<Play className="w-10 h-10 text-primary-foreground ml-1" />
+											</div>
+										</div>
+									</div>
 								) : (
-									<p>No description provided.</p>
+									<div className="aspect-video w-full rounded-xl border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+										<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,120,120,0.1),transparent_50%)]" />
+										<img
+											src="/loveakot_webiste.png"
+											alt="Placeholder"
+											className="absolute inset-0 w-full h-full object-cover opacity-20"
+										/>
+										<div className="relative z-10 flex flex-col items-center gap-3">
+											<div className="w-16 h-16 rounded-full bg-muted/60 border border-border/40 flex items-center justify-center">
+												<Play className="w-8 h-8 text-muted-foreground" />
+											</div>
+											<p className="text-sm font-medium text-muted-foreground">Demo video coming soon</p>
+										</div>
+									</div>
 								)}
 							</div>
 						</div>
@@ -221,6 +396,33 @@ const AboutProject = () => {
 						</div>
 					</div>
 				</motion.div>
+
+				{/* Video Modal */}
+				{showVideoModal && projectDetails.videoLink && (
+					<div
+						className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+						onClick={() => setShowVideoModal(false)}
+					>
+						<div
+							className="relative w-full max-w-5xl mx-4 aspect-video rounded-xl overflow-hidden shadow-2xl"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<button
+								onClick={() => setShowVideoModal(false)}
+								className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+							>
+								✕
+							</button>
+							<iframe
+								title={`${projectDetails.project_name} demo video`}
+								src={projectDetails.videoLink.replace('watch?v=', 'embed/').split('&')[0]}
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+								className="w-full h-full"
+							/>
+						</div>
+					</div>
+				)}
 			</MainContent>
 		</PageContainer>
 	);

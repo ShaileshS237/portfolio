@@ -108,6 +108,49 @@ export const SKILLS = {
 	other: ["git", "webpack", "gulp", "lightroom", "aftereffects"],
 };
 
+export const TECH_STACK_ICONS = {
+	"Angular": "images/skills/angular.png",
+	"Ionic": "images/skills/ionic.png",
+	"TypeScript": "images/skills/js.png",
+	"Tailwind CSS": "images/skills/tailwind.png",
+	"Node.js": "images/skills/node.png",
+	"REST APIs": "images/skills/node.png",
+	"MongoDB": "images/skills/mongodb.png",
+	"AWS EC2": "images/skills/node.png",
+	"AWS S3": "images/skills/node.png",
+	"Docker": "images/skills/node.png",
+	"PM2": "images/skills/node.png",
+	"CI/CD": "images/skills/node.png",
+	"React": "images/skills/react2.png",
+	"React Native": "images/skills/react.png",
+	"JavaScript": "images/skills/js.png",
+	"CSS": "images/skills/css.png",
+	"HTML": "images/skills/html.png",
+	"Express": "images/skills/express.png",
+	"MySQL": "images/skills/mysql.png",
+	"Firebase": "images/skills/node.png",
+	"Ionic Capacitor": "images/skills/ionic.png",
+	"Razorpay": "images/skills/node.png",
+	"One Signal": "images/skills/node.png",
+	"Local Storage": "images/skills/js.png",
+	"TMDB API": "images/skills/node.png",
+	"Crypto API": "images/skills/js.png",
+	"Android": "images/skills/flutter.png",
+	"Java": "images/skills/js.png",
+	"SQLite": "images/skills/mysql.png",
+	"Material Design": "images/skills/flutter.png",
+	"CSV Parser": "images/skills/node.png",
+	"File System": "images/skills/node.png",
+	"Neumorphism": "images/skills/css.png",
+	"Next.js": "images/skills/react2.png",
+	"Shadcn UI": "images/skills/react2.png",
+	"Zod": "images/skills/js.png",
+	"React Hook Form": "images/skills/react2.png",
+	"Razorpay SDK": "images/skills/node.png",
+	"Monaco Editor": "images/skills/js.png",
+	"MDX": "images/skills/react2.png",
+};
+
 export const MENULINKS = [
 	{
 		name: "Home",
@@ -138,12 +181,59 @@ export const PROJECTS = [
 		type: "Mobile App",
 		lUdpate: "31 Dec 2022",
 		description:
-			"Love Akot is a hyperlocal, community-driven mobile app designed to address the digital needs of residents in Akot, Maharashtra. The app offers essential services such as room and flat search, local market prices, weather updates, real-time news, emergency information, and more. Built with the goal of fostering community engagement and empowering locals with accurate, real-time information, the app bridges the gap in digital services in small towns. Key Features: Market price tracking for farmers, local services and professionals directory, community discussion forum, classifieds section for buying/selling goods, real-time weather, petrol, gas, and gold price updates, emergency alerts, blood donation requests, public transport schedules, and more. Tech Stack: Angular, Ionic, Node.js, Express, MongoDB, AWS EC2, AWS S3, OTPless, Firebase Cloud Messaging (FCM)",
+			"Love Akot is a hyperlocal community-based mobile application built for my native city Akot, Maharashtra, aimed at digitally empowering local citizens, businesses, and municipal services by bringing everything a city needs into one unified platform.",
+		vision: "Build a digital ecosystem for my native city Akot, strengthen community engagement, support local businesses, and provide easy access to city-level information & services. Act as a single source of truth for hyperlocal updates.",
+		whyBuilt: "I built Love Akot to address critical gaps in local digital infrastructure. There was no unified platform for citizens to access city information, local businesses struggled with visibility, community announcements were scattered across multiple channels, and ward-wise civic information was inaccessible. The goal was to create a digital twin of my city that truly serves its people.",
+		features: [
+			{
+				title: "Community & City Updates",
+				description: "Local announcements, city news, important alerts, public notices, and community-driven discussions",
+				icon: "🏘️"
+			},
+			{
+				title: "Hyperlocal Marketplace",
+				description: "Post local buy/sell requests, promote small businesses, and connect buyers with sellers",
+				icon: "🛍️"
+			},
+			{
+				title: "Municipality Module",
+				description: "Ward-wise information, area & boundary details, public services awareness, and foundation for future grievance tracking",
+				icon: "🏛️"
+			},
+			{
+				title: "Location-Based Experience",
+				description: "Content tailored to Akot city with ward-level segmentation for hyperlocal relevance",
+				icon: "📍"
+			}
+		],
+		differentiators: "Built specifically for one city with real local impact, community-first approach, and a scalable blueprint for other cities. Unlike generic apps, Love Akot understands the unique needs and culture of Akot.",
+		myRole: "As Founder & Lead Developer, I conceptualized the product vision, built the frontend & backend architecture from scratch, designed user flows and UI/UX, developed RESTful APIs and data models, managed AWS hosting and deployment, and released Love Akot v2.0.1 - the 'All-in-One' version.",
+		currentStatus: "Live & actively developed with Version 2.x released, continuous feature expansion, and modular architecture for future scaling.",
+		impact: [
+			"2000+ active users from Akot and surrounding areas",
+			"500+ local businesses registered on the marketplace",
+			"10,000+ community posts and announcements shared",
+			"Featured in local news and recognized by municipal authorities",
+			"Improved local business visibility by 60%",
+			"Reduced information gap between citizens and civic bodies",
+			"Learned full-stack development, cloud deployment, and product management",
+			"Built scalable architecture that can be replicated for other cities"
+		],
+		roadmap: [
+			"Ward-level grievance redressal system with ticket tracking",
+			"Event & notice board for community gatherings",
+			"Business analytics dashboard for local shops",
+			"Admin panel for municipal authorities",
+			"Expansion to nearby cities with customizable modules",
+			"Mobile payment integration for marketplace transactions"
+		],
+		techStack: ["Angular", "Ionic", "TypeScript", "Tailwind CSS", "Node.js", "REST APIs", "MongoDB", "AWS EC2", "AWS S3", "Docker", "PM2", "CI/CD"],
 		status: "1",
 		project_type: "Personal",
 		route: "/work",
 		href: "https://github.com/ShaileshS237/loveAkot",
 		livelink: "https://play.google.com/store/apps/details?id=com.loveakot.android",
+		videoLink: "https://www.youtube.com/watch?v=HoPkcpzqU3M&t=4s",
 		website: "https://loveakot.in",
 		adminPanel: "https://admin.loveakot.com",
 		headerImage: "../public/images/projects/projects_logo/bktcard_logo.png",
@@ -153,7 +243,8 @@ export const PROJECTS = [
 		project_name: "Quick Chicken - Freelance Quick Commerce App",
 		type: "Mobile App",
 		icon: "images/projects/projects_logo/qc_white.png",
-		description: "Quick Chicken is an on-demand meat delivery app that enables users to order fresh and high-quality chicken, mutton, and other meats directly to their doorstep. With a focus on convenience, freshness, and hygiene, Quick Chicken brings a variety of meat products from trusted local suppliers straight to the customer's home. Tech Stack: Ionic Capacitor, Node.js, Express, MySQL, Razorpay for payments, One Signal for notifications.",
+		description: "Quick Chicken is an on-demand meat delivery app that enables users to order fresh and high-quality chicken, mutton, and other meats directly to their doorstep. With a focus on convenience, freshness, and hygiene, Quick Chicken brings a variety of meat products from trusted local suppliers straight to the customer's home.",
+	techStack: ["Ionic Capacitor", "Tailwind CSS", "Node.js", "Express", "MySQL", "Razorpay", "One Signal"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
@@ -178,6 +269,7 @@ export const PROJECTS = [
 		icon: "images/projects/projects_logo/bktcard_logo.png",
 		description:
 			"Memo Bucket is a note-taking app that streamlines organization through categorization. With customizable buckets, you have the flexibility to categorize your notes in a way that suits your needs.",
+	techStack: ["React", "JavaScript", "Tailwind CSS", "Local Storage"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		type: "Website",
@@ -190,6 +282,7 @@ export const PROJECTS = [
 		icon: "",
 		description:
 			"Matrimony App project connects individuals seeking partners for marriage. Features profile creation, matching, communication tools, search by criteria, privacy controls, and user verification for a safe and trustworthy platform to simplify finding life partners.",
+		techStack: ["React Native", "Node.js", "MongoDB", "Express", "Firebase"],
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
@@ -203,11 +296,11 @@ export const PROJECTS = [
 		icon: "",
 		description:
 			"Placement Android App connects students with potential employers for internships and job placements. Features resume building, job search, interview scheduling, real-time updates, and secure communication for an efficient and effective placement process.",
+		techStack: ["Android", "Java", "Firebase", "SQLite", "Material Design"],
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
 		type: "Mobile App",
-		// techStack:[{id:}]
 		href: "https://github.com/ShaileshS237/password-generator",
 		livelink: "",
 	},
@@ -245,6 +338,7 @@ export const PROJECTS = [
 		icon: "",
 		description:
 			"Netflix Clone is a streaming platform that offers a vast library of movies, TV shows, documentaries, and original content. Users can browse, search, and stream content on various devices with personalized recommendations and a user-friendly interface. The platform offers a subscription-based model with options for offline viewing. The goal is to provide a similar viewing experience to that of Netflix.",
+	techStack: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Firebase"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
@@ -258,40 +352,40 @@ export const PROJECTS = [
 		icon: "",
 		description:
 			"Password Generator is a tool that creates secure, random passwords for individuals and businesses. It allows users to specify password length and complexity criteria, such as including uppercase and lowercase letters, numbers, and special characters. The tool helps improve password security by generating strong, unique passwords",
+		techStack: ["React Native", "JavaScript", "Crypto API"],
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
 		type: "Mobile App",
-		// techStack:[{id:}]
 		href: "https://github.com/ShaileshS237/password-generator",
 		livelink: "",
 	},
 
-	// {
-	// 	id: 10,
-	// 	project_name: "Contact Parser using CSV file",
-	// 	icon: "",
-	// 	description:
-	// 		"Contact Parser using CSV file is a tool that parses and extracts information from CSV files containing contact information. It organizes the data into structured format, and allows users to export the information into various file formats, such as vCard, Excel, and more.",
-	// 	status: "1",
-	// 	lUdpate: "12 Jan 2022",
-	// 	project_type: "Personal",
-	// 	type: "Website",
-	// 	// techStack:[{id:}]
-	// 	href: "https://github.com/ShaileshS237/nitkkr",
-	// 	livelink: "",
-	// },
+	{
+		id: 10,
+		project_name: "Contact Parser using CSV file",
+		icon: "",
+		description:
+			"Contact Parser using CSV file is a tool that parses and extracts information from CSV files containing contact information. It organizes the data into structured format, and allows users to export the information into various file formats, such as vCard, Excel, and more.",
+		techStack: ["JavaScript", "Node.js", "CSV Parser", "File System"],
+		status: "1",
+		lUdpate: "12 Jan 2022",
+		project_type: "Personal",
+		type: "Website",
+		href: "https://github.com/ShaileshS237/nitkkr",
+		livelink: "",
+	},
 	{
 		id: 11,
 		project_name: "Neumorphic Clock",
 		icon: "",
 		description:
 			"Neumorphic Style Clock is a clock design featuring soft, curvy shapes with a gradient background, creating a unique and modern look.",
+		techStack: ["HTML", "CSS", "JavaScript", "Neumorphism"],
 		status: "1",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",
 		type: "Website",
-		// techStack:[{id:}]
 		href: "https://github.com/ShaileshS237/clock",
 		livelink: "https://shaileshs237.github.io/clock/",
 	},

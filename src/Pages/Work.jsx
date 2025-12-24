@@ -29,7 +29,7 @@ const Work = () => {
 				/>
 
 				{/* Bento Grid - Paragon Style with improved gaps and auto-rows */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-7 auto-rows-fr">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 lg:gap-7 auto-rows-fr grid-flow-dense">
 					{PROJECTS.map((project, index) => (
 						<ProjectCard
 							key={project.id}
