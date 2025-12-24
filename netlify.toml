@@ -6,3 +6,6 @@
   NODE_VERSION = "20"
   NPM_CONFIG_REGISTRY = "https://registry.npmjs.org/"
   NPM_TOKEN = ""
+  NPM_FLAGS = "--ignore-scripts"
+  NETLIFY_USE_YARN = "false"
+  NPM_CONFIG__AUTH = ""
