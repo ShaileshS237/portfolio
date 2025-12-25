@@ -32,10 +32,9 @@ const LoveAkotBlog = () => {
             <Navbar
                 backTo="/blogs"
                 backText="← Back to Blogs"
-                sticky={true}
             />
 
-            <main className="container max-w-6xl mx-auto py-12 px-4 md:px-6">
+            <main className="container max-w-6xl mx-auto pt-24 pb-12 px-4 md:px-6">
                 <motion.article
                     initial="hidden"
                     animate="visible"

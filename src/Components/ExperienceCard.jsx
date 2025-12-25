@@ -5,7 +5,7 @@ import { Button } from "@/Components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import TechBadge from "@/Components/TechBadge";
 
-const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", initiallyExpanded = false, isCollapsible = true }) => {
+const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", initiallyExpanded = false, isCollapsible = true, showStaticLine = true, contentMotionStyle }) => {
     const [isExpanded, setIsExpanded] = React.useState(initiallyExpanded);
     const showBullets = variant === "compact";
     const techBadgeVariant = "default";
@@ -23,13 +23,22 @@ const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", init
             className="relative pl-8 md:pl-0"
         >
             {/* Timeline Line */}
-            <div className="hidden md:block absolute left-[149px] top-2 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
+            {showStaticLine && (
+                <>
+                    <div className="absolute left-4 md:left-[149px] top-3 bottom-[-48px] w-px bg-border last:bottom-0 last:h-auto"></div>
+
+                    {/* Mobile timeline dot */}
+                    <div className="absolute left-[10px] top-2 w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300 md:hidden"></div>
+                </>
+            )}
 
             <div className="md:grid md:grid-cols-[150px_1fr] md:gap-8 items-start">
                 {/* Date Column */}
                 <div className="text-sm text-muted-foreground font-medium pt-1.5 mb-2 md:mb-0 relative md:text-right md:pr-4">
                     {/* Dot */}
-                    <div className={`hidden md:block absolute right-[-5px] ${dotTopPosition} w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300`}></div>
+                    {showStaticLine && (
+                        <div className={`hidden md:block absolute right-[-5px] ${dotTopPosition} w-2.5 h-2.5 rounded-full border-2 border-primary bg-background z-10 transition-colors duration-300`}></div>
+                    )}
                     {exp.date}
                 </div>
 
@@ -74,8 +83,9 @@ const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", init
                                 <div className="overflow-hidden">
                                     <motion.div
                                         initial={false}
-                                        animate={{ height: "auto", opacity: 1 }}
+                                        animate={{ height: "auto" }}
                                         className="text-muted-foreground leading-relaxed"
+                                        style={contentMotionStyle}
                                     >
                                         {showBullets ? (
                                             <ul className="space-y-2 list-none">

@@ -1,12 +1,9 @@
 
 import React from "react";
 import { useTheme } from "@/Components/theme-provider";
-import { Card } from "@/Components/ui/card";
-import { Badge } from "@/Components/ui/badge";
+import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 import { Globe, Terminal } from "lucide-react";
-import TechBadge from "@/Components/TechBadge";
 import ExperienceCard from "@/Components/ExperienceCard";
-import { motion } from "framer-motion";
 import { EXPERIENCE } from "@/constants";
 import Navbar from "@/Components/Navbar";
 import PageHeader from "@/Components/PageHeader";
@@ -40,7 +37,7 @@ const getSkillDetails = (skill) => {
         'git': { url: 'https://git-scm.com', slug: 'git', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
         'docker': { url: 'https://www.docker.com', slug: 'docker', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
         'kubernetes': { url: 'https://kubernetes.io', slug: 'kubernetes', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
-        'aws': { url: 'https://aws.amazon.com', slug: 'amazonaws', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+        'aws': { url: 'https://aws.amazon.com', slug: 'cloudflare', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
         'tailwindcss': { url: 'https://tailwindcss.com', slug: 'tailwindcss', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
         'bootstrap': { url: 'https://getbootstrap.com', slug: 'bootstrap', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
         'sass': { url: 'https://sass-lang.com', slug: 'sass', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20' },
@@ -88,6 +85,11 @@ const getSkillDetails = (skill) => {
 const Experience = () => {
     const { theme } = useTheme();
 
+    const timelineRef = React.useRef(null);
+    const { scrollYProgress } = useScroll({ target: timelineRef, offset: ["start center", "end center"] });
+    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+    const lineOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+
     const technicalExperiences = EXPERIENCE.filter(exp => exp.type === 'technical');
     const nonTechnicalExperiences = EXPERIENCE.filter(exp => exp.type === 'non-technical');
 
@@ -100,7 +102,14 @@ const Experience = () => {
                     description="My professional journey and career milestones."
                 />
 
-                <div className="space-y-16">
+                <div ref={timelineRef} className="relative space-y-16">
+                    <div className="absolute left-4 md:left-[154px] top-2 bottom-3 w-px bg-transparent">
+                        <motion.div
+                            aria-hidden="true"
+                            style={{ height: lineHeight, opacity: lineOpacity }}
+                            className="absolute left-0 top-16 w-px origin-top bg-gradient-to-b from-cyan-300 via-sky-400 to-indigo-600 drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]"
+                        />
+                    </div>
                     {/* Technical Experience Section */}
                     {technicalExperiences.length > 0 && (
                         <div className="space-y-8">
@@ -109,16 +118,47 @@ const Experience = () => {
                                 <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
                             </div>
                             <div className="space-y-12">
-                                {technicalExperiences.map((exp, index) => (
-                                    <ExperienceCard
-                                        key={exp.id}
-                                        exp={exp}
-                                        index={index}
-                                        getSkillDetails={getSkillDetails}
-                                        variant="compact"
-                                        isCollapsible={false}
-                                    />
-                                ))}
+                                {technicalExperiences.map((exp, index, arr) => {
+                                    const denominator = Math.max(arr.length - 1, 1);
+                                    const activationPoint = arr.length === 1 ? 0 : index / denominator;
+                                    const start = Math.max(0, activationPoint - 0.18);
+                                    const end = Math.min(1, activationPoint + 0.02);
+                                    const active = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+                                    const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
+                                    const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
+                                    const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
+                                    const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
+                                    const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
+                                    const contentOpacity = useTransform(activeSpring, [0, 1], [0.55, 1]);
+                                    const contentY = useTransform(activeSpring, [0, 1], [12, 0]);
+
+                                    return (
+                                        <div key={exp.id} className="relative">
+                                            <motion.div
+                                                aria-hidden="true"
+                                                className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
+                                                style={{
+                                                    scale: dotScale,
+                                                    opacity: dotOpacity,
+                                                    backgroundColor: dotBg,
+                                                    boxShadow: dotShadow
+                                                }}
+                                            />
+
+
+                                            <ExperienceCard
+                                                exp={exp}
+                                                index={index}
+                                                getSkillDetails={getSkillDetails}
+                                                variant="compact"
+                                                isCollapsible={false}
+                                                showStaticLine={false}
+                                                contentMotionStyle={{ opacity: contentOpacity, y: contentY }}
+                                                scrollProgress={scrollYProgress}
+                                            />
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     )}
@@ -131,16 +171,48 @@ const Experience = () => {
                                 <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
                             </div>
                             <div className="space-y-12">
-                                {nonTechnicalExperiences.map((exp, index) => (
-                                    <ExperienceCard
-                                        key={exp.id}
-                                        exp={exp}
-                                        index={index}
-                                        getSkillDetails={getSkillDetails}
-                                        variant="compact"
-                                        isCollapsible={false}
-                                    />
-                                ))}
+                                {nonTechnicalExperiences.map((exp, index, arr) => {
+                                    const baseIndex = technicalExperiences.length + index;
+                                    const total = technicalExperiences.length + nonTechnicalExperiences.length;
+                                    const denominator = Math.max(total - 1, 1);
+                                    const activationPoint = total === 1 ? 0 : baseIndex / denominator;
+                                    const start = Math.max(0, activationPoint - 0.18);
+                                    const end = Math.min(1, activationPoint + 0.02);
+                                    const active = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+                                    const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
+                                    const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
+                                    const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
+                                    const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
+                                    const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
+                                    const contentOpacity = useTransform(activeSpring, [0, 1], [0.55, 1]);
+                                    const contentY = useTransform(activeSpring, [0, 1], [12, 0]);
+
+                                    return (
+                                        <div key={exp.id} className="relative">
+                                            <motion.div
+                                                aria-hidden="true"
+                                                className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
+                                                style={{
+                                                    scale: dotScale,
+                                                    opacity: dotOpacity,
+                                                    backgroundColor: dotBg,
+                                                    boxShadow: dotShadow
+                                                }}
+                                            />
+
+                                            <ExperienceCard
+                                                exp={exp}
+                                                index={index}
+                                                getSkillDetails={getSkillDetails}
+                                                variant="compact"
+                                                isCollapsible={false}
+                                                showStaticLine={false}
+                                                contentMotionStyle={{ opacity: contentOpacity, y: contentY }}
+                                                scrollProgress={scrollYProgress}
+                                            />
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     )}

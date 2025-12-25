@@ -1,5 +1,5 @@
 import { useSearchParams, Link, useLocation } from "react-router-dom";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useTheme } from "@/Components/theme-provider";
 import QuoteSection from "../Components/QuoteSection";
 import Navbar from "@/Components/Navbar";
@@ -43,7 +43,7 @@ import {
 	User,
 	Laptop
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { supabase } from "../lib/supabase";
 
 const getSkillDetails = (skill) => {
@@ -75,7 +75,7 @@ const getSkillDetails = (skill) => {
 		'git': { url: 'https://git-scm.com', slug: 'git', color: 'bg-orange-600/10 text-orange-700 dark:text-orange-400 border-orange-600/20' },
 		'docker': { url: 'https://www.docker.com', slug: 'docker', color: 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20' },
 		'kubernetes': { url: 'https://kubernetes.io', slug: 'kubernetes', color: 'bg-blue-600/10 text-blue-700 dark:text-blue-300 border-blue-600/20' },
-		'aws': { url: 'https://aws.amazon.com', slug: 'amazonaws', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
+		'aws': { url: 'https://aws.amazon.com', slug: 'cloudflare', color: 'bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20' },
 		'tailwindcss': { url: 'https://tailwindcss.com', slug: 'tailwindcss', color: 'bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20' },
 		'bootstrap': { url: 'https://getbootstrap.com', slug: 'bootstrap', color: 'bg-purple-600/10 text-purple-700 dark:text-purple-400 border-purple-600/20' },
 		'sass': { url: 'https://sass-lang.com', slug: 'sass', color: 'bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20' },
@@ -143,6 +143,8 @@ const Home = () => {
 	const location = useLocation();
 	const searchParams = useSearchParams()[0]; // Keep useSearchParams for direct access if needed, or remove if location is sufficient
 	const hasTracked = useRef(false);
+	const githubUser = "ShaileshS237";
+	const contributionChartSrc = useMemo(() => `https://ghchart.rshah.org/${githubUser}?ts=${new Date().toISOString().slice(0, 10)}`, [githubUser]);
 
 	useEffect(() => {
 		// Update isForV based on location.search
@@ -224,6 +226,11 @@ const Home = () => {
 			}
 		}
 	};
+
+	const workRef = useRef(null);
+	const { scrollYProgress: workProgress } = useScroll({ target: workRef, offset: ["start center", "end center"] });
+	const lineHeight = useTransform(workProgress, [0, 1], ["0%", "100%"]);
+	const lineOpacity = useTransform(workProgress, [0, 0.05], [0, 1]);
 
 	const itemVariants = {
 		hidden: { y: 20, opacity: 0 },
@@ -363,7 +370,7 @@ const Home = () => {
 
 
 				{/* Work / Experience Section */}
-				<section id="work" className="space-y-8 scroll-mt-20">
+				<section id="work" ref={workRef} className="space-y-8 scroll-mt-20">
 					<motion.div
 						initial={{ opacity: 0, x: -20 }}
 						whileInView={{ opacity: 1, x: 0 }}
@@ -376,17 +383,53 @@ const Home = () => {
 						</ViewButton>
 					</motion.div>
 
-					<div className="space-y-12">
-						{EXPERIENCE.filter(exp => exp.type === 'technical').slice(0, 3).map((exp, index) => (
-							<ExperienceCard
-								key={exp.id}
-								exp={exp}
-								index={index}
-								getSkillDetails={getSkillDetails}
-								variant="compact"
-								initiallyExpanded={index === 0}
+					<div className="relative">
+						<div className="absolute left-4 md:left-[154px] top-2 bottom-3 w-px bg-transparent">
+							<motion.div
+								aria-hidden="true"
+								style={{ height: lineHeight, opacity: lineOpacity }}
+								className="absolute left-0 top-0 w-px origin-top bg-gradient-to-b from-cyan-300 via-sky-400 to-indigo-600 drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]"
 							/>
-						))}
+						</div>
+
+						<div className="space-y-12">
+							{EXPERIENCE.filter(exp => exp.type === 'technical').slice(0, 3).map((exp, index, arr) => {
+								const denominator = Math.max(arr.length - 1, 1);
+								const activationPoint = arr.length === 1 ? 0 : index / denominator;
+								const start = Math.max(0, activationPoint - 0.18);
+								const end = Math.min(1, activationPoint + 0.02);
+								const active = useTransform(workProgress, [start, end], [0, 1], { clamp: true });
+								const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
+								const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
+								const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
+								const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
+								const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
+
+								return (
+									<div key={exp.id} className="relative">
+										<motion.div
+											aria-hidden="true"
+											className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
+											style={{
+												scale: dotScale,
+												opacity: dotOpacity,
+												backgroundColor: dotBg,
+												boxShadow: dotShadow
+											}}
+										/>
+
+										<ExperienceCard
+											exp={exp}
+											index={index}
+											getSkillDetails={getSkillDetails}
+											variant="compact"
+											initiallyExpanded={index === 0}
+											showStaticLine={false}
+										/>
+									</div>
+								);
+							})}
+						</div>
 					</div>
 
 				</section>
@@ -432,7 +475,7 @@ const Home = () => {
 						whileInView={{ opacity: 1, y: 0, scale: 1 }}
 						viewport={{ once: true, margin: "-50px" }}
 						transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-						className="rounded-lg border border-muted bg-card/50 p-4 overflow-hidden"
+						className="rounded-2xl border border-muted bg-card/50 p-4 overflow-hidden"
 					>
 						<div className="flex flex-col gap-4">
 							<motion.div
@@ -462,7 +505,7 @@ const Home = () => {
 								className="w-full overflow-x-auto"
 							>
 								<img
-									src="https://ghchart.rshah.org/ShaileshS237"
+									src={contributionChartSrc}
 									alt="GitHub Contribution Graph"
 									className="w-full h-auto dark:invert dark:hue-rotate-180"
 									loading="lazy"
@@ -480,11 +523,11 @@ const Home = () => {
 								<div className="flex items-center gap-2">
 									<span>Less</span>
 									<div className="flex gap-1">
-										<div className="w-2.5 h-2.5 rounded-sm bg-muted"></div>
-										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/20"></div>
-										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/40"></div>
-										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/60"></div>
-										<div className="w-2.5 h-2.5 rounded-sm bg-muted-foreground/80"></div>
+										<div className="w-2.5 h-2.5 rounded-full bg-muted"></div>
+										<div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/20"></div>
+										<div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/40"></div>
+										<div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/60"></div>
+										<div className="w-2.5 h-2.5 rounded-full bg-muted-foreground/80"></div>
 									</div>
 									<span>More</span>
 								</div>
