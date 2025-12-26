@@ -235,7 +235,7 @@ export const PROJECTS = [
 		livelink: "https://play.google.com/store/apps/details?id=com.loveakot.android",
 		videoLink: "https://www.youtube.com/watch?v=HoPkcpzqU3M&t=4s",
 		website: "https://loveakot.in",
-		adminPanel: "https://admin.loveakot.com",
+		adminPanel: "https://admin.loveakot.in",
 		headerImage: "../public/images/projects/projects_logo/bktcard_logo.png",
 	},
 	{
@@ -244,7 +244,7 @@ export const PROJECTS = [
 		type: "Mobile App",
 		icon: "images/projects/projects_logo/qc_white.png",
 		description: "Quick Chicken is an on-demand meat delivery app that enables users to order fresh and high-quality chicken, mutton, and other meats directly to their doorstep. With a focus on convenience, freshness, and hygiene, Quick Chicken brings a variety of meat products from trusted local suppliers straight to the customer's home.",
-	techStack: ["Ionic Capacitor", "Tailwind CSS", "Node.js", "Express", "MySQL", "Razorpay", "One Signal"],
+		techStack: ["Ionic Capacitor", "Tailwind CSS", "Node.js", "Express", "MySQL", "Razorpay", "One Signal"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Freelance",
@@ -269,7 +269,7 @@ export const PROJECTS = [
 		icon: "images/projects/projects_logo/bktcard_logo.png",
 		description:
 			"Memo Bucket is a note-taking app that streamlines organization through categorization. With customizable buckets, you have the flexibility to categorize your notes in a way that suits your needs.",
-	techStack: ["React", "JavaScript", "Tailwind CSS", "Local Storage"],
+		techStack: ["React", "JavaScript", "Tailwind CSS", "Local Storage"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		type: "Website",
@@ -338,7 +338,7 @@ export const PROJECTS = [
 		icon: "",
 		description:
 			"Netflix Clone is a streaming platform that offers a vast library of movies, TV shows, documentaries, and original content. Users can browse, search, and stream content on various devices with personalized recommendations and a user-friendly interface. The platform offers a subscription-based model with options for offline viewing. The goal is to provide a similar viewing experience to that of Netflix.",
-	techStack: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Firebase"],
+		techStack: ["React", "JavaScript", "TMDB API", "Tailwind CSS", "Firebase"],
 		status: "2",
 		lUdpate: "12 Jan 2022",
 		project_type: "Personal",

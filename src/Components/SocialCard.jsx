@@ -6,7 +6,7 @@ const SocialCard = ({ icon, name, handle, href }) => (
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center justify-between p-4 rounded-xl border border-muted bg-card hover:bg-muted/50 transition-colors group text-left"
+        className="flex items-center justify-between p-4 rounded-xl border-2 border-muted bg-card hover:bg-muted/50 transition-colors group text-left"
     >
         <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-muted text-foreground group-hover:bg-background transition-colors shrink-0">

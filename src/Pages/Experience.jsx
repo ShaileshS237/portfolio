@@ -1,7 +1,7 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@/Components/theme-provider";
-import { useScroll, useSpring, useTransform, motion } from "framer-motion";
+import { useScroll, useSpring, useTransform, motion, useMotionValueEvent } from "framer-motion";
 import { Globe, Terminal } from "lucide-react";
 import ExperienceCard from "@/Components/ExperienceCard";
 import { EXPERIENCE } from "@/constants";
@@ -82,12 +82,85 @@ const getSkillDetails = (skill) => {
     };
 };
 
+const TimeLineItem = ({ exp, index, totalCount, scrollYProgress, getSkillDetails, isNonTechnical = false, technicalCount = 0 }) => {
+    // Use totalCount as denominator so the last item isn't at the absolute end (1.0)
+    const denominator = totalCount;
+    const activationPoint = (isNonTechnical ? technicalCount + index : index) / denominator;
+
+    // Start revealing EXACTLY when the line hits (activationPoint)
+    const start = activationPoint;
+    const end = Math.min(1, activationPoint + 0.12);
+
+    const active = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
+    const activeSpring = useSpring(active, { stiffness: 100, damping: 20, mass: 1 });
+
+    // Latch state to keep revealed
+    const [hasBeenActive, setHasBeenActive] = useState(false);
+
+    useMotionValueEvent(activeSpring, "change", (latest) => {
+        if (latest > 0.5 && !hasBeenActive) {
+            setHasBeenActive(true);
+        }
+    });
+
+    const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
+    const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
+    const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
+    const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
+
+    const contentOpacity = useTransform(activeSpring, [0, 0.1, 1], [0, 0, 1]);
+    const contentY = useTransform(activeSpring, [0, 1], [15, 0]);
+    const contentBlur = useTransform(activeSpring, (v) => `blur(${v < 0.1 ? 10 : (1 - v) * 5}px)`);
+
+    return (
+        <div className="relative">
+            <motion.div
+                aria-hidden="true"
+                className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
+                style={{
+                    scale: dotScale,
+                    opacity: dotOpacity,
+                    backgroundColor: dotBg,
+                    boxShadow: dotShadow
+                }}
+            />
+
+            <ExperienceCard
+                exp={exp}
+                index={index}
+                getSkillDetails={getSkillDetails}
+                variant="compact"
+                isCollapsible={false}
+                showStaticLine={false}
+                style={hasBeenActive ? {
+                    opacity: 1,
+                    y: 0,
+                    filter: 'blur(0px)'
+                } : {
+                    opacity: contentOpacity,
+                    y: contentY,
+                    filter: contentBlur
+                }}
+            />
+        </div>
+    );
+};
+
 const Experience = () => {
     const { theme } = useTheme();
 
     const timelineRef = React.useRef(null);
     const { scrollYProgress } = useScroll({ target: timelineRef, offset: ["start center", "end center"] });
-    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+    const [maxLineProgress, setMaxLineProgress] = useState(0);
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (latest > maxLineProgress) {
+            setMaxLineProgress(latest);
+        }
+    });
+
+    const lineHeight = `${maxLineProgress * 100}%`;
     const lineOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
     const technicalExperiences = EXPERIENCE.filter(exp => exp.type === 'technical');
@@ -102,119 +175,68 @@ const Experience = () => {
                     description="My professional journey and career milestones."
                 />
 
-                <div ref={timelineRef} className="relative space-y-16">
-                    <div className="absolute left-4 md:left-[154px] top-2 bottom-3 w-px bg-transparent">
-                        <motion.div
-                            aria-hidden="true"
-                            style={{ height: lineHeight, opacity: lineOpacity }}
-                            className="absolute left-0 top-16 w-px origin-top bg-gradient-to-b from-cyan-300 via-sky-400 to-indigo-600 drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]"
-                        />
-                    </div>
+                <div className="space-y-16">
                     {/* Technical Experience Section */}
                     {technicalExperiences.length > 0 && (
-                        <div className="space-y-8">
+                        <div ref={timelineRef} className="relative space-y-8">
+                            <div className="absolute left-4 md:left-[154px] top-[74px] bottom-3 w-px bg-transparent">
+                                <motion.div
+                                    aria-hidden="true"
+                                    style={{ height: lineHeight, opacity: 1 }}
+                                    className="absolute left-0 top-0 w-px origin-top bg-gradient-to-b from-cyan-300 via-sky-400 to-indigo-600 drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]"
+                                />
+                            </div>
                             <div className="flex items-center gap-4">
                                 <h2 className="text-2xl font-bold tracking-tight">Technical Experience</h2>
                                 <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
                             </div>
                             <div className="space-y-12">
-                                {technicalExperiences.map((exp, index, arr) => {
-                                    const denominator = Math.max(arr.length - 1, 1);
-                                    const activationPoint = arr.length === 1 ? 0 : index / denominator;
-                                    const start = Math.max(0, activationPoint - 0.18);
-                                    const end = Math.min(1, activationPoint + 0.02);
-                                    const active = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
-                                    const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
-                                    const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
-                                    const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
-                                    const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
-                                    const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
-                                    const contentOpacity = useTransform(activeSpring, [0, 1], [0.55, 1]);
-                                    const contentY = useTransform(activeSpring, [0, 1], [12, 0]);
-
-                                    return (
-                                        <div key={exp.id} className="relative">
-                                            <motion.div
-                                                aria-hidden="true"
-                                                className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
-                                                style={{
-                                                    scale: dotScale,
-                                                    opacity: dotOpacity,
-                                                    backgroundColor: dotBg,
-                                                    boxShadow: dotShadow
-                                                }}
-                                            />
-
-
-                                            <ExperienceCard
-                                                exp={exp}
-                                                index={index}
-                                                getSkillDetails={getSkillDetails}
-                                                variant="compact"
-                                                isCollapsible={false}
-                                                showStaticLine={false}
-                                                contentMotionStyle={{ opacity: contentOpacity, y: contentY }}
-                                                scrollProgress={scrollYProgress}
-                                            />
-                                        </div>
-                                    );
-                                })}
+                                {technicalExperiences.map((exp, index, arr) => (
+                                    <TimeLineItem
+                                        key={exp.id}
+                                        exp={exp}
+                                        index={index}
+                                        totalCount={arr.length}
+                                        scrollYProgress={scrollYProgress}
+                                        getSkillDetails={getSkillDetails}
+                                    />
+                                ))}
                             </div>
                         </div>
                     )}
 
                     {/* Non-Technical Experience Section */}
                     {nonTechnicalExperiences.length > 0 && (
-                        <div className="space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={maxLineProgress > 0.9 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="space-y-8"
+                        >
                             <div className="flex items-center gap-4">
                                 <h2 className="text-2xl font-bold tracking-tight">Non-Technical Experience</h2>
                                 <div className="h-[1px] flex-1 bg-gradient-to-r from-muted to-transparent" />
                             </div>
                             <div className="space-y-12">
-                                {nonTechnicalExperiences.map((exp, index, arr) => {
-                                    const baseIndex = technicalExperiences.length + index;
-                                    const total = technicalExperiences.length + nonTechnicalExperiences.length;
-                                    const denominator = Math.max(total - 1, 1);
-                                    const activationPoint = total === 1 ? 0 : baseIndex / denominator;
-                                    const start = Math.max(0, activationPoint - 0.18);
-                                    const end = Math.min(1, activationPoint + 0.02);
-                                    const active = useTransform(scrollYProgress, [start, end], [0, 1], { clamp: true });
-                                    const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
-                                    const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
-                                    const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
-                                    const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
-                                    const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
-                                    const contentOpacity = useTransform(activeSpring, [0, 1], [0.55, 1]);
-                                    const contentY = useTransform(activeSpring, [0, 1], [12, 0]);
-
-                                    return (
-                                        <div key={exp.id} className="relative">
-                                            <motion.div
-                                                aria-hidden="true"
-                                                className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
-                                                style={{
-                                                    scale: dotScale,
-                                                    opacity: dotOpacity,
-                                                    backgroundColor: dotBg,
-                                                    boxShadow: dotShadow
-                                                }}
-                                            />
-
-                                            <ExperienceCard
-                                                exp={exp}
-                                                index={index}
-                                                getSkillDetails={getSkillDetails}
-                                                variant="compact"
-                                                isCollapsible={false}
-                                                showStaticLine={false}
-                                                contentMotionStyle={{ opacity: contentOpacity, y: contentY }}
-                                                scrollProgress={scrollYProgress}
-                                            />
-                                        </div>
-                                    );
-                                })}
+                                {nonTechnicalExperiences.map((exp, index) => (
+                                    <div key={exp.id} className="relative">
+                                        {/* Static Dot for Non-Technical */}
+                                        <div
+                                            aria-hidden="true"
+                                            className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-primary/30 bg-primary/10"
+                                        />
+                                        <ExperienceCard
+                                            exp={exp}
+                                            index={index}
+                                            getSkillDetails={getSkillDetails}
+                                            variant="compact"
+                                            isCollapsible={false}
+                                            showStaticLine={false}
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        </div>
+                        </motion.div>
                     )}
                 </div>
             </MainContent>

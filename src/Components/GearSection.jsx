@@ -59,7 +59,7 @@ const GearSection = () => {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: (catIndex * 0.1) + (itemIndex * 0.05) }}
-                                        className="group flex items-start gap-4 rounded-xl border border-muted bg-card/50 p-4 hover:bg-muted/50 transition-all duration-300"
+                                        className="group flex items-start gap-4 rounded-xl border-2 border-muted bg-card/50 p-4 hover:bg-muted/50 transition-all duration-300"
                                     >
                                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
                                             <IconComponent className="h-5 w-5" />

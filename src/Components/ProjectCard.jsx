@@ -29,6 +29,10 @@ const TechIcon = ({ tech, size = "sm", index = 0, isNew = false }) => {
     const sizeClass = size === "lg" ? "w-5 h-5" : "w-4 h-4";
     const paddingClass = size === "lg" ? "p-2.5" : "p-2";
 
+    // Only invert monochrome icons (zinc/gray/white/black) in dark mode
+    // Colored icons (red, blue, green, etc.) should use their original color via brightness-100
+    const isMonochrome = color.includes("zinc") || color.includes("slate") || color.includes("gray") || color.includes("white") || color.includes("black");
+
     return (
         <Tooltip content={tech}>
             <motion.div
@@ -39,13 +43,13 @@ const TechIcon = ({ tech, size = "sm", index = 0, isNew = false }) => {
                     delay: isNew ? index * 0.03 : 0,
                     ease: [0.34, 1.56, 0.64, 1]
                 }}
-                className={`${paddingClass} rounded-xl ${bg} border border-border/30 transition-all duration-300 `}
+                className={`${paddingClass} rounded-xl ${bg} border-2 border-border/30 transition-all duration-300 `}
             >
                 {slug ? (
                     <img
                         src={`https://cdn.simpleicons.org/${slug}`}
                         alt={tech}
-                        className={`${sizeClass} object-contain ${color} brightness-0 dark:brightness-100 dark:invert`}
+                        className={`${sizeClass} object-contain ${color} brightness-0 dark:brightness-100 ${isMonochrome ? "dark:invert" : ""}`}
                         style={{ filter: 'contrast(1.2)' }}
                     />
                 ) : (
@@ -128,7 +132,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
             >
                 <Card className={`
                     relative h-full overflow-hidden
-                    rounded-xl border border-muted shadow-none
+                    rounded-xl border-2 border-muted shadow-none
                     bg-gradient-to-br from-card/80 via-card to-card/90
                     transition-all duration-700 ease-out
                     ${isFeatured ? "p-8 md:p-10" : "p-6 md:p-7"}
@@ -156,7 +160,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                             )}
 
                             {/* Arrow indicator with View Project text */}
-                            <div className="shrink-0 flex items-center px-2 py-1.5 rounded-full bg-muted/30 border border-border/30 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-all duration-500 ease-out ml-auto">
+                            <div className="shrink-0 flex items-center px-2 py-1.5 rounded-full bg-muted/30 border-2 border-border/30 group-hover:bg-primary group-hover:border-primary group-hover:text-primary-foreground transition-all duration-500 ease-out ml-auto">
                                 <span className="text-xs font-medium max-w-0 overflow-hidden opacity-0 group-hover:max-w-32 group-hover:opacity-100 whitespace-nowrap transition-all duration-500 ease-out">
                                     <span className="pl-1 pr-1">View More</span>
                                 </span>
@@ -179,12 +183,12 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                             {/* Project Type Badge */}
                             <div className="flex items-center gap-2 mb-4 flex-wrap">
                                 {project.status && (
-                                    <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border ${statusConfig.color}`}>
+                                    <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border-2 ${statusConfig.color}`}>
                                         <Circle className="w-2 h-2 fill-current" />
                                         {statusConfig.label}
                                     </span>
                                 )}
-                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border border-border/30">
+                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border-2 border-border/30">
                                     {project.type === "Mobile App" ? (
                                         <Smartphone className="w-3.5 h-3.5" />
                                     ) : (
@@ -193,7 +197,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                     {project.type}
                                 </span>
                                 {project.project_type && (
-                                    <span className="text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border border-border/30">
+                                    <span className="text-xs font-medium text-muted-foreground px-3 py-1.5 bg-muted/50 rounded-full border-2 border-border/30">
                                         {project.project_type}
                                     </span>
                                 )}
@@ -226,7 +230,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                     );
                                 })}
                                 {techStack.length > (isFeatured ? 4 : 3) && !expandedTech && (
-                                    <div className="px-2 py-2 rounded-xl bg-muted/30 transition-all border border-border/30 flex items-center gap-1 overflow-hidden">
+                                    <div className="px-2 py-2 rounded-xl bg-muted/30 transition-all border-2 border-border/30 flex items-center gap-1 overflow-hidden">
                                         <span className="text-xs text-muted-foreground font-medium">
                                             +{techStack.length - (isFeatured ? 4 : 3)} More
                                         </span>
@@ -239,7 +243,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                 <div className="mt-4 w-full">
                                     {project.videoLink ? (
                                         <div
-                                            className="aspect-video w-full overflow-hidden rounded-lg border border-border/50 bg-black/60 cursor-pointer group/video relative"
+                                            className="aspect-video w-full overflow-hidden rounded-lg border-2 border-border/50 bg-black/60 cursor-pointer group/video relative"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 setShowVideoModal(true);
@@ -257,7 +261,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="aspect-video w-full rounded-lg border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
+                                        <div className="aspect-video w-full rounded-lg border-2 border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden">
                                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,120,120,0.1),transparent_50%)]" />
                                             <img
                                                 src="loveakot_webiste.png"
@@ -265,7 +269,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                                 className="absolute inset-0 w-full h-full object-cover opacity-20"
                                             />
                                             <div className="relative z-10 flex flex-col items-center gap-3">
-                                                <div className="w-16 h-16 rounded-full bg-muted/60 border border-border/40 flex items-center justify-center">
+                                                <div className="w-16 h-16 rounded-full bg-muted/60 border-2 border-border/40 flex items-center justify-center">
                                                     <Play className="w-8 h-8 text-muted-foreground" />
                                                 </div>
                                                 <p className="text-sm font-medium text-muted-foreground">Demo video coming soon</p>
@@ -282,7 +286,7 @@ const ProjectCard = ({ project, index = 0, size = "normal", showVideo = true }) 
                                 <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="gap-2 text-muted-foreground hover:text-foreground rounded-full px-4 h-9 border border-border/30 hover:border-border hover:bg-muted/50"
+                                    className="gap-2 text-muted-foreground hover:text-foreground rounded-full px-4 h-9 border-2 border-border/30 hover:border-border hover:bg-muted/50"
                                     asChild
                                     onClick={(e) => e.stopPropagation()}
                                 >

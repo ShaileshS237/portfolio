@@ -20,7 +20,7 @@ const BlogCard = ({ blog, index = 0 }) => {
                 transition={{ delay: index * 0.1 }}
                 className="h-full"
             >
-                <Card className="transition-colors hover:bg-muted/50 h-full border-muted">
+                <Card className="transition-colors hover:bg-muted/50 h-full border-2 border-muted">
                     <CardContent className="p-4 space-y-2 flex flex-col h-full">
                         <div className="flex items-start justify-between">
                             <div className="space-y-1">

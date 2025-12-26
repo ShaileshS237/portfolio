@@ -5,7 +5,7 @@ import { Button } from "@/Components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import TechBadge from "@/Components/TechBadge";
 
-const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", initiallyExpanded = false, isCollapsible = true, showStaticLine = true, contentMotionStyle }) => {
+const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", initiallyExpanded = false, isCollapsible = true, showStaticLine = true, contentMotionStyle, style }) => {
     const [isExpanded, setIsExpanded] = React.useState(initiallyExpanded);
     const showBullets = variant === "compact";
     const techBadgeVariant = "default";
@@ -17,9 +17,7 @@ const ExperienceCard = ({ exp, index, getSkillDetails, variant = "default", init
     return (
         <motion.div
             key={exp.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            style={style}
             className="relative pl-8 md:pl-0"
         >
             {/* Timeline Line */}

@@ -43,7 +43,7 @@ import {
 	User,
 	Laptop
 } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { supabase } from "../lib/supabase";
 
 const getSkillDetails = (skill) => {
@@ -133,6 +133,71 @@ const getOrdinalSuffix = (i) => {
 		return "rd";
 	}
 	return "th";
+};
+
+const TimeLineItem = ({ exp, index, arr, workProgress, getSkillDetails }) => {
+	// Use arr.length as denominator to ensure the last item (index N-1) 
+	// is reached at (N-1)/N, giving it room to reveal before the scroll ends.
+	const denominator = arr.length;
+	const activationPoint = index / denominator;
+
+	// Start revealing EXACTLY when the line hits (activationPoint)
+	const start = activationPoint;
+	const end = Math.min(1, activationPoint + 0.12);
+
+	const active = useTransform(workProgress, [start, end], [0, 1], { clamp: true });
+	const activeSpring = useSpring(active, { stiffness: 100, damping: 20, mass: 1 });
+
+	// Latch state to keep revealed
+	const [hasBeenActive, setHasBeenActive] = useState(false);
+
+	useMotionValueEvent(activeSpring, "change", (latest) => {
+		if (latest > 0.5 && !hasBeenActive) {
+			setHasBeenActive(true);
+		}
+	});
+
+	const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
+	const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
+	const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
+	const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
+
+	const contentOpacity = useTransform(activeSpring, [0, 0.1, 1], [0, 0, 1]);
+	const contentY = useTransform(activeSpring, [0, 1], [15, 0]);
+	const contentBlur = useTransform(activeSpring, (v) => `blur(${v < 0.1 ? 10 : (1 - v) * 5}px)`);
+
+	return (
+		<div className="relative">
+			<motion.div
+				aria-hidden="true"
+				className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border-2 border-background/70 dark:border-foreground/10"
+				style={{
+					scale: dotScale,
+					opacity: dotOpacity,
+					backgroundColor: dotBg,
+					boxShadow: dotShadow
+				}}
+			/>
+
+			<ExperienceCard
+				exp={exp}
+				index={index}
+				getSkillDetails={getSkillDetails}
+				variant="compact"
+				initiallyExpanded={index === 0}
+				showStaticLine={false}
+				style={hasBeenActive ? {
+					opacity: 1,
+					y: 0,
+					filter: 'blur(0px)'
+				} : {
+					opacity: contentOpacity,
+					y: contentY,
+					filter: contentBlur
+				}}
+			/>
+		</div>
+	);
 };
 
 const Home = () => {
@@ -229,7 +294,15 @@ const Home = () => {
 
 	const workRef = useRef(null);
 	const { scrollYProgress: workProgress } = useScroll({ target: workRef, offset: ["start center", "end center"] });
-	const lineHeight = useTransform(workProgress, [0, 1], ["0%", "100%"]);
+	const [maxLineProgress, setMaxLineProgress] = useState(0);
+
+	useMotionValueEvent(workProgress, "change", (latest) => {
+		if (latest > maxLineProgress) {
+			setMaxLineProgress(latest);
+		}
+	});
+
+	const lineHeight = `${maxLineProgress * 100}%`;
 	const lineOpacity = useTransform(workProgress, [0, 0.05], [0, 1]);
 
 	const itemVariants = {
@@ -325,8 +398,12 @@ const Home = () => {
 									<div className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
 										<div className="space-y-4">
 											<InfoItem icon={<Terminal className="w-4 h-4" />} text="Full-Stack Engineer & Product Builder" />
-											<InfoItem icon={<Lightbulb className="w-4 h-4" />} text="Founder @ Love Akot" />
-											<InfoItem icon={<MapPin className="w-4 h-4" />} text="Akot, Maharashtra, India" />
+											<InfoItem icon={<Lightbulb className="w-4 h-4" />} text="Hobby Project Founder @ Love Akot" />
+											<InfoItem
+												icon={<MapPin className="w-4 h-4" />}
+												text="Akot, Maharashtra, India"
+												href="https://www.google.com/maps/search/?api=1&query=Akot,+Maharashtra,+India"
+											/>
 										</div>
 										<div className="space-y-4">
 											<InfoItem icon={<Clock className="w-4 h-4" />} text={<TimeDisplay />} />
@@ -387,48 +464,22 @@ const Home = () => {
 						<div className="absolute left-4 md:left-[154px] top-2 bottom-3 w-px bg-transparent">
 							<motion.div
 								aria-hidden="true"
-								style={{ height: lineHeight, opacity: lineOpacity }}
+								style={{ height: lineHeight, opacity: 1 }}
 								className="absolute left-0 top-0 w-px origin-top bg-gradient-to-b from-cyan-300 via-sky-400 to-indigo-600 drop-shadow-[0_0_12px_rgba(56,189,248,0.55)]"
 							/>
 						</div>
 
 						<div className="space-y-12">
-							{EXPERIENCE.filter(exp => exp.type === 'technical').slice(0, 3).map((exp, index, arr) => {
-								const denominator = Math.max(arr.length - 1, 1);
-								const activationPoint = arr.length === 1 ? 0 : index / denominator;
-								const start = Math.max(0, activationPoint - 0.18);
-								const end = Math.min(1, activationPoint + 0.02);
-								const active = useTransform(workProgress, [start, end], [0, 1], { clamp: true });
-								const activeSpring = useSpring(active, { stiffness: 180, damping: 22, mass: 0.25 });
-								const dotScale = useTransform(activeSpring, [0, 1], [0.65, 1.3]);
-								const dotOpacity = useTransform(activeSpring, [0, 1], [0.35, 1]);
-								const dotBg = useTransform(activeSpring, [0, 1], ["hsl(var(--muted-foreground))", "hsl(var(--primary))"]);
-								const dotShadow = useTransform(activeSpring, (v) => `0 0 18px rgba(56,189,248,${0.35 + v * 0.25})`);
-
-								return (
-									<div key={exp.id} className="relative">
-										<motion.div
-											aria-hidden="true"
-											className="absolute left-4 md:left-[149px] top-2 -translate-x-1/2 w-3 h-3 rounded-full border border-background/70 dark:border-foreground/10"
-											style={{
-												scale: dotScale,
-												opacity: dotOpacity,
-												backgroundColor: dotBg,
-												boxShadow: dotShadow
-											}}
-										/>
-
-										<ExperienceCard
-											exp={exp}
-											index={index}
-											getSkillDetails={getSkillDetails}
-											variant="compact"
-											initiallyExpanded={index === 0}
-											showStaticLine={false}
-										/>
-									</div>
-								);
-							})}
+							{EXPERIENCE.filter(exp => exp.type === 'technical').slice(0, 3).map((exp, index, arr) => (
+								<TimeLineItem
+									key={exp.id}
+									exp={exp}
+									index={index}
+									arr={arr}
+									workProgress={workProgress}
+									getSkillDetails={getSkillDetails}
+								/>
+							))}
 						</div>
 					</div>
 
@@ -475,7 +526,7 @@ const Home = () => {
 						whileInView={{ opacity: 1, y: 0, scale: 1 }}
 						viewport={{ once: true, margin: "-50px" }}
 						transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-						className="rounded-2xl border border-muted bg-card/50 p-4 overflow-hidden"
+						className="rounded-2xl border-2 border-muted bg-card/50 p-4 overflow-hidden"
 					>
 						<div className="flex flex-col gap-4">
 							<motion.div
@@ -550,7 +601,7 @@ const Home = () => {
 						initial={{ opacity: 0, scale: 0.9 }}
 						animate={{ opacity: 1, scale: 1 }}
 						transition={{ duration: 0.5 }}
-						className="rounded-xl border border-pink-200 bg-pink-50/50 dark:bg-pink-950/10 p-8 text-center space-y-4"
+						className="rounded-xl border-2 border-pink-200 bg-pink-50/50 dark:bg-pink-950/10 p-8 text-center space-y-4"
 					>
 						<div className="space-y-2">
 							<span className="text-4xl animate-pulse">✨</span>

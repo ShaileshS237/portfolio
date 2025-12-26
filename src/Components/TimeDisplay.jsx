@@ -8,7 +8,12 @@ const TimeDisplay = ({ timeZone = "Asia/Kolkata", label = "IST" }) => {
         return () => clearInterval(timer);
     }, []);
 
-    const options = { timeZone, hour: '2-digit', minute: '2-digit', hour12: false };
+    const options = {
+        timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
     const timeString = time.toLocaleTimeString('en-US', options);
 
     return (

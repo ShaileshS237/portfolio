@@ -40,19 +40,23 @@ const getTechIcon = (techName) => {
 const TechBadge = ({ tech }) => {
 	const { slug, color, bg } = getTechIcon(tech);
 
+	// Only invert monochrome icons (zinc/gray/white/black) in dark mode
+	// Colored icons (red, blue, green, etc.) should use their original color via brightness-100
+	const isMonochrome = color.includes("zinc") || color.includes("slate") || color.includes("gray") || color.includes("white") || color.includes("black");
+
 	return (
 		<Tooltip content={tech}>
 			<motion.div
 				initial={{ opacity: 0, scale: 0.8 }}
 				animate={{ opacity: 1, scale: 1 }}
-				className={`inline-flex items-center gap-2 px-3 py-2 rounded-full ${bg} border border-border/30 transition-all hover:scale-105 cursor-default`}
+				className={`inline-flex items-center gap-2 px-3 py-2 rounded-full ${bg} border-2 border-border/30 transition-all hover:scale-105 cursor-default`}
 			>
 				<div className="w-5 h-5 flex items-center justify-center">
 					{slug ? (
 						<img
 							src={`https://cdn.simpleicons.org/${slug}`}
 							alt={tech}
-							className="w-full h-full object-contain brightness-0 dark:brightness-100 dark:invert"
+							className={`w-full h-full object-contain brightness-0 dark:brightness-100 ${isMonochrome ? "dark:invert" : ""}`}
 							style={{ filter: 'contrast(1.2)' }}
 						/>
 					) : (
@@ -186,7 +190,7 @@ const AboutProject = () => {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.25 }}
-						className="relative overflow-hidden rounded-2xl border border-muted bg-gradient-to-br from-primary/5 via-card to-background p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10"
+						className="relative overflow-hidden rounded-2xl border-2 border-muted bg-gradient-to-br from-primary/5 via-card to-background p-8 md:p-10 flex flex-col md:flex-row gap-6 md:gap-10"
 					>
 						<div className="flex-1 space-y-4">
 							<p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Project Spotlight</p>
@@ -194,22 +198,22 @@ const AboutProject = () => {
 
 							<div className="flex flex-wrap items-center gap-2">
 								{projectDetails.status && (
-									<span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border ${statusConfig.color}`}>
+									<span className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full border-2 ${statusConfig.color}`}>
 										<Circle className="w-2 h-2 fill-current" />
 										{statusConfig.label}
 									</span>
 								)}
-								<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border/40 bg-muted/50 text-muted-foreground">
+								<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border-2 border-border/40 bg-muted/50 text-muted-foreground">
 									{projectDetails.type === "Mobile App" ? <Smartphone className="w-3.5 h-3.5" /> : <Globe className="w-3.5 h-3.5" />}
 									{projectDetails.type || "Project"}
 								</span>
 								{projectDetails.project_type && (
-									<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border/40 bg-muted/50 text-muted-foreground">
+									<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border-2 border-border/40 bg-muted/50 text-muted-foreground">
 										{projectDetails.project_type}
 									</span>
 								)}
 								{projectDetails.lUdpate && (
-									<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border border-border/40 bg-muted/50 text-muted-foreground">
+									<span className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full border-2 border-border/40 bg-muted/50 text-muted-foreground">
 										Last updated: {projectDetails.lUdpate}
 									</span>
 								)}
@@ -252,7 +256,7 @@ const AboutProject = () => {
 							)}
 						</div>
 
-						<div className="w-full md:w-56 h-32 md:h-40 flex items-center justify-center rounded-xl bg-muted/40 border border-border/50 p-4 self-start">
+						<div className="w-full md:w-56 h-32 md:h-40 flex items-center justify-center rounded-xl bg-muted/40 border-2 border-border/50 p-4 self-start">
 							{projectLogo ? (
 								<img src={projectLogo} alt={projectDetails.project_name} className="w-full h-full object-contain" />
 							) : (
@@ -311,7 +315,7 @@ const AboutProject = () => {
 												initial={{ opacity: 0, y: 10 }}
 												animate={{ opacity: 1, y: 0 }}
 												transition={{ delay: idx * 0.1 }}
-												className="group relative rounded-lg border border-border/50 bg-muted/30 p-4 hover:border-primary/40 hover:bg-primary/5 transition-all"
+												className="group relative rounded-lg border-2 border-border/50 bg-muted/30 p-4 hover:border-primary/40 hover:bg-primary/5 transition-all"
 											>
 												<div className="flex items-start gap-3">
 													<span className="text-2xl flex-shrink-0">{feature.icon}</span>
@@ -343,7 +347,7 @@ const AboutProject = () => {
 
 							{/* My Role */}
 							{projectDetails.myRole && (
-								<div id="my-role" className="rounded-lg border border-primary/20 bg-primary/5 p-5 space-y-2 scroll-mt-24">
+								<div id="my-role" className="rounded-lg border-2 border-primary/20 bg-primary/5 p-5 space-y-2 scroll-mt-24">
 									<div className="flex items-center gap-2">
 										<h3 className="text-base font-semibold">My Role (Founder & Developer)</h3>
 									</div>
@@ -380,7 +384,7 @@ const AboutProject = () => {
 												initial={{ opacity: 0, x: -10 }}
 												animate={{ opacity: 1, x: 0 }}
 												transition={{ delay: idx * 0.05 }}
-												className="flex items-start gap-2 text-muted-foreground text-sm rounded-lg border border-border/40 bg-muted/20 p-3 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all"
+												className="flex items-start gap-2 text-muted-foreground text-sm rounded-lg border-2 border-border/40 bg-muted/20 p-3 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all"
 											>
 												<span className="text-emerald-500 mt-0.5 flex-shrink-0">✓</span>
 												<span>{item}</span>
@@ -419,7 +423,7 @@ const AboutProject = () => {
 								<h3 className="text-base font-semibold mb-3">Demo Video</h3>
 								{projectDetails.videoLink ? (
 									<div
-										className="aspect-video w-full overflow-hidden rounded-xl border border-border/50 bg-black/60 cursor-pointer group/video relative transition-transform duration-200 hover:scale-[1.01]"
+										className="aspect-video w-full overflow-hidden rounded-xl border-2 border-border/50 bg-black/60 cursor-pointer group/video relative transition-transform duration-200 hover:scale-[1.01]"
 										onClick={handleDemoClick}
 									>
 										<img
@@ -434,7 +438,7 @@ const AboutProject = () => {
 										</div>
 									</div>
 								) : (
-									<div className="aspect-video w-full rounded-xl border border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200">
+									<div className="aspect-video w-full rounded-xl border-2 border-dashed border-border/60 bg-gradient-to-br from-muted/40 to-muted/20 flex flex-col items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200">
 										<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,120,120,0.1),transparent_50%)]" />
 										<img
 											src="/loveakot_webiste.png"
@@ -442,7 +446,7 @@ const AboutProject = () => {
 											className="absolute inset-0 w-full h-full object-cover opacity-20"
 										/>
 										<div className="relative z-10 flex flex-col items-center gap-3">
-											<div className="w-16 h-16 rounded-full bg-muted/60 border border-border/40 flex items-center justify-center">
+											<div className="w-16 h-16 rounded-full bg-muted/60 border-2 border-border/40 flex items-center justify-center">
 												<Play className="w-8 h-8 text-muted-foreground" />
 											</div>
 											<p className="text-sm font-medium text-muted-foreground">Demo video coming soon</p>
@@ -490,7 +494,7 @@ const AboutProject = () => {
 									href={primaryLink}
 									target="_blank"
 									rel="noreferrer"
-									className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+									className="flex items-center justify-between rounded-lg border-2 border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
 								>
 									<span className="flex items-center gap-2 text-sm font-medium">
 										<Globe className="w-4 h-4" /> Website
@@ -503,7 +507,7 @@ const AboutProject = () => {
 									href={projectDetails.livelink}
 									target="_blank"
 									rel="noreferrer"
-									className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+									className="flex items-center justify-between rounded-lg border-2 border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
 								>
 									<span className="flex items-center gap-2 text-sm font-medium">
 										<ExternalLink className="w-4 h-4" /> Live Demo
@@ -516,7 +520,7 @@ const AboutProject = () => {
 									href={projectDetails.adminPanel}
 									target="_blank"
 									rel="noreferrer"
-									className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+									className="flex items-center justify-between rounded-lg border-2 border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
 								>
 									<span className="flex items-center gap-2 text-sm font-medium">
 										<Globe className="w-4 h-4" /> Admin Panel
@@ -529,7 +533,7 @@ const AboutProject = () => {
 									href={projectDetails.href}
 									target="_blank"
 									rel="noreferrer"
-									className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
+									className="flex items-center justify-between rounded-lg border-2 border-border/50 bg-muted/40 px-4 py-3 hover:border-primary/40 hover:bg-primary/5 transition-colors"
 								>
 									<span className="flex items-center gap-2 text-sm font-medium">
 										<Github className="w-4 h-4" /> Source Code

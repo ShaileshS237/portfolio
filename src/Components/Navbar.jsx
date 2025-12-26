@@ -53,7 +53,7 @@ const Navbar = ({
                     {backToHome && (
                         <button
                             onClick={handleBack}
-                            className="group flex items-center justify-center h-10 w-10 rounded-lg border border-muted bg-background hover:bg-muted transition-colors"
+                            className="group flex items-center justify-center h-10 w-10 rounded-lg border-2 border-muted bg-background hover:bg-muted transition-colors"
                         >
                             <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
                         </button>
