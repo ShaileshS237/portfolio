@@ -9,6 +9,8 @@ import LoveAkotBlog from "./Pages/Blogs/LoveAkot";
 import ScrollToTop from "./Components/ScrollToTop";
 import Experience from "./Pages/Experience";
 import Gear from "./Pages/Gear";
+import PersonalSpace from "./Pages/PersonalSpace";
+import EvidenceWorkspace from "./features/evidence/EvidenceWorkspace";
 function App() {
 	return (
 		<BrowserRouter>
@@ -22,6 +24,8 @@ function App() {
 				<Route path="/blogs/love-akot" element={<LoveAkotBlog />} />
 				<Route path="/experience" element={<Experience />} />
 				<Route path="/gear" element={<Gear />} />
+				<Route path="/personal-space" element={<PersonalSpace />} />
+				<Route path="/personal-space/evidence/*" element={<EvidenceWorkspace />} />
 			</Routes>
 		</BrowserRouter>
 	);

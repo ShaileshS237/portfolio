@@ -323,7 +323,8 @@ const Home = () => {
 					{ label: "Work", href: "#work", external: true },
 					{ label: "Blogs", href: "/blogs", external: false },
 					{ label: "Projects", href: "#projects", external: true },
-					{ label: "Gear", href: "/gear", external: false }
+					{ label: "Gear", href: "/gear", external: false },
+					{ label: "Personal Space", href: "/personal-space", external: false }
 				]}
 			/>
 
