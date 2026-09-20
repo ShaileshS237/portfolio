@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Heart, LockKeyhole, ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import { LockKeyhole, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/Components/Navbar";
 import PageHeader from "@/Components/PageHeader";
@@ -19,24 +19,6 @@ const hashPassword = async (password) => {
         .map((byte) => byte.toString(16).padStart(2, "0"))
         .join("");
 };
-
-const spaces = [
-    {
-        title: "Beyond the screen",
-        description: "A place for the interests, ideas, and little things that make life interesting outside of work.",
-        icon: Heart,
-    },
-    {
-        title: "On the court",
-        description: "Baseball, volleyball, and badminton are my favorite ways to reset, compete, and have fun.",
-        icon: Trophy,
-    },
-    {
-        title: "More to come",
-        description: "Notes, recommendations, photos, and things I am currently enjoying will find a home here.",
-        icon: Sparkles,
-    },
-];
 
 const PersonalSpace = () => {
     const [hasAccess, setHasAccess] = useState(
@@ -94,28 +76,6 @@ const PersonalSpace = () => {
                             </Card>
                         </Link>
 
-                        <motion.div
-                            className="grid grid-cols-1 gap-4 md:grid-cols-3"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.15 }}
-                        >
-                            {spaces.map(({ title, description, icon: Icon }) => (
-                                <Card key={title} className="h-full border-2 border-muted shadow-none transition-colors hover:bg-muted/30">
-                                    <CardHeader className="space-y-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted">
-                                            <Icon className="h-5 w-5" aria-hidden="true" />
-                                        </div>
-                                        <CardTitle className="text-lg">{title}</CardTitle>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <p className="text-sm leading-relaxed text-muted-foreground">
-                                            {description}
-                                        </p>
-                                    </CardContent>
-                                </Card>
-                            ))}
-                        </motion.div>
                     </>
                 ) : (
                     <motion.div

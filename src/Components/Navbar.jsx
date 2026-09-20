@@ -11,6 +11,7 @@ const Navbar = ({
     backText = "← Back to Home",
     title = null,
     navLinks = [],
+    actions = null,
     sticky = false
 }) => {
     const { theme, setTheme } = useTheme();
@@ -93,6 +94,8 @@ const Navbar = ({
                     )}
 
                     <div className="flex items-center gap-2">
+                        {actions}
+
                         {/* Theme Toggle */}
                         {showThemeToggle && (
                             <Button
